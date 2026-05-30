@@ -431,112 +431,162 @@ function stampa(){
   const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
 <title>Contratto — ${nomeCompleto}</title>
 <style>
-body{font-family:'Times New Roman',Times,serif;font-size:10.5pt;line-height:1.65;color:#000;margin:0}
-.page{max-width:170mm;margin:0 auto;padding:18mm 0}
-h1{font-size:12pt;font-weight:bold;text-align:center;margin-bottom:8pt;text-transform:uppercase;letter-spacing:.5px}
-h2{font-size:10.5pt;font-weight:bold;margin:13pt 0 3pt;text-decoration:underline}
-p{margin:0 0 6pt;text-align:justify}
-.firme{margin-top:40pt;display:flex;justify-content:space-between;gap:40px}
-.firma-col{flex:1;text-align:center;font-size:9.5pt}
-.firma-line{border-top:1px solid #000;margin-top:30pt;padding-top:6pt}
-.footer-note{margin-top:16pt;font-size:9pt;border:1pt solid #ccc;padding:8pt;background:#f9f9f9}
-@media print{body{margin:0}@page{size:A4;margin:2.2cm 2cm}}
+body{font-family:'Times New Roman',Times,serif;font-size:9pt;line-height:1.42;color:#000;margin:0}
+.page{max-width:172mm;margin:0 auto;padding:10mm 0}
+h1{font-size:11pt;font-weight:bold;text-align:center;margin-bottom:5pt;text-transform:uppercase;letter-spacing:.3px}
+h2{font-size:9pt;font-weight:bold;margin:6pt 0 1pt}
+p{margin:0 0 3.5pt;text-align:justify}
+ul.arr{list-style:none;margin:2pt 0 3pt;padding:0}
+ul.arr li{padding-left:14pt;position:relative;margin-bottom:1.5pt;text-align:justify}
+ul.arr li::before{content:'\\27A2';position:absolute;left:0}
+ul.bul{list-style:disc;margin:2pt 0 3pt;padding-left:14pt}
+ul.bul li{margin-bottom:1.5pt;text-align:justify}
+.firme-top{margin-top:10pt;display:flex;justify-content:space-between}
+.firme-bot{margin-top:8pt;display:flex;justify-content:space-between}
+.fc{flex:1;font-size:8.5pt}
+.fline{border-top:1px solid #000;margin-top:18pt;padding-top:3pt;text-align:center;font-size:8.5pt}
+@media print{body{margin:0}@page{size:A4;margin:1.6cm 1.8cm}}
 </style></head><body><div class="page">
 
-<h1>Contratto di sublocazione abitativa</h1>
+<h1>Contratto di Sublocazione Abitativa</h1>
 
-<p>L'anno <strong>${OP.sigAnno}</strong> il giorno <strong>${OP.sigGiorno}</strong> del mese di <strong>${OP.sigMese}</strong> in <strong>Cagliari</strong>, tra:</p>
+<p>L'anno <strong>${OP.sigAnno}</strong> il giorno <strong>${OP.sigGiorno}</strong> del mese di <strong>${OP.sigMese}</strong> in Cagliari, tra:</p>
 
-<p><strong>"Top SRL."</strong> in persona del legale rappresentante pro tempore <strong>Matteo Carta</strong>, (P.IVA 03838480923) avente sede legale in Cagliari (CA) via Sigmund Freud, n.4, d'ora in poi denominato anche <em>«SUBLOCATRICE»</em></p>
-<p style="text-align:center">e</p>
-<p><strong>${titolo} ${nomeCompleto}</strong> ${sessoStr} a ${luogoNasc} il ${dataNasc}, residente in ${residenza}, C.F. <strong>${cf}</strong>, d'ora in poi denominato/a anche <em>«Subconduttore»</em></p>
-<p style="font-size:9.5pt"><em>Email: ${email} — Telefono: ${tel}</em></p>
+<p>"Top SRL." in persona del legale rappresentante pro tempore Matteo Carta, (P.IVA 03838480923 ) avente sede legale in Cagliari (CA) via Sigmund Freud, n.4, d'ora in poi denominato anche «SUBLOCATRICE»</p>
+<p>e</p>
+<p>${nomeCompleto} ${sessoStr} a ${luogoNasc} residente a ${residenza} C.F. ${cf} d'ora in poi denominato anche «Subconduttore» (indirizzo email:${email} telefono ${tel}</p>
 
-<h2>PREMESSO</h2>
+<p><strong>PREMESSO</strong></p>
 <p>1) ${apt.premesso}</p>
-<p>2) che il predetto contratto di locazione prevede espressamente, alla clausola n. 4, la facoltà per il conduttore di concedere in sublocazione il citato immobile o porzione di esso;</p>
-
-<p>Tutto ciò premesso e considerato, <strong>SI CONVIENE E SI STIPULA QUANTO SEGUE</strong></p>
-<p>Top SRL concede in sublocazione al/alla ${titolo} <strong>${nomeCompleto}</strong> che accetta, l'unità immobiliare (ovvero porzione dell'unità immobiliare – stanza n° <strong>${OP.stanza}</strong> oltre i vani in comune) sita in Cagliari presso l'immobile sopra indicato. L'unità immobiliare viene concessa ammobiliata e pulita, come da separato verbale sottoscritto dalle parti.</p>
+<p>2) che il predetto contratto di locazione prevede espressamente, alla clausola n. 4 la facoltà per il conduttore di concedere in sublocazione il citato immobile o porzione di esso;</p>
+<p>Tutto ciò premesso e considerato,</p>
+<p><strong>SI CONVIENE E SI STIPULA QUANTO SEGUE</strong></p>
+<p>Top SRL concede in sublocazione alla ${titolo} ${nomeCompleto} che accetta, l'unita immobiliare (ovvero porzione dell'unità immobiliare – stanza n ${OP.stanza} oltre i vani in comune) descritta in premessa. L'unità immobiliare viene concessa in sublocazione ammobiliata e pulita, come da separato verbale sottoscritto dai contraenti all'atto della consegna dell'unità immobiliare, quale parte integrante al presente contratto.</p>
 <p>L'immobile è destinato esclusivamente ad uso di civile abitazione del Subconduttore.</p>
+<p><strong>AI SEGUENTI PATTI E CONDIZIONI</strong></p>
 
-<h2>AI SEGUENTI PATTI E CONDIZIONI</h2>
-
-<h2>Articolo 1 — Premesse</h2>
+<h2>Articolo 1 - (Premesse)</h2>
 <p>Le premesse formano parte integrante, sostanziale ed inscindibile del presente contratto.</p>
 
-<h2>Articolo 2 — Durata della sublocazione</h2>
-<p>Il presente contratto è stipulato con decorrenza dal <strong>${OP.dataInizio}</strong> al <strong>${OP.dataFine}</strong>. Al termine pattuito il contratto sarà definitivamente scaduto senza possibilità di rinnovo tacito. Il Subconduttore entrerà nel possesso dell'unità immobiliare libera da persone e cose.</p>
-<p>Le parti convengono che il contratto potrà cessare anticipatamente qualora l'immobile necessiti di opere di manutenzione tali da impedirne la concomitante occupazione, con preavviso di almeno 30 giorni da parte della Sublocatrice.</p>
+<h2>Articolo 2 - (Durata della sublocazione)</h2>
+<p>Il presente contratto è stipulato con decorrenza dal ${OP.dataInizio} al ${OP.dataFine} . Al termine pattuito il contratto sarà definitivamente scaduto senza possibilità di rinnovo tacito. Il Subconduttore entrerà nel possesso dell'unità immobiliare oggetto di locazione, ovvero della parte di essa così come indicata, nonché delle relative parti comuni, a far data dal giorno ${OP.dataInizio} . Il Subconduttore dichiara di aver ricevuto dalla Sublocatrice le informazioni e la documentazione, comprensiva dell'Attestato allegato al presente contratto, in ordine alla attestazione della prestazione energetica dell'immobile.</p>
+<p>Le parti convengono altresì che il contratto potrà cessare automaticamente e consensualmente la sua efficacia anticipatamente rispetto alla sua naturale scadenza nell'ipotesi in cui l'immobile sublocato necessiti di opere di manutenzione e/o ristrutturazione tali da impedirne la concomitante occupazione da parte del Subconduttore. In tal caso il Subconduttore si impegna al rilascio dell'immobile entro il termine di 15 giorni dal momento della comunicazione dei suddetti lavori da parte della Sublocatrice, senza nulla poter pretendere a titolo di restituzioni per canoni già versati e spese eventualmente già sostenute, né per indennizzi o risarcimenti del danno nei confronti di quest'ultima.</p>
+<p>Qualora in caso di cessazione degli effetti del contratto di sublocazione per qualsiasi causa, il Subconduttore non provveda al momento della liberazione della porzione di immobile e dell'immobile sublocato e comunque entro le successive 24 h, all'asportazione, integrale o parziale, di tutti i propri effetti personali e dei propri beni, e/o dei beni in suo possesso o che ad altro titolo o diritto si trovino nei suddetti locali e siano allo stesso riferiti, con la sottoscrizione del presente contratto e salvo diverso accordo scritto tra le parti, il Subconduttore autorizza il sublocatore alla rimozione di tali beni dall'immobile e al trasporto e deposito degli stessi a spese esclusive del Subconduttore, tenendo indenne sin da adesso la sublocatrice da qualsivoglia obbligo di custodia o deposito di tali beni, nonché da qualunque responsabilità – anche per la fase di trasporto - per danni ed ammaloramenti degli stessi, nonché da eventuali rivendicazioni o richieste di restituzione/indennizzi/risarcimenti da parte di terzi che ne siano proprietari o titolari di altro diritto reale sugli stessi.</p>
 
-<h2>Articolo 3 — Canone</h2>
-<p>Il canone totale di sublocazione è pattuito in Euro <strong>${OP.canoneTotale.replace('.',',')} (${OP.canoneTotaleLettere})</strong> e dovrà essere corrisposto come di seguito indicato:</p>
-<p>quanto ad Euro <strong>${OP.primaRata.replace('.',',')} (${OP.primaRataLettere})</strong> all'atto della sottoscrizione del presente contratto, da imputare come prima mensilità e iscrizione club, mediante Bonifico Bancario;</p>
-<p>quanto ad Euro <strong>${OP.rateResidueTotale.replace('.',',')} (${OP.rateResidueLettere})</strong> in n.<strong>${OP.nRateResidue}</strong> rate mensili, ciascuna pari ad Euro <strong>${OP.canoneMensile.replace('.',',')} (${OP.canoneMensileLettere})</strong>, a mezzo RID o bonifico, entro il 05 di ciascun mese su C/C bancario intestato a TOP SRL — IBAN: IT 70 M 03069 09606 100000015827.</p>
-<p>Le spese condominiali sono incluse nel canone. Il pagamento non potrà essere sospeso o ritardato per nessun motivo.</p>
+<h2>Articolo 3 - (Canone)</h2>
+<p>Il canone totale di sublocazione è pattuito in Euro ${OP.canoneTotale.replace('.',',')} ( ${OP.canoneTotaleLettere}) e dovrà essere corrisposto come di seguito indicato:</p>
+<ul class="arr">
+  <li>quanto ad Euro ${OP.primaRata.replace('.',',')} ( ${OP.primaRataLettere}) all'atto della sottoscrizione del presente contratto, da imputare come prima mensilità, iscrizione club mediante Bonifico Bancario</li>
+  <li>quanto ad Euro ${OP.rateResidueTotale.replace('.',',')} ( ${OP.rateResidueLettere}) in n.${OP.nRateResidue} rate mensili, ciascuna pari ad Euro ${OP.canoneMensile.replace('.',',')} ( ${OP.canoneMensileLettere}), a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: IT02W0200804810000105593166</li>
+</ul>
+<p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra.</p>
+<p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso o ritardato.</p>
+<p>Il mancato puntuale pagamento per qualunque causa, anche di una sola rata del canone (nonché di quanto altro dovuto a qualunque titolo) costituisce in mora il Subconduttore, fatto salvo quanto previsto dagli artt. 5 e 55 della Legge n. 392/78.</p>
 
-<h2>Articolo 4 — Spese ed oneri</h2>
-<p>Sono a carico della Sublocatrice: imposte di bollo e registrazione del contratto; assicurazione fabbricato e arredi; allacciamento e voltura utenze; consumo delle utenze nel limite dei consumi pattuiti; manutenzione ordinaria degli arredi e impianti; tasse rifiuti e utenze comunali. Il mancato puntuale pagamento del canone costituisce in mora il Subconduttore.</p>
+<h2>Articolo 4 - (Spese ed oneri a carico della Sublocatrice e spese ed oneri a carico del Subconduttore)</h2>
+<p>Sono a carico della Sublocatrice:</p>
+<ul class="arr">
+  <li>il versamento delle imposte di bollo e di registrazione del presente contratto;</li>
+  <li>assicurazione fabbricato e arredi per danni derivanti da impianti, o da cause fortuite da vicini o per ricorso vicini;</li>
+  <li>le spese per l'allacciamento e/o voltura delle utenze energetiche</li>
+  <li>le spese di gestione e di consumo delle utenze stesse nel limite dei consumi di seguito pattuiti;</li>
+  <li>le spese di manutenzione ordinaria degli arredi e degli impianti;</li>
+  <li>le tasse per lo smaltimento dei rifiuti solidi urbani nonché i canoni per utenze comunali relative alle forniture dell'acqua e spurgo pozzi.</li>
+</ul>
+<p>E' fatto salvo il diritto della Sublocatrice di pretendere da ciascun Subconduttore (in parti uguali tra loro quando più di uno) ovvero dal solo Subconduttore, ulteriori somme a titolo integrazione qualora si ravveda un utilizzo sconsiderato e sproporzionato (come meglio specificato nel "Regolamento dell'Appartamento") delle utenze elettriche, gas, acqua.</p>
+<p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso, ritardato né in nessun caso posto in compensazione da parte del Subconduttore, e ciò anche in caso di inadempimento del Sublocatore ad uno degli obblighi contrattualmente assunti.</p>
+<p>Il mancato puntuale pagamento, per qualunque causa, anche di una sola rata del canone (nonché di quant'altro dovuto a qualunque titolo) costituisce in mora il Subconduttore, fatto salvo quanto previsto dagli artt. 5 e 55 della Legge n. 392/78; restando salvo il diritto al risarcimento dell'ulteriore danno in capo alla Sublocatrice.</p>
+<p>E' inoltre a carico della Sublocatrice effettuare la registrazione del presente contratto secondo norma di legge.</p>
 
-<h2>Articolo 5 — Uso, manutenzione e obblighi del Subconduttore</h2>
-<p>Il Subconduttore si assume la responsabilità della custodia dell'unità immobiliare, si impegna a utilizzarla con la diligenza del buon padre di famiglia e a mantenere il decoro degli ambienti comuni. Eventuali danni da uso negligente saranno a suo esclusivo carico. Il Subconduttore dispone di 48 ore dalla consegna per segnalare difformità via PEC a toplocazioni@legalmail.it.</p>
+<h2>Articolo5 - (Uso, manutenzione, oneri accessori e obblighi del Subconduttore)</h2>
+<p>Il Subconduttore si assume la responsabilità della custodia dell'unità immobiliare sublocata, comprese le relative chiavi di accesso, e si impegna a utilizzarla con la diligenza del buon padre di famiglia, evitando qualsiasi molestia agli altri conduttori o utilizzatori dell'edificio. È tenuto a mantenere l'unità immobiliare in condizioni di ordine, pulizia e decoro, incluse le aree comuni, i bagni e le cucine.</p>
+<p>Eventuali interventi resi necessari da un uso negligente dell'immobile, da danni dovuti a imperizia o da carenze nella pulizia saranno a carico esclusivo del Subconduttore. Qualora questi non provveda al ripristino dello stato di pulizia o alla riparazione dei danni, la Sublocatrice potrà intervenire direttamente, riservandosi il diritto di richiedere il rimborso delle spese sostenute, comprensive della gestione, al Subconduttore. Nel caso in cui l'intervento riguardi spazi comuni, tale rimborso sarà suddiviso in parti uguali tra tutti i subconduttori.</p>
+<p>L'immobile viene sublocato nello stato di fatto e di diritto in cui attualmente si trova, che il Subconduttore dichiara di conoscere e accettare senza alcuna riserva. Il Subconduttore prende atto che eventuali condizionatori presenti, anche se non funzionanti, dovranno rimanere inattivi e non potranno essere rimessi in funzione, sollevando espressamente la Sublocatrice da ogni responsabilità o obbligo in merito.</p>
+<p>Il Subconduttore dichiara inoltre di conoscere e accettare lo stato manutentivo dell'immobile, degli impianti, dei servizi e di ogni altro apparato presente, dichiarandoli idonei all'uso.</p>
+<p>Nell'utilizzo dell'unità abitativa e dei servizi comuni, il Subconduttore è tenuto a rispettare le normative vigenti, i regolamenti eventualmente emanati dalle autorità competenti, nonché il "Regolamento dello stabile" o il "Regolamento di condominio", ove esistenti. In assenza di questi, si applica il "Regolamento generale per gli inquilini" vigente nella provincia in cui si trova l'immobile, che il Subconduttore dichiara di aver visionato e accettato, essendo stato messo a sua disposizione dalla Sublocatrice. Inoltre, il Subconduttore si impegna a rispettare il "Regolamento Stanza Semplice", che dichiara di conoscere e accettare integralmente.</p>
+<p>Ogni porzione di immobile viene consegnata dalla Sublocatrice perfettamente pulita. Il Subconduttore accetta che il personale addetto alla pulizia, autorizzato dalla Sublocatrice e previo idoneo preavviso, possa accedere all'unità immobiliare per svolgere le operazioni necessarie e detenga una copia delle chiavi.</p>
+<p>Il Subconduttore dispone di 48 ore dalla presa in consegna dell'unità per segnalare eventuali difformità, malfunzionamenti, necessità di manutenzione o altre anomalie riscontrate, tramite comunicazione scritta da inviare via PEC all'indirizzo toplocazioni@legalmail.it. Trascorso tale termine, ogni eventuale malfunzionamento o anomalia si presume a lui imputabile, con obbligo di sostenere i relativi interventi di manutenzione o ripristino. Anche successivamente, eventuali problematiche non imputabili al Subconduttore dovranno essere comunicate entro 48 ore dalla scoperta, pena la responsabilità delle relative spese e l'eventuale risarcimento del danno alla Sublocatrice in caso di ritardo nella comunicazione.</p>
+<p>Il Subconduttore è tenuto a mantenere il decoro degli ambienti e il rispetto della civile convivenza, provvedendo alla pulizia degli spazi comuni dell'unità abitativa, inclusi cucina, bagno e ogni altro spazio o arredo non strettamente personale.</p>
+<p>Infine, il Subconduttore si impegna a osservare tutte le norme di sicurezza e prevenzione dei rischi, evitando comportamenti pericolosi quali, a titolo esemplificativo e non esaustivo, l'eccessivo carico di prese elettriche, l'introduzione di materiali infiammabili, o il fumo all'interno dell'immobile. È altresì tenuto a rispettare tutte le disposizioni relative alla prevenzione incendi.</p>
 
-<h2>Articolo 6 — Divieti</h2>
-<p>È vietato al Subconduttore: occupare spazi comuni con materiali; porre fissi, infissi o insegne; fumare in ogni locale dell'abitazione; detenere animali salvo diverso accordo con gli altri conduttori.</p>
+<h2>Articolo 6 - (Divieti)</h2>
+<p>E' fatto divieto al Subconduttore occupare con materiali od oggetti gli spazi comuni, nonché porre fissi, infissi, targhe, insegne, tende di qualsiasi genere e condizionatori all'esterno dell'unità immobiliare locatagli, salvo che ciò non sia stato preventivamente autorizzato dalla Sublocatrice. E' altresì vietato installare antenne radio o TV senza il preventivo consenso della Sublocatrice, che potrà indicare le eventuali modalità di installazione. E' vietato al Subconduttore allestire con fioriere, vasi o altri suppellettili, davanzali o altre sporgenze dell'immobile. Il Subconduttore prende atto che è assolutamente vietato entrare con veicoli di qualsiasi tipo nel cortile, nei viali di accesso e comunque nelle zone private circostanti il fabbricato, così come è vietato far sostare veicoli di sorta in tali zone, salvo espressa autorizzazione della Sublocatrice.</p>
+<p>È fatto espresso divieto al Subconduttore di fumare in ogni locale dell'unità abitativa oggetto del presente contratto. Fatto salvo diverso accordo con gli altri eventuali Subconduttori, è vietato detenere animali nell'immobile di cui sopra. Il Subconduttore è unico responsabile di una scorretta gestione dei servizi di cui sopra, in particolare per quanto attiene al corretto smaltimento dei rifiuti secondo le normative vigenti. Eventuali costi aggiuntivi e/o multe dovuti all'inadempimento/negligenza e/o errore nell'utilizzo di detti servizi ed utenze, saranno ad esclusivo carico del Subconduttore.</p>
 
-<h2>Articolo 7 — Miglioramenti e innovazioni</h2>
-<p>È vietato eseguire innovazioni o modifiche di qualsiasi natura senza il preventivo assenso scritto della Sublocatrice. In caso contrario, la Sublocatrice potrà pretendere il ripristino a spese del Subconduttore.</p>
+<h2>Articolo 7 - (Miglioramenti addizioni e innovazioni)</h2>
+<p>E' vietato al Subconduttore eseguire direttamente o indirettamente innovazioni, migliorie, addizioni e/o innovazioni di qualsiasi genere e natura, (ivi compresa quella relativa alla modifica, anche parziale, della destinazione di uso del bene oggetto della presente sublocazione), senza preventivo assenso scritto della Sublocatrice. In ogni caso eventuali innovazioni, migliorie, addizioni e/o modifiche (da intendersi anche, a solo titolo esemplificativo, fori nelle parti/pareti strutturali) anche se effettuate con il consenso della Sublocatrice rimarranno, di diritto, acquisite alla proprietà senza che il Subconduttore possa asportarle o pretenderne indennizzi e/o rimborsi alla fine della sublocazione. Resta salvo ed impregiudicato il diritto della Sublocatrice di richiedere a suo insindacabile giudizio la riduzione in pristino a cura e spese del Subconduttore. La Sublocatrice si riserva il diritto di far eseguire sia all'interno sia all'esterno dell'unità immobiliare oggetto del presente contratto tutti gli interventi che si rendessero necessari, fatto salvo quanto previsto dagli articoli 1583 e 1584 del codice civile.</p>
 
-<h2>Articolo 8 — Accesso nell'immobile</h2>
-<p>Il Subconduttore consente l'accesso alla Sublocatrice e a persone da essa autorizzate, previo preavviso. In caso di urgenza o disdetta, l'accesso potrà avvenire senza preavviso.</p>
+<h2>Articolo 8 - (Accesso nell'immobile)</h2>
+<p>Il Subconduttore si impegna sin d'ora a consentire l'accesso al bene da parte della Sublocatrice, della proprietà e/o da persone da queste autorizzate, previo idoneo preavviso. Ove sia stata preventivamente comunicata disdetta da parte del Subconduttore o della Sublocatrice o comunque in caso di necessità, il Subconduttore sarà tenuto a permettere alla Sublocatrice di far visionare i locali sublocati a chiunque sia interessato agli stessi dal lunedì al venerdì, previo preavviso al Subconduttore.</p>
 
-<h2>Articolo 9 — Cessione e sublocazione</h2>
-<p>È fatto espresso divieto al Subconduttore di sublocare o cedere in qualsiasi forma il proprio contratto, o di consentire l'utilizzo dell'immobile a terzi senza il preventivo consenso scritto della Sublocatrice.</p>
+<h2>Articolo 9 - (Cessione, sublocazione, comodato, successione)</h2>
+<p>E' fatto espresso divieto al Subconduttore di sublocare, in tutto o in parte, la cosa locata; di cedere in qualsiasi forma ad altri il suo contratto; di consentire, a qualsiasi titolo, l'utilizzo di quanto oggetto del presente contratto a terzi. Non è consentito dare alloggio, sia pure a titolo gratuito, a persone che non siano il Subconduttore o le eventuali persone indicate in premessa: l'inosservanza di tale divieto costituisce grave inadempimento contrattuale e legittima la Sublocatrice a chiedere l'immediata risoluzione del contratto. Per la successione nel contratto si applica l'articolo 6 della legge n. 392/78, nel testo vigente a seguito della sentenza della Corte Costituzionale n. 404 del 1988.</p>
 
-<h2>Articolo 10 — Clausola risolutiva espressa</h2>
-<p>Il contratto si intenderà risolto ai sensi dell'art. 1456 c.c. qualora il Subconduttore: non paghi anche una sola mensilità; non mantenga l'immobile pulito; ceda il godimento a terzi; impedisca l'accesso alla Sublocatrice; modifichi la destinazione d'uso; non rispetti il Regolamento Stanza Semplice; non trasmetta il contratto firmato entro 2 giorni; non fornisca il CF entro 30 giorni; detenga armi o materiali illeciti; o trasferisca la residenza anagrafica nell'immobile.</p>
+<h2>Articolo 10 - (Clausola risolutiva espressa)</h2>
+<p>Il presente contratto di sublocazione si intenderà immediatamente risolto, ai sensi dell'art. 1456 del Codice civile, qualora il Subconduttore:</p>
+<ul class="bul">
+  <li>Non adempia al pagamento anche di una sola mensilità del canone pattuito.</li>
+  <li>Non mantenga l'immobile in condizioni di pulizia e decoro, sia nelle aree private che comuni, contravvenendo agli obblighi stabiliti all'Articolo 5;</li>
+  <li>Ceda, in tutto o in parte, stabilmente o temporaneamente, il godimento del bene sublocato o trasferisca il presente contratto a terzi, senza il preventivo consenso scritto della Sublocatrice.</li>
+  <li>Impedisca o ostacoli l'accesso all'immobile da parte della Sublocatrice, o da soggetti da questa autorizzati, nonostante idoneo preavviso come previsto all'Articolo 8;</li>
+  <li>Modifichi la destinazione d'uso del bene sublocato o ne faccia un uso diverso da quello pattuito, irregolare, pregiudizievole o comunque senza il preventivo consenso scritto della Sublocatrice.</li>
+  <li>Non rispetti, anche parzialmente, le disposizioni del Regolamento "Stanza Semplice", che il Subconduttore ha sottoscritto, accettato e si è impegnato a osservare.</li>
+  <li>Non trasmetta alla Sublocatrice copia sottoscritta del contratto, unitamente alla documentazione aggiuntiva richiesta, entro 2 giorni dalla data di ricezione della stessa.</li>
+  <li>Non fornisca il proprio codice fiscale entro 30 giorni dalla data di decorrenza del contratto.</li>
+  <li>Non ottemperi agli obblighi contenuti nel precedente Articolo 4 del presente contratto.</li>
+  <li>Non ottemperi agli obblighi contenuti nel precedente Articolo 5 del presente contratto.</li>
+  <li>Attui azioni o comportamenti che possano mettere in pericolo l'incolumità di cose o persone, sia la propria o quella di terzi.</li>
+  <li>Detenga o introduca, all'interno dell'immobile sublocato o negli spazi in comune, armi da fuoco, armi bianche o qualsiasi altro oggetto atto a offendere, indipendentemente dalla finalità.</li>
+  <li>Detenga materiali che sono in contrasto con le leggi vigenti, stupefacenti, sostanze pericolose o elementi che possono creare pericoli a cose e persone.</li>
+  <li>Cessi di occupare la porzione d'immobile senza preavviso e senza fornire alcuna comunicazione, non rispondendo a tentativi di contatto, con qualsiasi forma e mezzo, per un periodo superiore a 15 giorni consecutivi, interrompendo ogni comunicazione con la Sublocatrice.</li>
+  <li>Non accetti eventuali sistemazioni alternative a seguito degli eventi riportati nel precedente articolo 4 del presente contratto.</li>
+  <li>Trasferisca la propria residenza anagrafica presso l'unità immobiliare, contravvenendo all'Articolo 6 del presente contratto.</li>
+</ul>
+<p>Le parti convengono che soltanto la Sublocatrice possa avvalersi della facoltà concessagli dalla già menzionata clausola risolutiva qualora sussista anche uno solo dei motivi elencati; in tal caso, il Sublocatrice non sarà tenuto ad alcun obbligo di preavviso nei confronti del Subconduttore, limitandosi a manifestare la volontà di avvalersi di tale clausola mediante invio allo stesso di lettera raccomandata, o comunicazione mail nell'ipotesi di mancato invio della documentazione contrattuale sottoscritta nel termine indicato al punto precedente, nel qual caso il contratto di intenderà risolto ipso Jure al momento di trasmissione della mail.</p>
+<p>Il Subconduttore si impegna con la sottoscrizione del presente contratto a lasciare l'unità immobiliare locata entro il termine di 15 (quindici) giorni dalla ricezione della raccomandata/comunicazione suddetta senza aver più nulla a che pretendere dalla Sublocatrice, e restando obbligato al pagamento del canone - eventualmente ridotto in misura proporzionata ai giorni - sino al momento di effettivo rilascio del bene.</p>
+<p>Salvo tutto quanto sopra indicato, qualora dovesse intervenire una causa che possa dar diritto al Subconduttore ad ottenere la risoluzione del contratto per inidoneità sopravvenuta della cosa locata a servire all'uso convenuto, non imputabile alla Sublocatrice né al Subconduttore medesimo, la Sublocatrice è tenuta a restituire solo la parte di canone di locazione eventualmente anticipatole in proporzione al periodo di mancato godimento da parte del Subconduttore.</p>
 
-<h2>Articolo 11 — Dispositivo di rilevamento decibel</h2>
-<p>Il Subconduttore dichiara di essere informato e di accettare la presenza di un dispositivo elettronico per il rilevamento dei livelli sonori (decibel) nelle zone comuni. Tale dispositivo monitora esclusivamente i livelli acustici, senza registrare né trasmettere audio o video.</p>
+<h2>Articolo 11 – (Dispositivo di rilevamento decibel e clausola risolutiva espressa)</h2>
+<p>Il Subconduttore dichiara di essere stato informato, di essere a conoscenza e di accettare espressamente la presenza di un dispositivo elettronico per il rilevamento dei livelli sonori (decibel) installato nella zona comune dell'appartamento. Tale dispositivo ha la sola funzione di monitorare i livelli di rumorosità per garantire il rispetto della quiete e della convivenza civile, nel rispetto delle normative vigenti in materia di inquinamento acustico e delle regole condominiali e contrattuali. Il Subconduttore si impegna a mantenere, anche tramite i propri eventuali ospiti, un comportamento conforme al limite massimo di rumorosità consentito dalla legge e indicato nel regolamento che, pur non essendo materialmente allegato, costituisce parte integrante e sostanziale del presente contratto a tutti gli effetti di legge.</p>
+<p>In caso di rilevamento da parte del suddetto dispositivo di livelli di rumorosità costantemente o ripetutamente superiori alla soglia consentita, tali da arrecare disturbo alla quiete pubblica o privata, il Sublocatore potrà utilizzare i dati rilevati come prova oggettiva per avviare una procedura di risoluzione anticipata del contratto per giusta causa, ai sensi dell'art. 1456 c.c., con conseguente decadenza del Subconduttore dal diritto di permanenza nell'immobile e addebito delle spese connesse alla risoluzione stessa (incluse, a titolo esemplificativo, le spese amministrative, legali ed eventuali danni derivanti da tale condotta). Il Subconduttore prende atto che il dispositivo in oggetto non effettua registrazioni audio né viola la privacy personale, limitandosi esclusivamente alla misurazione del livello sonoro in decibel.</p>
 
-<h2>Articolo 12 — Riscaldamento e condizionamento</h2>
-<p>Il Subconduttore accetta che i servizi di riscaldamento e aria condizionata non siano inclusi nell'importo "all inclusive". Eventuali impianti presenti potranno essere attivati solo nei periodi e nelle fasce orarie stabilite dalla Sublocatrice.</p>
+<h2>Articolo 12 – Riscaldamento e Condizionamento dell'Appartamento</h2>
+<p>Il Subconduttore dichiara di essere stato informato e di accettare che, nell'ambito dei servizi "all inclusive" previsti dal presente contratto, non sono inclusi il servizio di riscaldamento né quello di aria condizionata.</p>
+<p>Qualora l'appartamento fosse dotato di impianti di riscaldamento nelle zone comuni e/o nelle stanze, gli stessi potranno essere attivati esclusivamente in determinati periodi dell'anno, per specifiche fasce orarie e per una durata stabilita, secondo le disposizioni del capo condominio e/o del Sublocatore, senza possibilità di gestione autonoma da parte del Subconduttore. In ogni caso, il servizio non è garantito in modo continuativo né per 24 ore su 24.</p>
+<p>Si precisa altresì che l'appartamento non è dotato di impianto di aria condizionata e che tale servizio non è incluso nella sublocazione.</p>
+<p>Con la sottoscrizione del presente contratto, il Subconduttore dichiara di aver preso piena visione delle suddette condizioni e di accettarle integralmente, senza riserva alcuna.</p>
 
-<h2>Articolo 13 — Riconsegna</h2>
-<p>Alla cessazione del contratto il Subconduttore consegnerà le chiavi previo sopralluogo, liberando la stanza entro le ore 12:00 dell'ultimo giorno del mese di scadenza, in perfetto stato di pulizia e manutenzione.</p>
+<h2>Articolo 13 - (Riconsegna)</h2>
+<p>Alla data di cessazione del contratto il Subconduttore è tenuto alla consegna delle chiavi dei locali oggetto del presente contratto nelle mani della Sublocatrice previo sopralluogo da parte di quest'ultima. Il subconduttore si impegna a liberare la stanza entro le ore 12:00 dell'ultimo giorno del mese. E' diritto della Sublocatrice medesima pretendere il risarcimento dei danni ove i locali e gli arredi risultino danneggiati, fatto salvo il normale deperimento derivante dall'uso del buon padre di famiglia. A tal fine, faranno fede le pattuizioni contenute nel "Regolamento Stanza Semplice" e le comunicazioni avvenute all'atto di consegna della porzione di immobile, le cui modalità di comunicazione sono contenute nel precedente art.5.</p>
 
-<h2>Articolo 14 — Esonero di responsabilità</h2>
-<p>Il Subconduttore è custode della cosa locata ed esonera la Sublocatrice da responsabilità per danni derivanti da fatti di altri conduttori o terzi, ferma restando la responsabilità della Sublocatrice per fatti propri.</p>
+<h2>Articolo 14 - (Esonero di responsabilità)</h2>
+<p>Il Subconduttore è costituito custode della cosa locata. Egli esonera espressamente la Sublocatrice da qualsiasi responsabilità per danni diretti ed indiretti che potessero derivargli da fatti dolosi o colposi di altri conduttori o di terzi in genere. Resta ferma la responsabilità della Sublocatrice per i danni provocati da fatti colposi nell'esecuzione delle obbligazioni su quest'ultima gravanti. Il Subconduttore si obbliga a rispondere puntualmente dei danni causati dai propri familiari, dipendenti o da tutte le persone che egli ammette temporaneamente nei locali, fermo restando il divieto di cui all'art. 9 che precede. Si obbliga inoltre a tenere sollevata ed indenne la Sublocatrice da eventuali danni derivanti dall'uso del gas, dell'acqua, della connessione internet o dell'elettricità cagionati a terzi e/o all'immobile con propria colpa o dalle persone delle quali è chiamato a rispondere. Il Subconduttore esonera la Sublocatrice da ogni responsabilità per sospensioni o irregolarità dei servizi di rete internet, illuminazione, acqua, acqua dei sanitari e ascensore dovute a casi imprevisti o alla sostituzione, riparazione, adeguamento, manutenzione degli impianti per il periodo necessario per l'effettuazione di tali interventi.</p>
 
-<h2>Articolo 15 — Foro Competente</h2>
-<p>Per ogni controversia le parti esperiscono preliminarmente la mediazione (D.Lgs. n. 28/2010). Per quanto non risolto, è competente il Foro di Cagliari.</p>
+<h2>Articolo 15 - (Foro Competente)</h2>
+<p>Relativamente ad ogni e qualsiasi controversia dovessero insorgere in merito alla validità, all'interpretazione e/o esecuzione del presente contratto, le parti si obbligano, in via preliminare, ad esperire secondo quando previsto dalla normativa vigente (d.lgs. n. 28/2010) il tentativo di mediazione avanti agli organismi autorizzati ed aventi sede legale nella provincia ove è situato l'immobile oggetto del presente contratto. In ipotesi di esito negativo del predetto tentativo di mediazione, le parti dichiarano di eleggere il Foro competente secondo le norme previste dal codice di procedura civile. A tutti gli effetti del presente contratto, comprese la notifica degli atti esecutivi, e ai fini della competenza a giudicare, il Subconduttore elegge domicilio nei locali a lui locati e, ove egli più non li occupi o comunque detenga, presso l'ufficio di segreteria del Comune ove è situato l'immobile locato.</p>
 
-<h2>Articolo 16 — Trattamento dei dati personali</h2>
-<p>Le parti trattano i dati personali nel rispetto del D.Lgs. 196/2003 e del Regolamento UE 679/2016 (GDPR), esclusivamente per fini connessi al presente contratto.</p>
-<p style="font-size:9.5pt"><em>Contatti Subconduttore per emergenze: ${email} — ${tel}</em></p>
+<h2>Articolo 16 - (Trattamento dei dati personali)</h2>
+<p>Le parti si impegnano a trattare i dati personali in loro possesso nel rispetto della Legge sulla Privacy (D.Lgs 196/2003 e Regolamento Europeo 679/2016). Tali dati potranno essere inseriti in Banche dati, archivi informatici e sistemi telematici solo per fini connessi al presente contratto. Si richiedono inoltre, ai fini di urgenze sanitarie e/o altre comunicazioni di carattere urgente e importante oltre i riferimenti telefonici e principale indirizzo mail di riferimento del capo famiglia o eventuali persone di riferimento del Subconduttore</p>
+<p>Indirizzo email: ${email} telefono ${tel}</p>
 
-<h2>Articolo 17 — Richiamo a disposizioni di legge</h2>
-<p>Per quanto non previsto valgono le norme del Codice Civile, le Leggi n. 392/78 e n. 431/98 e la normativa vigente in materia di locazioni abitative.</p>
+<h2>Articolo 17 -(Richiamo a disposizioni di legge)</h2>
+<p>Per quanto non previsto nel presente contratto valgono, in quanto applicabili, tutte le norme vigenti in materia, con particolare riferimento alle disposizioni del codice civile, alle leggi n. 392/78 e n. 431/98 o comunque dalle norme vigenti e dagli usi locali nonché alla normativa ministeriale emanata in applicazione della legge n. 431/98. Qualunque modifica del presente contratto non può aver luogo, se non mediante forma scritta con il consenso di entrambe le parti.</p>
 
-<p style="margin-top:14pt"><strong>Letto, approvato e sottoscritto a Cagliari il ${OP.sigGiorno} ${OP.sigMese} ${OP.sigAnno}</strong></p>
-<p style="font-size:9pt;margin-top:6pt">A norma degli artt. 1341 e 1342 c.c., le parti approvano espressamente le clausole degli Articoli 3, 4, 6, 7, 9, 10, 12 e 13.</p>
+<p style="margin-top:8pt">Letto, approvato e sottoscritto a Cagliari il ${OP.sigGiorno}/${OP.sigMese==='Agosto'?'08':OP.sigMese==='Febbraio'?'02':OP.sigGiorno}/${OP.sigAnno}</p>
 
-<div class="firme">
-  <div class="firma-col">
-    <p style="font-size:9pt">Per TOP SRL — Sublocatrice<br><em>Matteo Carta</em></p>
-    <div class="firma-line">Firma</div>
-  </div>
-  <div class="firma-col">
-    <p style="font-size:9pt">${titolo} ${nomeCompleto}<br><em>Subconduttore/a</em></p>
-    <div class="firma-line">Firma</div>
-  </div>
+<div class="firme-top">
+  <div class="fc">La Sublocatrice</div>
+  <div class="fc" style="text-align:right">Il Subconduttore</div>
 </div>
+<div style="border-top:1px solid #000;margin-top:20pt;padding-top:2pt;font-size:8.5pt;text-align:center">_______________________________________________________</div>
 
-<div class="footer-note">
-  <strong>Dati Subconduttore:</strong> ${nomeCompleto} — nato/a a ${luogoNasc} il ${dataNasc} — C.F.: ${cf}<br>
-  Università: ${univ} — Corso: ${facolta}<br>
-  Appartamento: ${apt.label} — Stanza n° ${OP.stanza}
+<p style="margin-top:6pt;font-size:8.5pt">A norma degli artt. 1341 e 1342 del codice civile, le parti, di comune accordo, previa lettura delle clausole e degli articoli contenuti nel presente contratto, con particolare riguardo ai nn. 3, 4, 6, 7, 9, 10, 12 e 13, dichiarano espressamente di approvarle, rinunciata sin d'ora ogni eccezione.</p>
+
+<div class="firme-bot">
+  <div class="fc">La Parte Sublocatrice</div>
+  <div class="fc" style="text-align:right">Il Subconduttore</div>
 </div>
+<div style="border-top:1px solid #000;margin-top:20pt;padding-top:2pt;font-size:8.5pt;text-align:center">_____________________________________________________</div>
 
 </div></body></html>`;
 
