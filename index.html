@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stanza Semplice — Genera Link Contratto</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f6f2;color:#1a1a1a;min-height:100vh}
+.wrap{max-width:540px;margin:0 auto;padding:2rem 1rem 4rem}
+header{text-align:center;margin-bottom:2rem}
+.logo{font-size:1.5rem;font-weight:700;letter-spacing:-0.5px;color:#1a1a1a}
+.logo span{color:#e8a020}
+header p{color:#888;font-size:.875rem;margin-top:4px}
+.card{background:#fff;border-radius:14px;border:1px solid #ebebeb;padding:1.25rem;margin-bottom:.75rem}
+.card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:1rem}
+.field{margin-bottom:.875rem}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:.825rem;color:#555;margin-bottom:5px;font-weight:500}
+input,select{width:100%;padding:11px 13px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:.95rem;color:#1a1a1a;background:#fff;outline:none;transition:border-color .15s}
+input:focus,select:focus{border-color:#1a1a1a}
+input.err,select.err{border-color:#dc2626;background:#fff8f8}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:.75rem;color:#aaa;margin-top:3px}
+.eco{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:1rem 1.125rem;margin-bottom:.75rem}
+.eco-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#16a34a;margin-bottom:.75rem}
+.er{display:flex;justify-content:space-between;padding:4px 0;font-size:.85rem}
+.er span:first-child{color:#555}
+.er span:last-child{font-weight:500;color:#1a1a1a}
+.er.sep{border-top:1px solid #bbf7d0;padding-top:8px;margin-top:4px;font-size:.95rem;font-weight:600}
+.er.sep span{color:#15803d}
+.btn-genera{width:100%;padding:15px;background:#1a1a1a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:600;cursor:pointer;margin-bottom:.75rem;transition:background .15s}
+.btn-genera:hover{background:#333}
+.link-box{background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:1.125rem;display:none}
+.link-header{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#2563eb;margin-bottom:.625rem}
+.link-url{font-family:'Courier New',monospace;font-size:.72rem;color:#1e40af;word-break:break-all;background:#dbeafe;border-radius:7px;padding:.625rem .75rem;margin-bottom:.75rem;line-height:1.6;max-height:80px;overflow-y:auto}
+.btn-copia{width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:9px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-copia:hover{background:#1d4ed8}
+.btn-copia.ok{background:#16a34a}
+.link-note{font-size:.775rem;color:#6b7280;text-align:center;margin-top:.5rem;line-height:1.4}
+.reset-link{display:block;text-align:center;margin-top:1rem;font-size:.825rem;color:#888;text-decoration:underline;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">Stanza <span>Semplice</span></div>
+    <p>Pannello operatore — genera link contratto</p>
+  </header>
+
+  <div class="card">
+    <div class="card-label">Stanza e date</div>
+
+    <div class="field">
+      <label>N° stanza</label>
+      <input type="number" id="stanza" min="1" placeholder="es. 25">
+    </div>
+
+    <div class="g2">
+      <div class="field">
+        <label>Data inizio</label>
+        <input type="date" id="inizio" oninput="calcFine()">
+      </div>
+      <div class="field">
+        <label>Durata</label>
+        <select id="durata" onchange="onDur()">
+          <option value="">— seleziona —</option>
+          <option value="6">6 mesi</option>
+          <option value="11">11 mesi</option>
+          <option value="12">12 mesi</option>
+          <option value="altro">Altro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field" id="durAltroDiv" style="display:none">
+      <label>Numero di mesi</label>
+      <input type="number" id="durMesi" min="1" max="24" placeholder="es. 9" oninput="calcFine()">
+    </div>
+
+    <div class="field">
+      <label>Data fine</label>
+      <input type="date" id="fine">
+      <div class="hint" id="fineHint"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Importi</div>
+
+    <div class="field">
+      <label>Canone mensile (€)</label>
+      <input type="number" id="canone" min="0" step="0.01" placeholder="es. 415.00" oninput="calcEco()">
+    </div>
+
+    <div class="field">
+      <label>Fee Club Stanza Semplice</label>
+      <select id="feeTipo" onchange="onFee()">
+        <option value="">— seleziona —</option>
+        <option value="380">€ 380,00 (standard)</option>
+        <option value="manuale">Importo personalizzato</option>
+      </select>
+    </div>
+
+    <div class="field" id="feeManDiv" style="display:none">
+      <label>Importo fee (€)</label>
+      <input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()">
+    </div>
+  </div>
+
+  <div class="eco" id="ecoDiv" style="display:none">
+    <div class="eco-title">Riepilogo economico</div>
+    <div id="ecoHtml"></div>
+  </div>
+
+  <button class="btn-genera" onclick="genera()">Genera link per lo studente</button>
+
+  <div class="link-box" id="linkBox">
+    <div class="link-header">Link pronto — incollalo nella tua email</div>
+    <div class="link-url" id="linkUrl"></div>
+    <button class="btn-copia" id="btnCopia" onclick="copia()">Copia link</button>
+    <p class="link-note">Ogni link è univoco per questo contratto.<br>Genera un nuovo link per ogni studente.</p>
+  </div>
+
+  <span class="reset-link" onclick="reset()" id="resetBtn" style="display:none">Nuovo contratto</span>
+
+</div>
+
+<script>
+const STUDENT_URL = 'https://23mc23.github.io/contratti/studente.html';
+
+function addM(iso, m) {
+  const d = new Date(iso);
+  d.setMonth(d.getMonth() + parseInt(m));
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split('T')[0];
+}
+function fmtD(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-');
+  return d + '/' + m + '/' + y;
+}
+function fmtE(n) { return '€ ' + parseFloat(n).toFixed(2).replace('.', ','); }
+function getDur() {
+  const s = document.getElementById('durata').value;
+  return s === 'altro' ? parseInt(document.getElementById('durMesi').value) || 0 : parseInt(s) || 0;
+}
+function getCanone() { return parseFloat(document.getElementById('canone').value) || 0; }
+function getFee() {
+  const t = document.getElementById('feeTipo').value;
+  return t === '380' ? 380 : t === 'manuale' ? parseFloat(document.getElementById('feeImp').value) || 0 : 0;
+}
+
+function n2w(n) {
+  n = Math.round(n);
+  if (n === 0) return 'zero';
+  const o = ['','uno','due','tre','quattro','cinque','sei','sette','otto','nove','dieci','undici','dodici','tredici','quattordici','quindici','sedici','diciassette','diciotto','diciannove'];
+  const t = ['','','venti','trenta','quaranta','cinquanta','sessanta','settanta','ottanta','novanta'];
+  function u(x) { if (x < 20) return o[x]; let T = t[Math.floor(x/10)], O = o[x%10]; if ((O==='uno'||O==='otto') && T) T = T.slice(0,-1); return T+O; }
+  function h(x) { if (x < 100) return u(x); const H = Math.floor(x/100), r = x%100; return (H===1?'cento':o[H]+'cento')+(r?u(r):''); }
+  if (n < 1000) return h(n);
+  const th = Math.floor(n/1000), r = n%1000;
+  return (th===1?'mille':h(th)+'mila')+(r?h(r):'');
+}
+
+function onDur() {
+  document.getElementById('durAltroDiv').style.display = document.getElementById('durata').value === 'altro' ? 'block' : 'none';
+  calcFine();
+}
+function onFee() {
+  document.getElementById('feeManDiv').style.display = document.getElementById('feeTipo').value === 'manuale' ? 'block' : 'none';
+  calcEco();
+}
+
+function calcFine() {
+  const ini = document.getElementById('inizio').value, d = getDur();
+  if (ini && d > 0) {
+    const fine = addM(ini, d);
+    document.getElementById('fine').value = fine;
+    document.getElementById('fineHint').textContent = 'Calcolata automaticamente: ' + fmtD(fine);
+  }
+  calcEco();
+}
+
+function calcEco() {
+  const c = getCanone(), f = getFee(), d = getDur();
+  if (!c || !f || !d) { document.getElementById('ecoDiv').style.display = 'none'; return; }
+  const pr = c + f, rr = c * (d - 1), tot = pr + rr, nr = d - 1;
+  document.getElementById('ecoDiv').style.display = 'block';
+  document.getElementById('ecoHtml').innerHTML =
+    er('Canone mensile', fmtE(c)) +
+    er('Fee Club Stanza', fmtE(f)) +
+    er('Prima rata (1° mese + fee)', fmtE(pr)) +
+    er(nr + ' rate mensili residue', fmtE(rr)) +
+    `<div class="er sep"><span>Canone totale complessivo</span><span>${fmtE(tot)}</span></div>`;
+}
+function er(l, v) { return `<div class="er"><span>${l}</span><span>${v}</span></div>`; }
+
+function valida() {
+  let ok = true;
+  const chk = (id, fn) => {
+    const el = document.getElementById(id);
+    const v = el ? el.value.trim() : '';
+    const valid = fn ? fn(v) : v.length > 0;
+    if (el) el.classList.toggle('err', !valid);
+    if (!valid) ok = false;
+  };
+  chk('stanza', v => parseInt(v) > 0);
+  chk('inizio', v => v.length > 0);
+  chk('durata', v => v.length > 0);
+  if (document.getElementById('durata').value === 'altro') chk('durMesi', v => parseInt(v) >= 1);
+  chk('fine', v => v.length > 0);
+  chk('canone', v => parseFloat(v) > 0);
+  chk('feeTipo', v => v.length > 0);
+  if (document.getElementById('feeTipo').value === 'manuale') chk('feeImp', v => parseFloat(v) > 0);
+  return ok;
+}
+
+function genera() {
+  if (!valida()) return;
+  const c = getCanone(), f = getFee(), d = getDur();
+  const pr = c + f, rr = c * (d - 1), tot = pr + rr, nr = d - 1;
+  const data = {
+    stanza: document.getElementById('stanza').value,
+    dataInizio: fmtD(document.getElementById('inizio').value),
+    dataFine: fmtD(document.getElementById('fine').value),
+    durataMesi: d,
+    canoneMensile: c.toFixed(2),
+    feeClub: f.toFixed(2),
+    primaRata: pr.toFixed(2),
+    primaRataLettere: n2w(pr) + '/00',
+    nRateResidue: nr,
+    rateResidueTotale: rr.toFixed(2),
+    rateResidueLettere: n2w(rr) + '/00',
+    canoneTotale: tot.toFixed(2),
+    canoneTotaleLettere: n2w(tot) + '/00',
+    canoneMensileLettere: n2w(c) + '/00'
+  };
+  const url = STUDENT_URL + '?d=' + encodeURIComponent(JSON.stringify(data));
+  document.getElementById('linkUrl').textContent = url;
+  document.getElementById('linkBox').style.display = 'block';
+  document.getElementById('resetBtn').style.display = 'block';
+  document.getElementById('btnCopia').textContent = 'Copia link';
+  document.getElementById('btnCopia').className = 'btn-copia';
+  document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copia() {
+  const url = document.getElementById('linkUrl').textContent;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('btnCopia');
+    btn.textContent = '✓ Copiato!';
+    btn.className = 'btn-copia ok';
+    setTimeout(() => { btn.textContent = 'Copia link'; btn.className = 'btn-copia'; }, 3000);
+  });
+}
+
+function reset() {
+  document.querySelectorAll('input').forEach(el => el.value = '');
+  document.querySelectorAll('select').forEach(el => el.value = '');
+  document.getElementById('ecoDiv').style.display = 'none';
+  document.getElementById('linkBox').style.display = 'none';
+  document.getElementById('resetBtn').style.display = 'none';
+  document.getElementById('durAltroDiv').style.display = 'none';
+  document.getElementById('feeManDiv').style.display = 'none';
+  document.getElementById('fineHint').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
