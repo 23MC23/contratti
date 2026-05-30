@@ -3,24 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Stanza Semplice — Genera Link Contratto</title>
+<title>Stanza Semplice — Genera Contratto</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f6f2;color:#1a1a1a;min-height:100vh}
-.wrap{max-width:540px;margin:0 auto;padding:2rem 1rem 4rem}
-header{text-align:center;margin-bottom:2rem}
+.wrap{max-width:620px;margin:0 auto;padding:2rem 1rem 5rem}
+header{text-align:center;margin-bottom:1.5rem}
 .logo{font-size:1.5rem;font-weight:700;letter-spacing:-0.5px}
 .logo span{color:#e8a020}
 header p{color:#888;font-size:.875rem;margin-top:4px}
+.crm-banner{background:#f0fdf4;border:1.5px solid #86efac;border-radius:11px;padding:.875rem 1.125rem;margin-bottom:.875rem;display:none;align-items:center;gap:10px}
+.crm-banner-icon{font-size:1.25rem;flex-shrink:0}
+.crm-banner-text{font-size:.85rem;color:#15803d;line-height:1.4}
+.crm-banner-text strong{font-weight:600}
 .card{background:#fff;border-radius:14px;border:1px solid #ebebeb;padding:1.25rem;margin-bottom:.75rem}
+.card.student{border-color:#fde68a;background:#fffdf0}
 .card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:1rem}
-.field{margin-bottom:.875rem}
-.field:last-child{margin-bottom:0}
+.card.student .card-label{color:#b45309}
+.field{margin-bottom:.875rem}.field:last-child{margin-bottom:0}
 label{display:block;font-size:.825rem;color:#555;margin-bottom:5px;font-weight:500}
 input,select{width:100%;padding:11px 13px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:.95rem;color:#1a1a1a;background:#fff;outline:none;transition:border-color .15s;-webkit-appearance:none}
 input:focus,select:focus{border-color:#1a1a1a}
 input.err,select.err{border-color:#dc2626;background:#fff8f8}
+input.precomp{background:#f0fdf4;border-color:#86efac;color:#15803d}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .hint{font-size:.75rem;color:#aaa;margin-top:3px}
 .radio-group{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
 .radio-opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1.5px solid #e5e5e5;border-radius:9px;cursor:pointer;transition:border-color .15s}
@@ -30,27 +37,27 @@ input.err,select.err{border-color:#dc2626;background:#fff8f8}
 .eco{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:1rem 1.125rem;margin-bottom:.75rem}
 .eco-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#16a34a;margin-bottom:.75rem}
 .er{display:flex;justify-content:space-between;padding:4px 0;font-size:.85rem}
-.er span:first-child{color:#555}
-.er span:last-child{font-weight:500}
+.er span:first-child{color:#555}.er span:last-child{font-weight:500}
 .er.sep{border-top:1px solid #bbf7d0;padding-top:8px;margin-top:4px;font-size:.95rem;font-weight:600}
 .er.sep span{color:#15803d}
-.btn-genera{width:100%;padding:15px;background:#1a1a1a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:600;cursor:pointer;margin-bottom:.75rem}
-.btn-genera:hover{background:#333}
-.link-box{background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:1.125rem;display:none}
-.link-header{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#2563eb;margin-bottom:.625rem}
-.link-url{font-family:'Courier New',monospace;font-size:.72rem;color:#1e40af;word-break:break-all;background:#dbeafe;border-radius:7px;padding:.625rem .75rem;margin-bottom:.75rem;line-height:1.6;max-height:80px;overflow-y:auto}
-.btn-copia{width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:9px;font-size:.9rem;font-weight:600;cursor:pointer}
-.btn-copia.ok{background:#16a34a}
-.link-note{font-size:.775rem;color:#6b7280;text-align:center;margin-top:.5rem;line-height:1.4}
+.btn-pdf{width:100%;padding:16px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:1.05rem;font-weight:700;cursor:pointer;margin-bottom:.75rem;transition:background .15s}
+.btn-pdf:hover{background:#15803d}
 .reset-link{display:block;text-align:center;margin-top:1rem;font-size:.825rem;color:#888;text-decoration:underline;cursor:pointer}
+.cf-note{font-size:.75rem;color:#9333ea;margin-top:3px;display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="logo">Stanza <span>Semplice</span></div>
-    <p>Pannello operatore — genera link contratto</p>
+    <p>Pannello operatore — genera contratto PDF</p>
   </header>
+
+  <!-- Banner CRM -->
+  <div class="crm-banner" id="crmBanner">
+    <div class="crm-banner-icon">✅</div>
+    <div class="crm-banner-text"><strong>Dati studente caricati dal CRM.</strong> Verifica i campi e compila i dati del contratto, poi clicca "Genera PDF".</div>
+  </div>
 
   <!-- APPARTAMENTO -->
   <div class="card">
@@ -87,28 +94,13 @@ input.err,select.err{border-color:#dc2626;background:#fff8f8}
     <div class="field">
       <label>Scegli la data di stipula *</label>
       <div class="radio-group">
-        <label class="radio-opt">
-          <input type="radio" name="tipData" value="agosto" onchange="onTipData()">
-          <span>31 Agosto</span>
-        </label>
-        <label class="radio-opt">
-          <input type="radio" name="tipData" value="febbraio" onchange="onTipData()">
-          <span>28 Febbraio</span>
-        </label>
-        <label class="radio-opt">
-          <input type="radio" name="tipData" value="custom" onchange="onTipData()">
-          <span>Data personalizzata</span>
-        </label>
+        <label class="radio-opt"><input type="radio" name="tipData" value="agosto" onchange="onTipData()"><span>31 Agosto</span></label>
+        <label class="radio-opt"><input type="radio" name="tipData" value="febbraio" onchange="onTipData()"><span>28 Febbraio</span></label>
+        <label class="radio-opt"><input type="radio" name="tipData" value="custom" onchange="onTipData()"><span>Data personalizzata</span></label>
       </div>
       <div id="annoDiv" style="display:none;margin-bottom:10px">
         <label>Anno *</label>
-        <select id="annoStip">
-          <option value="2025">2025</option>
-          <option value="2026" selected>2026</option>
-          <option value="2027">2027</option>
-          <option value="2028">2028</option>
-          <option value="2029">2029</option>
-        </select>
+        <select id="annoStip"><option value="2025">2025</option><option value="2026" selected>2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option></select>
       </div>
       <div id="customDateDiv" style="display:none">
         <label>Inserisci data *</label>
@@ -117,58 +109,66 @@ input.err,select.err{border-color:#dc2626;background:#fff8f8}
     </div>
   </div>
 
-  <!-- STANZA E DATE -->
+  <!-- STANZA E PERIODO -->
   <div class="card">
     <div class="card-label">Stanza e periodo</div>
-    <div class="field">
-      <label>N° stanza *</label>
-      <input type="number" id="stanza" min="1" placeholder="es. 25">
-    </div>
+    <div class="field"><label>N° stanza *</label><input type="number" id="stanza" min="1" placeholder="es. 25"></div>
     <div class="g2">
-      <div class="field">
-        <label>Data inizio *</label>
-        <input type="date" id="inizio" oninput="calcFine()">
-      </div>
-      <div class="field">
-        <label>Durata *</label>
-        <select id="durata" onchange="onDur()">
-          <option value="">— seleziona —</option>
-          <option value="6">6 mesi</option>
-          <option value="11">11 mesi</option>
-          <option value="12">12 mesi</option>
-          <option value="altro">Altro</option>
-        </select>
+      <div class="field"><label>Data inizio *</label><input type="date" id="inizio" oninput="calcFine()"></div>
+      <div class="field"><label>Durata *</label>
+        <select id="durata" onchange="onDur()"><option value="">— seleziona —</option><option value="6">6 mesi</option><option value="11">11 mesi</option><option value="12">12 mesi</option><option value="altro">Altro</option></select>
       </div>
     </div>
-    <div class="field" id="durAltroDiv" style="display:none">
-      <label>Numero di mesi *</label>
-      <input type="number" id="durMesi" min="1" max="24" placeholder="es. 9" oninput="calcFine()">
-    </div>
-    <div class="field">
-      <label>Data fine *</label>
-      <input type="date" id="fine">
-      <div class="hint" id="fineHint"></div>
-    </div>
+    <div class="field" id="durAltroDiv" style="display:none"><label>Numero di mesi *</label><input type="number" id="durMesi" min="1" max="24" placeholder="es. 9" oninput="calcFine()"></div>
+    <div class="field"><label>Data fine *</label><input type="date" id="fine"><div class="hint" id="fineHint"></div></div>
   </div>
 
   <!-- IMPORTI -->
   <div class="card">
     <div class="card-label">Importi</div>
-    <div class="field">
-      <label>Canone mensile * (€)</label>
-      <input type="number" id="canone" min="0" step="0.01" placeholder="es. 415.00" oninput="calcEco()">
+    <div class="field"><label>Canone mensile * (€)</label><input type="number" id="canone" min="0" step="0.01" placeholder="es. 415.00" oninput="calcEco()"></div>
+    <div class="field"><label>Fee Club Stanza Semplice *</label>
+      <select id="feeTipo" onchange="onFee()"><option value="">— seleziona —</option><option value="380">€ 380,00 (standard)</option><option value="manuale">Importo personalizzato</option></select>
     </div>
-    <div class="field">
-      <label>Fee Club Stanza Semplice *</label>
-      <select id="feeTipo" onchange="onFee()">
-        <option value="">— seleziona —</option>
-        <option value="380">€ 380,00 (standard)</option>
-        <option value="manuale">Importo personalizzato</option>
-      </select>
+    <div class="field" id="feeManDiv" style="display:none"><label>Importo fee * (€)</label><input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()"></div>
+  </div>
+
+  <!-- DATI STUDENTE -->
+  <div class="card student">
+    <div class="card-label">Dati studente <span id="studentSource" style="font-size:.7rem;font-weight:400;color:#16a34a"></span></div>
+
+    <div class="g2">
+      <div class="field"><label>Cognome *</label><input type="text" id="s-cognome" autocomplete="family-name"></div>
+      <div class="field"><label>Nome *</label><input type="text" id="s-nome" autocomplete="given-name"></div>
     </div>
-    <div class="field" id="feeManDiv" style="display:none">
-      <label>Importo fee * (€)</label>
-      <input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()">
+    <div class="g2">
+      <div class="field"><label>Data di nascita *</label><input type="date" id="s-dataNasc"></div>
+      <div class="field"><label>Sesso *</label>
+        <select id="s-sesso"><option value="">— seleziona —</option><option value="M">Maschio</option><option value="F">Femmina</option></select>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="field"><label>Comune nascita *</label><input type="text" id="s-comNasc"></div>
+      <div class="field"><label>Provincia *</label><input type="text" id="s-provNasc" maxlength="2" style="text-transform:uppercase"></div>
+      <div class="field"><label>Stato nascita</label><input type="text" id="s-statoNasc" placeholder="es. ITALIA"></div>
+    </div>
+    <div class="field"><label>Codice fiscale</label>
+      <input type="text" id="s-cf" maxlength="16" style="text-transform:uppercase;letter-spacing:1.5px;font-family:monospace" oninput="onCF()">
+      <div class="cf-note" id="cfNote">Straniero: CF da completare all'arrivo in Italia</div>
+    </div>
+    <div class="field"><label>Indirizzo residenza *</label><input type="text" id="s-via" placeholder="Via/Piazza e numero civico"></div>
+    <div class="g3">
+      <div class="field"><label>CAP *</label><input type="text" id="s-cap" maxlength="5"></div>
+      <div class="field"><label>Comune res. *</label><input type="text" id="s-comRes"></div>
+      <div class="field"><label>Provincia *</label><input type="text" id="s-provRes" maxlength="2" style="text-transform:uppercase"></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>Email *</label><input type="email" id="s-email" autocomplete="email"></div>
+      <div class="field"><label>Telefono *</label><input type="tel" id="s-tel"></div>
+    </div>
+    <div class="g2" style="margin-top:.25rem">
+      <div class="field"><label>Università</label><input type="text" id="s-univ"></div>
+      <div class="field"><label>Facoltà / Corso</label><input type="text" id="s-facolta"></div>
     </div>
   </div>
 
@@ -178,28 +178,92 @@ input.err,select.err{border-color:#dc2626;background:#fff8f8}
     <div id="ecoHtml"></div>
   </div>
 
-  <button class="btn-genera" onclick="genera()">Genera link per lo studente</button>
-
-  <div class="link-box" id="linkBox">
-    <div class="link-header">Link pronto — incollalo nella tua email</div>
-    <div class="link-url" id="linkUrl"></div>
-    <button class="btn-copia" id="btnCopia" onclick="copia()">Copia link</button>
-    <p class="link-note">Ogni link è univoco per questo contratto.<br>Genera un nuovo link per ogni nuovo studente.</p>
-  </div>
-
+  <button class="btn-pdf" onclick="genera()">📄 Genera contratto PDF</button>
   <span class="reset-link" onclick="resetForm()" id="resetBtn" style="display:none">↩ Nuovo contratto</span>
 </div>
 
 <script>
-const STUDENT_URL = 'https://23mc23.github.io/contratti/studente.html';
+// ── Dati appartamenti ─────────────────────────────────────────────────
+const APT={
+  ariosto11:{label:"Via Ariosto n°11",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con i signori: Corona Anna Rita CF: CRNNRT74M59B35AN nata a Cagliari il 19/08/1974, residente in Dolianova, Via Marconi n58; Sig. Corona Gianluigi, C.F. CRNLG68T14B354X nato a Cagliari il 14/12/1968 e residente in Quartu Sant'Elena, via Armando Diaz n65; Sig. Corona Pietro C.F. CRNPTR39M08D323E nato a Cagliari il 08/08/1939 e residente a Cagliari in via Ariosto 11; avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Lodovico Ariosto n11, piano 5, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana/comune catastale A, foglio 19, sub 16, particella 2577, classe Energetica E;"},
+  dante108:{label:"Via Dante n°108",premesso:"che in data 05/10/2022 la Sublocatrice ha stipulato con la società Fabrica Immobiliare con sede legale in Roma (RM) via Nazionale n.87, C.F. e P.IVA 07753061006, R.E.A. n. RM-1054624, il contratto di locazione registrato in data 18/10/2022 al n. 021115-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Dante n. 108 piano 1, di complessivi mq. 368 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A/19 mappale 2607 sub 88 categoria A/2 classe 03, classe energetica D;"},
+  deledda22:{label:"Via Grazia Deledda n°22",premesso:"che in data 09/06/2025 il sublocatore ha stipulato con la sig.ra Chiara Maria Pulixi nata a Cagliari il 15/03/2001, residente in Cagliari Via Milano n.8, codice fiscale PLXCRM01C55B354E, il contratto di locazione registrato in data 13/06/2025 al n. 003553-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Grazia Deledda nr.18 piano 3°, censita al N.C.E.U. con i seguenti identificativi: Sezione A, Foglio 18, particella 3849, Sub 4, Categoria A/2, Classe 3, consistenza 12 vani, rendita catastale €2.231,09, classe energetica D;"},
+  doberdo37:{label:"Via Doberdò n°37",premesso:"che in data 30/06/2024 la Sublocatrice ha stipulato con la sig.ra Maria Luigia Marinelli, nata a Iglesias (CI) il 24/09/1944 e residente a Cagliari (CA) in Via Doberdò n. 37, con codice fiscale MRNMLG44P64E281V, il contratto di locazione avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Doberdò n. 37 piano 2, di complessivi mq. 100 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A10 mappale 265, sub 6 categoria A4 classe 01, R.C. €326,66, classe energetica C;"},
+  giudicati1:{label:"Via dei Giudicati n°1",premesso:"che in data 31/05/2019 il sublocatore ha stipulato con la Sig.ra Maria Giovanna Porcu nata ad Oristano il 4/04/1982, residente in Oristano via delle fosse ardeatine 25, codice fiscale PRCMGV82D44G113Y, il contratto di locazione registrato in data 07/06/2019 al n. 003344-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via dei Giudicati n1 piano 3, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 12, sub 34, particella 122, categoria A3, rendita 637,82 euro, classe Energetica C;"},
+  goldoni24:{label:"Via Goldoni n°24",premesso:"che in data 09/06/2025 il sublocatore ha stipulato con il Sig. Giorgetti Enrico nato a Cagliari il 29/01/1990, residente in Brescia via Mantova n.46, codice fiscale GRGNRC90A29B354H, il contratto di locazione registrato in data 13/01/2026 al n. 000472-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Goldoni 24 8° piano, censita al N.C.E.U. con i seguenti identificativi: Sezione A, Foglio A/13, particella 311, Sub 36, Categoria A/3, Classe 3, rendita catastale €686,89, classe energetica G;"},
+  ingurtosu9_2p:{label:"Via Ingurtosu n°9 — Piano 2",premesso:"che in data 29/01/2019 il sublocatore ha stipulato con il Sig Farigu Marco nato a Capoterra il 22/11/1958, residente in Capoterra via Michelangelo n 14, codice fiscale FRGMRC58S22B675N, il contratto di locazione registrato in data 12/02/2019 al n. 000970-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Ingurtosu n°9 piano 2, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 7, sub 8, particella 3391, categoria A3, rendita 522,90 euro, classe Energetica F;"},
+  ingurtosu9_3p:{label:"Via Ingurtosu n°9 — Piano 3",premesso:"che in data 21/11/2018 il sublocatore ha stipulato con il Sig Farigu Marco nato a Capoterra il 22/11/1958, residente in Capoterra via Michelangelo n 14, codice fiscale FRGMRC58S22B675N, il contratto di locazione registrato in data 27/11/2018 al n. 014699-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Ingurtosu n°9 piano 3, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 7, sub 11, particella 3391, categoria A3, rendita 522,90 euro, classe Energetica F;"},
+  ismirrionis87:{label:"Via Is Mirrionis n°87",premesso:"che in data 06/11/2019 il sublocatore ha stipulato con la Sig.ra Maria Virdis nata a Cagliari (CA) il 10/08/1965, residente in Cagliari (CA) via Ludovico Ariosto, codice fiscale VRDMRA30P47B354D, il contratto di locazione registrato in data 07/11/2019 al n. 008265-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Is Mirrionis 87 piano 2, di complessivi mq. 90 censita in catasto fabbricati del Comune di Cagliari, foglio 7, particella/mappale 3280, sub 9, categoria A/2, classe 1, vani 5, rendita 671,39 euro;"},
+  lombardia2:{label:"Via Lombardia n°2",premesso:"che in data 21/11/2018 il sublocatore ha stipulato con la Sig.ra Delogu Maria Serena nata a Solarussa (OR) il 10/08/1965, residente in Sestu (CA) via San Simmarco n6, codice fiscale DLGMSR65M50I791W, il contratto di locazione registrato in data 19/12/2018 al n. 015252-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Lombardia n2 piano 1, di complessivi mq. 130 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 11, particella/mappale 344, sub 125, categoria A/4, classe 2, vani 7, rendita 488,05 euro;"},
+  machiavelli91:{label:"Via Machiavelli n°91a",premesso:"che in data 27/03/2024 la Sublocatrice ha stipulato con il Sig. Francesco Marongiu, nato a Cagliari (CA) il 28/04/1972 e residente a Cagliari (CA) in Via Machiavelli n. 91a, con codice fiscale MRNFNC72D28B354V, il contratto di locazione registrato in data 05/04/2024 al n. 002225-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Machiavelli n. 91a piano 4, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio 13 mappale 2511 sub 15 categoria A3 classe 03, classe energetica D;"},
+  passeri3:{label:"Via dei Passeri n°3",premesso:"che in data 24/10/2019 il sublocatore ha stipulato con la Sig.ra Panzeri Maria nata a Cantù il 1/08/1931, residente in Cagliari via Pietro Delitala, codice fiscale PNZMRA31M41B639Z, il contratto di locazione registrato in data 06/11/2019 al n. 008246-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via dei Passeri n3 piano 3, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio 21, sub 16, particella 1883, rendita 1074,23 euro, classe Energetica E;"},
+  pola5:{label:"Via Pola n°5",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la Sig.ra Poddine Rossella nata a Cagliari il 10/03/1967, residente a Cagliari in Viale Merello n71, il contratto di locazione registrato in data 17/02/2020 al n. 001155-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Pola n5 piano 2, di complessivi mq. 180 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio A/18, sub 5, particella 540, rendita 2231,09 euro, classe Energetica E;"},
+  pola26:{label:"Via Pola n°26",premesso:"che in data 29/01/2019 il sublocatore ha stipulato con il Sig Aresu Tito residente in Cagliari via San Lucifero n 72 codice fiscale RSATTI54A25G122K il contratto di locazione registrato in data 30/01/2019 al n. 620-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Pola n°26 piano 4, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio 18, sub 17, particella 8248, categoria A/2, rendita catastale 1102,64 euro, classe Energetica C;"},
+  tigellio20_1p:{label:"Via Tigellio n°20 — Piano 1",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 15/01/2020 al n. 000267-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 20b piano 1, di complessivi mq. 110 censita in catasto fabbricati del Comune di Cagliari, foglio A/18, sub 43, particella 5502, rendita 1023,88 euro, classe Energetica E;"},
+  tigellio20_2p:{label:"Via Tigellio n°20 — Piano 2",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 15/01/2020 al n. 000266-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 20b piano 2, di complessivi mq. 110 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio A/18, sub 7, particella 8300, rendita 1023,88 euro, classe Energetica E;"},
+  tigellio24:{label:"Via Tigellio n°24",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 04/12/2020 al n. 008480-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 24 piano 5, di complessivi mq. 140 censita in catasto fabbricati del Comune di Cagliari, foglio A/18, sub 31, particella 8300, rendita 1260,15 euro, classe Energetica G;"},
+  tiziano62:{label:"Via Tiziano n°62",premesso:"che in data 09/12/2021 la Sublocatrice ha stipulato con il Sig. Gianluca Fontana nato a Cagliari (CA) il 21/07/1975, residente a Sanluri (VS) in via Zurru n.7, C.F. FNTGLC75L21B354Y, il contratto di locazione registrato in data 13/12/2021 al n. 009499-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Tiziano n. 62 piano 4, di complessivi mq. 145 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A/19 p.m. 3119 sub 8 categoria A/2 classe 02, classe energetica G;"}
+};
+
+// ── Leggi params CRM dal link bookmarklet ─────────────────────────────
+(function(){
+  const p=new URLSearchParams(window.location.search);
+  const raw=p.get('s');
+  if(!raw)return;
+  try{
+    const d=JSON.parse(decodeURIComponent(raw));
+    const setVal=(id,v)=>{
+      const el=document.getElementById(id);
+      if(el&&v){el.value=v;el.classList.add('precomp');}
+    };
+    setVal('s-cognome',d.cognome);
+    setVal('s-nome',d.nome);
+    setVal('s-cf',d.cf);
+    // Data nascita: converti DD/MM/AAAA → AAAA-MM-DD per input type=date
+    if(d.dataNasc){
+      const parts=d.dataNasc.split('/');
+      if(parts.length===3){
+        const iso=parts[2]+'-'+parts[1]+'-'+parts[0];
+        const el=document.getElementById('s-dataNasc');
+        if(el){el.value=iso;el.classList.add('precomp');}
+      }
+    }
+    if(d.sesso){
+      const el=document.getElementById('s-sesso');
+      if(el){el.value=d.sesso;el.classList.add('precomp');}
+    }
+    setVal('s-comNasc',d.comNasc);
+    setVal('s-provNasc',d.provNasc);
+    setVal('s-statoNasc',d.statoNasc);
+    setVal('s-via',d.via);
+    setVal('s-cap',d.cap);
+    setVal('s-comRes',d.comRes);
+    setVal('s-provRes',d.provRes);
+    setVal('s-tel',d.tel);
+    setVal('s-email',d.email);
+    setVal('s-univ',d.univ||'');
+    setVal('s-facolta',d.facolta);
+    // Mostra banner e badge
+    document.getElementById('crmBanner').style.display='flex';
+    document.getElementById('studentSource').textContent='— dal CRM';
+    // Nota CF straniero
+    const stato=(d.statoNasc||'').toUpperCase();
+    if(stato&&stato!=='ITALIA'&&stato!=='ITALY'){
+      document.getElementById('cfNote').style.display='block';
+    }
+    // Scroll to appartamento
+    window.scrollTo({top:0});
+  }catch(e){}
+})();
 
 // ── Utilità ────────────────────────────────────────────────────────────
-function addM(iso,m){const d=new Date(iso);d.setMonth(d.getMonth()+parseInt(m));d.setDate(d.getDate()-1);return d.toISOString().split('T')[0];}
 function fmtD(iso){if(!iso)return'';const[y,m,d]=iso.split('-');return d+'/'+m+'/'+y;}
 function fmtE(n){return'€ '+parseFloat(n).toFixed(2).replace('.',',');}
 function getDur(){const s=document.getElementById('durata').value;return s==='altro'?parseInt(document.getElementById('durMesi').value)||0:parseInt(s)||0;}
 function getCanone(){return parseFloat(document.getElementById('canone').value)||0;}
 function getFee(){const t=document.getElementById('feeTipo').value;return t==='380'?380:t==='manuale'?parseFloat(document.getElementById('feeImp').value)||0:0;}
+function addM(iso,m){const d=new Date(iso);d.setMonth(d.getMonth()+parseInt(m));d.setDate(d.getDate()-1);return d.toISOString().split('T')[0];}
+function v(id){return(document.getElementById(id)||{}).value||'';}
 
 function n2w(n){
   n=Math.round(n);if(n===0)return'zero';
@@ -218,22 +282,17 @@ function onTipData(){
   document.getElementById('annoDiv').style.display=(v==='agosto'||v==='febbraio')?'block':'none';
   document.getElementById('customDateDiv').style.display=v==='custom'?'block':'none';
 }
-
 function getDataStipula(){
-  const v=document.querySelector('input[name="tipData"]:checked')?.value;
-  if(!v)return null;
+  const val=document.querySelector('input[name="tipData"]:checked')?.value;
+  if(!val)return null;
   const mesiArr=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-  if(v==='agosto'){const a=document.getElementById('annoStip').value;return{g:'31',m:'Agosto',a,fmt:'31 Agosto '+a};}
-  if(v==='febbraio'){const a=document.getElementById('annoStip').value;return{g:'28',m:'Febbraio',a,fmt:'28 Febbraio '+a};}
-  if(v==='custom'){
-    const d=document.getElementById('dataCustom').value;
-    if(!d)return null;
+  if(val==='agosto'){const a=document.getElementById('annoStip').value;return{g:'31',m:'Agosto',a,fmt:'31/08/'+a};}
+  if(val==='febbraio'){const a=document.getElementById('annoStip').value;return{g:'28',m:'Febbraio',a,fmt:'28/02/'+a};}
+  if(val==='custom'){
+    const d=document.getElementById('dataCustom').value;if(!d)return null;
     const dt=new Date(d+'T12:00:00');
-    const g=String(dt.getDate());
-    const m=mesiArr[dt.getMonth()];
-    const mCap=m.charAt(0).toUpperCase()+m.slice(1);
-    const a=String(dt.getFullYear());
-    return{g,m:mCap,a,fmt:g+' '+mCap+' '+a};
+    const g=String(dt.getDate()),mm=mesiArr[dt.getMonth()],a=String(dt.getFullYear());
+    return{g,m:mm.charAt(0).toUpperCase()+mm.slice(1),a,fmt:String(g).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+a};
   }
   return null;
 }
@@ -241,13 +300,11 @@ function getDataStipula(){
 // ── Durata e fee ───────────────────────────────────────────────────────
 function onDur(){document.getElementById('durAltroDiv').style.display=document.getElementById('durata').value==='altro'?'block':'none';calcFine();}
 function onFee(){document.getElementById('feeManDiv').style.display=document.getElementById('feeTipo').value==='manuale'?'block':'none';calcEco();}
-
 function calcFine(){
   const ini=document.getElementById('inizio').value,d=getDur();
   if(ini&&d>0){const f=addM(ini,d);document.getElementById('fine').value=f;document.getElementById('fineHint').textContent='Calcolata: '+fmtD(f);}
   calcEco();
 }
-
 function calcEco(){
   const c=getCanone(),f=getFee(),d=getDur();
   if(!c||!f||!d){document.getElementById('ecoDiv').style.display='none';return;}
@@ -259,81 +316,217 @@ function calcEco(){
     er(nr+' rate mensili residue',fmtE(rr))+
     `<div class="er sep"><span>Canone totale complessivo</span><span>${fmtE(tot)}</span></div>`;
 }
-function er(l,v){return`<div class="er"><span>${l}</span><span>${v}</span></div>`;}
+function er(l,vv){return`<div class="er"><span>${l}</span><span>${vv}</span></div>`;}
+
+function onCF(){
+  const cf=document.getElementById('s-cf').value.toUpperCase();
+  const stato=document.getElementById('s-statoNasc').value.toUpperCase();
+  if(stato&&stato!=='ITALIA'&&stato!=='ITALY')document.getElementById('cfNote').style.display='block';
+  else document.getElementById('cfNote').style.display='none';
+}
 
 // ── Validazione ────────────────────────────────────────────────────────
+function chk(id,fn){
+  const el=document.getElementById(id);if(!el)return true;
+  const vv=el.value.trim(),ok=fn?fn(vv):vv.length>0;
+  el.classList.toggle('err',!ok);return ok;
+}
 function valida(){
   let ok=true;
-  const chk=(id,fn)=>{const el=document.getElementById(id);if(!el)return;const v=el.value.trim();const valid=fn?fn(v):v.length>0;el.classList.toggle('err',!valid);if(!valid)ok=false;};
-  chk('appartamento',v=>v.length>0);
+  ok=chk('appartamento',vv=>vv.length>0)&&ok;
   const ds=getDataStipula();
-  if(!ds){
-    const tip=document.querySelector('input[name="tipData"]:checked');
-    if(!tip)ok=false;
-    else if(tip.value==='custom'&&!document.getElementById('dataCustom').value)ok=false;
-  }
-  chk('stanza',v=>parseInt(v)>0);
-  chk('inizio',v=>v.length>0);
-  chk('durata',v=>v.length>0);
-  if(document.getElementById('durata').value==='altro')chk('durMesi',v=>parseInt(v)>=1);
-  chk('fine',v=>v.length>0);
-  chk('canone',v=>parseFloat(v)>0);
-  chk('feeTipo',v=>v.length>0);
-  if(document.getElementById('feeTipo').value==='manuale')chk('feeImp',v=>parseFloat(v)>0);
+  if(!ds){document.querySelector('input[name="tipData"]')?.closest('.card')?.classList.add('border-red');ok=false;}
+  ok=chk('stanza',vv=>parseInt(vv)>0)&&ok;
+  ok=chk('inizio',vv=>vv.length>0)&&ok;
+  ok=chk('durata',vv=>vv.length>0)&&ok;
+  if(document.getElementById('durata').value==='altro')ok=chk('durMesi',vv=>parseInt(vv)>=1)&&ok;
+  ok=chk('fine',vv=>vv.length>0)&&ok;
+  ok=chk('canone',vv=>parseFloat(vv)>0)&&ok;
+  ok=chk('feeTipo',vv=>vv.length>0)&&ok;
+  if(document.getElementById('feeTipo').value==='manuale')ok=chk('feeImp',vv=>parseFloat(vv)>0)&&ok;
+  ok=chk('s-cognome')&&ok; ok=chk('s-nome')&&ok;
+  ok=chk('s-dataNasc',vv=>vv.length>0)&&ok;
+  ok=chk('s-sesso',vv=>vv.length>0)&&ok;
+  ok=chk('s-comNasc')&&ok;
+  ok=chk('s-via')&&ok;
+  ok=chk('s-email',vv=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vv))&&ok;
+  ok=chk('s-tel',vv=>vv.replace(/\D/g,'').length>=8)&&ok;
+  if(!ok)window.scrollTo({top:0,behavior:'smooth'});
   return ok;
 }
 
-// ── Genera link ────────────────────────────────────────────────────────
+// ── Genera PDF ─────────────────────────────────────────────────────────
 function genera(){
-  if(!valida()){alert('Compila tutti i campi obbligatori prima di generare il link.');return;}
+  if(!valida()){alert('Compila tutti i campi obbligatori.');return;}
   const ds=getDataStipula();
   if(!ds){alert('Seleziona la data di stipula.');return;}
-  const c=getCanone(),f=getFee(),d=getDur();
-  const pr=c+f,rr=c*(d-1),tot=pr+rr,nr=d-1;
-  const data={
-    appartamento:document.getElementById('appartamento').value,
-    sigGiorno:ds.g,sigMese:ds.m,sigAnno:ds.a,sigData:ds.fmt,
-    stanza:document.getElementById('stanza').value,
-    dataInizio:fmtD(document.getElementById('inizio').value),
-    dataFine:fmtD(document.getElementById('fine').value),
-    durataMesi:d,
-    canoneMensile:c.toFixed(2),feeClub:f.toFixed(2),
-    primaRata:pr.toFixed(2),primaRataLettere:n2w(pr)+'/00',
-    nRateResidue:nr,
-    rateResidueTotale:rr.toFixed(2),rateResidueLettere:n2w(rr)+'/00',
-    canoneTotale:tot.toFixed(2),canoneTotaleLettere:n2w(tot)+'/00',
-    canoneMensileLettere:n2w(c)+'/00'
-  };
-  const url=STUDENT_URL+'?d='+encodeURIComponent(JSON.stringify(data));
-  document.getElementById('linkUrl').textContent=url;
-  document.getElementById('linkBox').style.display='block';
-  document.getElementById('resetBtn').style.display='block';
-  document.getElementById('btnCopia').textContent='Copia link';
-  document.getElementById('btnCopia').className='btn-copia';
-  document.getElementById('linkBox').scrollIntoView({behavior:'smooth'});
-}
+  const c=getCanone(),f=getFee(),d=getDur(),pr=c+f,rr=c*(d-1),tot=pr+rr,nr=d-1;
+  const apt=APT[document.getElementById('appartamento').value]||{label:'—',premesso:'—'};
+  const sesso=v('s-sesso'),titolo=sesso==='F'?'Sig.ra':'Sig.',sessoStr=sesso==='F'?'nata':'nato';
+  const nomeCompleto=v('s-cognome')+' '+v('s-nome');
+  const dataNasc=fmtD(v('s-dataNasc'));
+  const luogoNasc=v('s-comNasc')+(v('s-provNasc')?' ('+v('s-provNasc').toUpperCase()+')':'');
+  const residenza=v('s-via')+', '+v('s-cap')+' '+v('s-comRes')+(v('s-provRes')?' ('+v('s-provRes').toUpperCase()+')':'');
+  const cf=v('s-cf').toUpperCase()||'____________________';
+  const email=v('s-email'),tel=v('s-tel'),univ=v('s-univ'),facolta=v('s-facolta');
+  const primaRata=pr.toFixed(2).replace('.',',');
+  const rateResidue=rr.toFixed(2).replace('.',',');
+  const canoneTotale=tot.toFixed(2).replace('.',',');
+  const canoneMensile=c.toFixed(2).replace('.',',');
 
-function copia(){
-  navigator.clipboard.writeText(document.getElementById('linkUrl').textContent).then(()=>{
-    const btn=document.getElementById('btnCopia');
-    btn.textContent='✓ Copiato!';btn.className='btn-copia ok';
-    setTimeout(()=>{btn.textContent='Copia link';btn.className='btn-copia';},3000);
-  });
+  const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
+<title>Contratto — ${nomeCompleto}</title>
+<style>
+body{font-family:'Times New Roman',Times,serif;font-size:9pt;line-height:1.42;color:#000;margin:0}
+.page{max-width:172mm;margin:0 auto;padding:10mm 0}
+h1{font-size:11pt;font-weight:bold;text-align:center;margin-bottom:5pt;text-transform:uppercase;letter-spacing:.3px}
+h2{font-size:9pt;font-weight:bold;margin:6pt 0 1pt}
+p{margin:0 0 3.5pt;text-align:justify}
+ul.arr{list-style:none;margin:2pt 0 3pt;padding:0}
+ul.arr li{padding-left:14pt;position:relative;margin-bottom:1.5pt;text-align:justify}
+ul.arr li::before{content:'\\27A2';position:absolute;left:0}
+ul.bul{list-style:disc;margin:2pt 0 3pt;padding-left:14pt}
+ul.bul li{margin-bottom:1.5pt;text-align:justify}
+.firme-top{margin-top:10pt;display:flex;justify-content:space-between}
+.firme-bot{margin-top:8pt;display:flex;justify-content:space-between}
+.fc{flex:1;font-size:8.5pt}
+.fline{border-top:1px solid #000;margin-top:18pt;padding-top:3pt;text-align:center;font-size:8.5pt}
+@media print{body{margin:0}@page{size:A4;margin:1.6cm 1.8cm}}
+</style></head><body><div class="page">
+<h1>Contratto di Sublocazione Abitativa</h1>
+<p>L'anno <strong>${ds.a}</strong> il giorno <strong>${ds.g}</strong> del mese di <strong>${ds.m}</strong> in Cagliari, tra:</p>
+<p>"Top SRL." in persona del legale rappresentante pro tempore Matteo Carta, (P.IVA 03838480923 ) avente sede legale in Cagliari (CA) via Sigmund Freud, n.4, d'ora in poi denominato anche «SUBLOCATRICE»</p>
+<p>e</p>
+<p>${nomeCompleto} ${sessoStr} a ${luogoNasc} residente a ${residenza} C.F. ${cf} d'ora in poi denominato anche «Subconduttore» (indirizzo email:${email} telefono ${tel}</p>
+<p><strong>PREMESSO</strong></p>
+<p>1) ${apt.premesso}</p>
+<p>2) che il predetto contratto di locazione prevede espressamente, alla clausola n. 4 la facoltà per il conduttore di concedere in sublocazione il citato immobile o porzione di esso;</p>
+<p>Tutto ciò premesso e considerato,</p>
+<p><strong>SI CONVIENE E SI STIPULA QUANTO SEGUE</strong></p>
+<p>Top SRL concede in sublocazione alla ${titolo} ${nomeCompleto} che accetta, l'unita immobiliare (ovvero porzione dell'unità immobiliare – stanza n ${v('stanza')} oltre i vani in comune) descritta in premessa. L'unità immobiliare viene concessa in sublocazione ammobiliata e pulita, come da separato verbale sottoscritto dai contraenti all'atto della consegna dell'unità immobiliare, quale parte integrante al presente contratto.</p>
+<p>L'immobile è destinato esclusivamente ad uso di civile abitazione del Subconduttore.</p>
+<p><strong>AI SEGUENTI PATTI E CONDIZIONI</strong></p>
+<h2>Articolo 1 - (Premesse)</h2>
+<p>Le premesse formano parte integrante, sostanziale ed inscindibile del presente contratto.</p>
+<h2>Articolo 2 - (Durata della sublocazione)</h2>
+<p>Il presente contratto è stipulato con decorrenza dal ${fmtD(v('inizio'))} al ${fmtD(v('fine'))} . Al termine pattuito il contratto sarà definitivamente scaduto senza possibilità di rinnovo tacito. Il Subconduttore entrerà nel possesso dell'unità immobiliare oggetto di locazione, ovvero della parte di essa così come indicata, nonché delle relative parti comuni, a far data dal giorno ${fmtD(v('inizio'))} . Il Subconduttore dichiara di aver ricevuto dalla Sublocatrice le informazioni e la documentazione, comprensiva dell'Attestato allegato al presente contratto, in ordine alla attestazione della prestazione energetica dell'immobile.</p>
+<p>Le parti convengono altresì che il contratto potrà cessare automaticamente e consensualmente la sua efficacia anticipatamente rispetto alla sua naturale scadenza nell'ipotesi in cui l'immobile sublocato necessiti di opere di manutenzione e/o ristrutturazione tali da impedirne la concomitante occupazione da parte del Subconduttore. In tal caso il Subconduttore si impegna al rilascio dell'immobile entro il termine di 15 giorni dal momento della comunicazione dei suddetti lavori da parte della Sublocatrice, senza nulla poter pretendere a titolo di restituzioni per canoni già versati e spese eventualmente già sostenute, né per indennizzi o risarcimenti del danno nei confronti di quest'ultima.</p>
+<p>Qualora in caso di cessazione degli effetti del contratto di sublocazione per qualsiasi causa, il Subconduttore non provveda al momento della liberazione della porzione di immobile e dell'immobile sublocato e comunque entro le successive 24 h, all'asportazione, integrale o parziale, di tutti i propri effetti personali e dei propri beni, e/o dei beni in suo possesso o che ad altro titolo o diritto si trovino nei suddetti locali e siano allo stesso riferiti, con la sottoscrizione del presente contratto e salvo diverso accordo scritto tra le parti, il Subconduttore autorizza il sublocatore alla rimozione di tali beni dall'immobile e al trasporto e deposito degli stessi a spese esclusive del Subconduttore, tenendo indenne sin da adesso la sublocatrice da qualsivoglia obbligo di custodia o deposito di tali beni, nonché da qualunque responsabilità – anche per la fase di trasporto - per danni ed ammaloramenti degli stessi, nonché da eventuali rivendicazioni o richieste di restituzione/indennizzi/risarcimenti da parte di terzi che ne siano proprietari o titolari di altro diritto reale sugli stessi.</p>
+<h2>Articolo 3 - (Canone)</h2>
+<p>Il canone totale di sublocazione è pattuito in Euro ${canoneTotale} ( ${n2w(tot)}/00) e dovrà essere corrisposto come di seguito indicato:</p>
+<ul class="arr">
+<li>quanto ad Euro ${primaRata} ( ${n2w(pr)}/00) all'atto della sottoscrizione del presente contratto, da imputare come prima mensilità, iscrizione club mediante Bonifico Bancario</li>
+<li>quanto ad Euro ${rateResidue} ( ${n2w(rr)}/00) in n.${nr} rate mensili, ciascuna pari ad Euro ${canoneMensile} ( ${n2w(c)}/00), a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: IT02W0200804810000105593166</li>
+</ul>
+<p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra.</p>
+<p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso o ritardato.</p>
+<p>Il mancato puntuale pagamento per qualunque causa, anche di una sola rata del canone (nonché di quanto altro dovuto a qualunque titolo) costituisce in mora il Subconduttore, fatto salvo quanto previsto dagli artt. 5 e 55 della Legge n. 392/78.</p>
+<h2>Articolo 4 - (Spese ed oneri a carico della Sublocatrice e spese ed oneri a carico del Subconduttore)</h2>
+<p>Sono a carico della Sublocatrice:</p>
+<ul class="arr">
+<li>il versamento delle imposte di bollo e di registrazione del presente contratto;</li>
+<li>assicurazione fabbricato e arredi per danni derivanti da impianti, o da cause fortuite da vicini o per ricorso vicini;</li>
+<li>le spese per l'allacciamento e/o voltura delle utenze energetiche</li>
+<li>le spese di gestione e di consumo delle utenze stesse nel limite dei consumi di seguito pattuiti;</li>
+<li>le spese di manutenzione ordinaria degli arredi e degli impianti;</li>
+<li>le tasse per lo smaltimento dei rifiuti solidi urbani nonché i canoni per utenze comunali relative alle forniture dell'acqua e spurgo pozzi.</li>
+</ul>
+<p>E' fatto salvo il diritto della Sublocatrice di pretendere da ciascun Subconduttore (in parti uguali tra loro quando più di uno) ovvero dal solo Subconduttore, ulteriori somme a titolo integrazione qualora si ravveda un utilizzo sconsiderato e sproporzionato (come meglio specificato nel "Regolamento dell'Appartamento") delle utenze elettriche, gas, acqua.</p>
+<p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso, ritardato né in nessun caso posto in compensazione da parte del Subconduttore, e ciò anche in caso di inadempimento del Sublocatore ad uno degli obblighi contrattualmente assunti.</p>
+<p>Il mancato puntuale pagamento, per qualunque causa, anche di una sola rata del canone (nonché di quant'altro dovuto a qualunque titolo) costituisce in mora il Subconduttore, fatto salvo quanto previsto dagli artt. 5 e 55 della Legge n. 392/78; restando salvo il diritto al risarcimento dell'ulteriore danno in capo alla Sublocatrice.</p>
+<p>E' inoltre a carico della Sublocatrice effettuare la registrazione del presente contratto secondo norma di legge.</p>
+<h2>Articolo5 - (Uso, manutenzione, oneri accessori e obblighi del Subconduttore)</h2>
+<p>Il Subconduttore si assume la responsabilità della custodia dell'unità immobiliare sublocata, comprese le relative chiavi di accesso, e si impegna a utilizzarla con la diligenza del buon padre di famiglia, evitando qualsiasi molestia agli altri conduttori o utilizzatori dell'edificio. È tenuto a mantenere l'unità immobiliare in condizioni di ordine, pulizia e decoro, incluse le aree comuni, i bagni e le cucine.</p>
+<p>Eventuali interventi resi necessari da un uso negligente dell'immobile, da danni dovuti a imperizia o da carenze nella pulizia saranno a carico esclusivo del Subconduttore. Qualora questi non provveda al ripristino dello stato di pulizia o alla riparazione dei danni, la Sublocatrice potrà intervenire direttamente, riservandosi il diritto di richiedere il rimborso delle spese sostenute, comprensive della gestione, al Subconduttore. Nel caso in cui l'intervento riguardi spazi comuni, tale rimborso sarà suddiviso in parti uguali tra tutti i subconduttori.</p>
+<p>L'immobile viene sublocato nello stato di fatto e di diritto in cui attualmente si trova, che il Subconduttore dichiara di conoscere e accettare senza alcuna riserva. Il Subconduttore prende atto che eventuali condizionatori presenti, anche se non funzionanti, dovranno rimanere inattivi e non potranno essere rimessi in funzione, sollevando espressamente la Sublocatrice da ogni responsabilità o obbligo in merito.</p>
+<p>Il Subconduttore dichiara inoltre di conoscere e accettare lo stato manutentivo dell'immobile, degli impianti, dei servizi e di ogni altro apparato presente, dichiarandoli idonei all'uso.</p>
+<p>Nell'utilizzo dell'unità abitativa e dei servizi comuni, il Subconduttore è tenuto a rispettare le normative vigenti, i regolamenti eventualmente emanati dalle autorità competenti, nonché il "Regolamento dello stabile" o il "Regolamento di condominio", ove esistenti. In assenza di questi, si applica il "Regolamento generale per gli inquilini" vigente nella provincia in cui si trova l'immobile, che il Subconduttore dichiara di aver visionato e accettato, essendo stato messo a sua disposizione dalla Sublocatrice. Inoltre, il Subconduttore si impegna a rispettare il "Regolamento Stanza Semplice", che dichiara di conoscere e accettare integralmente.</p>
+<p>Ogni porzione di immobile viene consegnata dalla Sublocatrice perfettamente pulita. Il Subconduttore accetta che il personale addetto alla pulizia, autorizzato dalla Sublocatrice e previo idoneo preavviso, possa accedere all'unità immobiliare per svolgere le operazioni necessarie e detenga una copia delle chiavi.</p>
+<p>Il Subconduttore dispone di 48 ore dalla presa in consegna dell'unità per segnalare eventuali difformità, malfunzionamenti, necessità di manutenzione o altre anomalie riscontrate, tramite comunicazione scritta da inviare via PEC all'indirizzo toplocazioni@legalmail.it. Trascorso tale termine, ogni eventuale malfunzionamento o anomalia si presume a lui imputabile, con obbligo di sostenere i relativi interventi di manutenzione o ripristino. Anche successivamente, eventuali problematiche non imputabili al Subconduttore dovranno essere comunicate entro 48 ore dalla scoperta, pena la responsabilità delle relative spese e l'eventuale risarcimento del danno alla Sublocatrice in caso di ritardo nella comunicazione.</p>
+<p>Il Subconduttore è tenuto a mantenere il decoro degli ambienti e il rispetto della civile convivenza, provvedendo alla pulizia degli spazi comuni dell'unità abitativa, inclusi cucina, bagno e ogni altro spazio o arredo non strettamente personale.</p>
+<p>Infine, il Subconduttore si impegna a osservare tutte le norme di sicurezza e prevenzione dei rischi, evitando comportamenti pericolosi quali, a titolo esemplificativo e non esaustivo, l'eccessivo carico di prese elettriche, l'introduzione di materiali infiammabili, o il fumo all'interno dell'immobile. È altresì tenuto a rispettare tutte le disposizioni relative alla prevenzione incendi.</p>
+<h2>Articolo 6 - (Divieti)</h2>
+<p>E' fatto divieto al Subconduttore occupare con materiali od oggetti gli spazi comuni, nonché porre fissi, infissi, targhe, insegne, tende di qualsiasi genere e condizionatori all'esterno dell'unità immobiliare locatagli, salvo che ciò non sia stato preventivamente autorizzato dalla Sublocatrice. E' altresì vietato installare antenne radio o TV senza il preventivo consenso della Sublocatrice. E' vietato al Subconduttore allestire con fioriere, vasi o altri suppellettili, davanzali o altre sporgenze dell'immobile. Il Subconduttore prende atto che è assolutamente vietato entrare con veicoli di qualsiasi tipo nel cortile, nei viali di accesso e comunque nelle zone private circostanti il fabbricato, così come è vietato far sostare veicoli di sorta in tali zone, salvo espressa autorizzazione della Sublocatrice.</p>
+<p>È fatto espresso divieto al Subconduttore di fumare in ogni locale dell'unità abitativa oggetto del presente contratto. Fatto salvo diverso accordo con gli altri eventuali Subconduttori, è vietato detenere animali nell'immobile di cui sopra. Il Subconduttore è unico responsabile di una scorretta gestione dei servizi di cui sopra, in particolare per quanto attiene al corretto smaltimento dei rifiuti secondo le normative vigenti. Eventuali costi aggiuntivi e/o multe dovuti all'inadempimento/negligenza e/o errore nell'utilizzo di detti servizi ed utenze, saranno ad esclusivo carico del Subconduttore.</p>
+<h2>Articolo 7 - (Miglioramenti addizioni e innovazioni)</h2>
+<p>E' vietato al Subconduttore eseguire direttamente o indirettamente innovazioni, migliorie, addizioni e/o innovazioni di qualsiasi genere e natura, (ivi compresa quella relativa alla modifica, anche parziale, della destinazione di uso del bene oggetto della presente sublocazione), senza preventivo assenso scritto della Sublocatrice. In ogni caso eventuali innovazioni, migliorie, addizioni e/o modifiche anche se effettuate con il consenso della Sublocatrice rimarranno, di diritto, acquisite alla proprietà senza che il Subconduttore possa asportarle o pretenderne indennizzi e/o rimborsi alla fine della sublocazione. Resta salvo ed impregiudicato il diritto della Sublocatrice di richiedere a suo insindacabile giudizio la riduzione in pristino a cura e spese del Subconduttore. La Sublocatrice si riserva il diritto di far eseguire sia all'interno sia all'esterno dell'unità immobiliare oggetto del presente contratto tutti gli interventi che si rendessero necessari, fatto salvo quanto previsto dagli articoli 1583 e 1584 del codice civile.</p>
+<h2>Articolo 8 - (Accesso nell'immobile)</h2>
+<p>Il Subconduttore si impegna sin d'ora a consentire l'accesso al bene da parte della Sublocatrice, della proprietà e/o da persone da queste autorizzate, previo idoneo preavviso. Ove sia stata preventivamente comunicata disdetta da parte del Subconduttore o della Sublocatrice o comunque in caso di necessità, il Subconduttore sarà tenuto a permettere alla Sublocatrice di far visionare i locali sublocati a chiunque sia interessato agli stessi dal lunedì al venerdì, previo preavviso al Subconduttore.</p>
+<h2>Articolo 9 - (Cessione, sublocazione, comodato, successione)</h2>
+<p>E' fatto espresso divieto al Subconduttore di sublocare, in tutto o in parte, la cosa locata; di cedere in qualsiasi forma ad altri il suo contratto; di consentire, a qualsiasi titolo, l'utilizzo di quanto oggetto del presente contratto a terzi. Non è consentito dare alloggio, sia pure a titolo gratuito, a persone che non siano il Subconduttore o le eventuali persone indicate in premessa: l'inosservanza di tale divieto costituisce grave inadempimento contrattuale e legittima la Sublocatrice a chiedere l'immediata risoluzione del contratto. Per la successione nel contratto si applica l'articolo 6 della legge n. 392/78, nel testo vigente a seguito della sentenza della Corte Costituzionale n. 404 del 1988.</p>
+<h2>Articolo 10 - (Clausola risolutiva espressa)</h2>
+<p>Il presente contratto di sublocazione si intenderà immediatamente risolto, ai sensi dell'art. 1456 del Codice civile, qualora il Subconduttore:</p>
+<ul class="bul">
+<li>Non adempia al pagamento anche di una sola mensilità del canone pattuito.</li>
+<li>Non mantenga l'immobile in condizioni di pulizia e decoro, sia nelle aree private che comuni, contravvenendo agli obblighi stabiliti all'Articolo 5;</li>
+<li>Ceda, in tutto o in parte, stabilmente o temporaneamente, il godimento del bene sublocato o trasferisca il presente contratto a terzi, senza il preventivo consenso scritto della Sublocatrice.</li>
+<li>Impedisca o ostacoli l'accesso all'immobile da parte della Sublocatrice, o da soggetti da questa autorizzati, nonostante idoneo preavviso come previsto all'Articolo 8;</li>
+<li>Modifichi la destinazione d'uso del bene sublocato o ne faccia un uso diverso da quello pattuito, irregolare, pregiudizievole o comunque senza il preventivo consenso scritto della Sublocatrice.</li>
+<li>Non rispetti, anche parzialmente, le disposizioni del Regolamento "Stanza Semplice", che il Subconduttore ha sottoscritto, accettato e si è impegnato a osservare.</li>
+<li>Non trasmetta alla Sublocatrice copia sottoscritta del contratto, unitamente alla documentazione aggiuntiva richiesta, entro 2 giorni dalla data di ricezione della stessa.</li>
+<li>Non fornisca il proprio codice fiscale entro 30 giorni dalla data di decorrenza del contratto.</li>
+<li>Non ottemperi agli obblighi contenuti nel precedente Articolo 4 del presente contratto.</li>
+<li>Non ottemperi agli obblighi contenuti nel precedente Articolo 5 del presente contratto.</li>
+<li>Attui azioni o comportamenti che possano mettere in pericolo l'incolumità di cose o persone, sia la propria o quella di terzi.</li>
+<li>Detenga o introduca, all'interno dell'immobile sublocato o negli spazi in comune, armi da fuoco, armi bianche o qualsiasi altro oggetto atto a offendere, indipendentemente dalla finalità.</li>
+<li>Detenga materiali che sono in contrasto con le leggi vigenti, stupefacenti, sostanze pericolose o elementi che possono creare pericoli a cose e persone.</li>
+<li>Cessi di occupare la porzione d'immobile senza preavviso e senza fornire alcuna comunicazione, non rispondendo a tentativi di contatto, con qualsiasi forma e mezzo, per un periodo superiore a 15 giorni consecutivi, interrompendo ogni comunicazione con la Sublocatrice.</li>
+<li>Non accetti eventuali sistemazioni alternative a seguito degli eventi riportati nel precedente articolo 4 del presente contratto.</li>
+<li>Trasferisca la propria residenza anagrafica presso l'unità immobiliare, contravvenendo all'Articolo 6 del presente contratto.</li>
+</ul>
+<p>Le parti convengono che soltanto la Sublocatrice possa avvalersi della facoltà concessagli dalla già menzionata clausola risolutiva qualora sussista anche uno solo dei motivi elencati; in tal caso, il Sublocatrice non sarà tenuto ad alcun obbligo di preavviso nei confronti del Subconduttore, limitandosi a manifestare la volontà di avvalersi di tale clausola mediante invio allo stesso di lettera raccomandata, o comunicazione mail nell'ipotesi di mancato invio della documentazione contrattuale sottoscritta nel termine indicato al punto precedente, nel qual caso il contratto di intenderà risolto ipso Jure al momento di trasmissione della mail.</p>
+<p>Il Subconduttore si impegna con la sottoscrizione del presente contratto a lasciare l'unità immobiliare locata entro il termine di 15 (quindici) giorni dalla ricezione della raccomandata/comunicazione suddetta senza aver più nulla a che pretendere dalla Sublocatrice, e restando obbligato al pagamento del canone - eventualmente ridotto in misura proporzionata ai giorni - sino al momento di effettivo rilascio del bene.</p>
+<p>Salvo tutto quanto sopra indicato, qualora dovesse intervenire una causa che possa dar diritto al Subconduttore ad ottenere la risoluzione del contratto per inidoneità sopravvenuta della cosa locata a servire all'uso convenuto, non imputabile alla Sublocatrice né al Subconduttore medesimo, la Sublocatrice è tenuta a restituire solo la parte di canone di locazione eventualmente anticipatole in proporzione al periodo di mancato godimento da parte del Subconduttore.</p>
+<h2>Articolo 11 – (Dispositivo di rilevamento decibel e clausola risolutiva espressa)</h2>
+<p>Il Subconduttore dichiara di essere stato informato, di essere a conoscenza e di accettare espressamente la presenza di un dispositivo elettronico per il rilevamento dei livelli sonori (decibel) installato nella zona comune dell'appartamento. Tale dispositivo ha la sola funzione di monitorare i livelli di rumorosità per garantire il rispetto della quiete e della convivenza civile, nel rispetto delle normative vigenti in materia di inquinamento acustico e delle regole condominiali e contrattuali. Il Subconduttore si impegna a mantenere, anche tramite i propri eventuali ospiti, un comportamento conforme al limite massimo di rumorosità consentito dalla legge e indicato nel regolamento che, pur non essendo materialmente allegato, costituisce parte integrante e sostanziale del presente contratto a tutti gli effetti di legge.</p>
+<p>In caso di rilevamento da parte del suddetto dispositivo di livelli di rumorosità costantemente o ripetutamente superiori alla soglia consentita, tali da arrecare disturbo alla quiete pubblica o privata, il Sublocatore potrà utilizzare i dati rilevati come prova oggettiva per avviare una procedura di risoluzione anticipata del contratto per giusta causa, ai sensi dell'art. 1456 c.c., con conseguente decadenza del Subconduttore dal diritto di permanenza nell'immobile e addebito delle spese connesse alla risoluzione stessa. Il Subconduttore prende atto che il dispositivo in oggetto non effettua registrazioni audio né viola la privacy personale, limitandosi esclusivamente alla misurazione del livello sonoro in decibel.</p>
+<h2>Articolo 12 – Riscaldamento e Condizionamento dell'Appartamento</h2>
+<p>Il Subconduttore dichiara di essere stato informato e di accettare che, nell'ambito dei servizi "all inclusive" previsti dal presente contratto, non sono inclusi il servizio di riscaldamento né quello di aria condizionata.</p>
+<p>Qualora l'appartamento fosse dotato di impianti di riscaldamento nelle zone comuni e/o nelle stanze, gli stessi potranno essere attivati esclusivamente in determinati periodi dell'anno, per specifiche fasce orarie e per una durata stabilita, secondo le disposizioni del capo condominio e/o del Sublocatore, senza possibilità di gestione autonoma da parte del Subconduttore. In ogni caso, il servizio non è garantito in modo continuativo né per 24 ore su 24.</p>
+<p>Si precisa altresì che l'appartamento non è dotato di impianto di aria condizionata e che tale servizio non è incluso nella sublocazione.</p>
+<p>Con la sottoscrizione del presente contratto, il Subconduttore dichiara di aver preso piena visione delle suddette condizioni e di accettarle integralmente, senza riserva alcuna.</p>
+<h2>Articolo 13 - (Riconsegna)</h2>
+<p>Alla data di cessazione del contratto il Subconduttore è tenuto alla consegna delle chiavi dei locali oggetto del presente contratto nelle mani della Sublocatrice previo sopralluogo da parte di quest'ultima. Il subconduttore si impegna a liberare la stanza entro le ore 12:00 dell'ultimo giorno del mese. E' diritto della Sublocatrice medesima pretendere il risarcimento dei danni ove i locali e gli arredi risultino danneggiati, fatto salvo il normale deperimento derivante dall'uso del buon padre di famiglia. A tal fine, faranno fede le pattuizioni contenute nel "Regolamento Stanza Semplice" e le comunicazioni avvenute all'atto di consegna della porzione di immobile, le cui modalità di comunicazione sono contenute nel precedente art.5.</p>
+<h2>Articolo 14 - (Esonero di responsabilità)</h2>
+<p>Il Subconduttore è costituito custode della cosa locata. Egli esonera espressamente la Sublocatrice da qualsiasi responsabilità per danni diretti ed indiretti che potessero derivargli da fatti dolosi o colposi di altri conduttori o di terzi in genere. Resta ferma la responsabilità della Sublocatrice per i danni provocati da fatti colposi nell'esecuzione delle obbligazioni su quest'ultima gravanti. Il Subconduttore si obbliga a rispondere puntualmente dei danni causati dai propri familiari, dipendenti o da tutte le persone che egli ammette temporaneamente nei locali, fermo restando il divieto di cui all'art. 9 che precede. Si obbliga inoltre a tenere sollevata ed indenne la Sublocatrice da eventuali danni derivanti dall'uso del gas, dell'acqua, della connessione internet o dell'elettricità cagionati a terzi e/o all'immobile con propria colpa o dalle persone delle quali è chiamato a rispondere. Il Subconduttore esonera la Sublocatrice da ogni responsabilità per sospensioni o irregolarità dei servizi di rete internet, illuminazione, acqua, acqua dei sanitari e ascensore dovute a casi imprevisti o alla sostituzione, riparazione, adeguamento, manutenzione degli impianti per il periodo necessario per l'effettuazione di tali interventi.</p>
+<h2>Articolo 15 - (Foro Competente)</h2>
+<p>Relativamente ad ogni e qualsiasi controversia dovessero insorgere in merito alla validità, all'interpretazione e/o esecuzione del presente contratto, le parti si obbligano, in via preliminare, ad esperire secondo quando previsto dalla normativa vigente (d.lgs. n. 28/2010) il tentativo di mediazione avanti agli organismi autorizzati ed aventi sede legale nella provincia ove è situato l'immobile oggetto del presente contratto. In ipotesi di esito negativo del predetto tentativo di mediazione, le parti dichiarano di eleggere il Foro competente secondo le norme previste dal codice di procedura civile. A tutti gli effetti del presente contratto, comprese la notifica degli atti esecutivi, e ai fini della competenza a giudicare, il Subconduttore elegge domicilio nei locali a lui locati e, ove egli più non li occupi o comunque detenga, presso l'ufficio di segreteria del Comune ove è situato l'immobile locato.</p>
+<h2>Articolo 16 - (Trattamento dei dati personali)</h2>
+<p>Le parti si impegnano a trattare i dati personali in loro possesso nel rispetto della Legge sulla Privacy (D.Lgs 196/2003 e Regolamento Europeo 679/2016). Tali dati potranno essere inseriti in Banche dati, archivi informatici e sistemi telematici solo per fini connessi al presente contratto. Si richiedono inoltre, ai fini di urgenze sanitarie e/o altre comunicazioni di carattere urgente e importante oltre i riferimenti telefonici e principale indirizzo mail di riferimento del capo famiglia o eventuali persone di riferimento del Subconduttore</p>
+<p>Indirizzo email: ${email} telefono ${tel}</p>
+<h2>Articolo 17 -(Richiamo a disposizioni di legge)</h2>
+<p>Per quanto non previsto nel presente contratto valgono, in quanto applicabili, tutte le norme vigenti in materia, con particolare riferimento alle disposizioni del codice civile, alle leggi n. 392/78 e n. 431/98 o comunque dalle norme vigenti e dagli usi locali nonché alla normativa ministeriale emanata in applicazione della legge n. 431/98. Qualunque modifica del presente contratto non può aver luogo, se non mediante forma scritta con il consenso di entrambe le parti.</p>
+<p style="margin-top:8pt">Letto, approvato e sottoscritto a Cagliari il ${ds.fmt}</p>
+<div class="firme-top"><div class="fc">La Sublocatrice</div><div class="fc" style="text-align:right">Il Subconduttore</div></div>
+<div style="border-top:1px solid #000;margin-top:20pt;padding-top:2pt;font-size:8.5pt;text-align:center">_______________________________________________________</div>
+<p style="margin-top:6pt;font-size:8.5pt">A norma degli artt. 1341 e 1342 del codice civile, le parti, di comune accordo, previa lettura delle clausole e degli articoli contenuti nel presente contratto, con particolare riguardo ai nn. 3, 4, 6, 7, 9, 10, 12 e 13, dichiarano espressamente di approvarle, rinunciata sin d'ora ogni eccezione.</p>
+<div class="firme-bot"><div class="fc">La Parte Sublocatrice</div><div class="fc" style="text-align:right">Il Subconduttore</div></div>
+<div style="border-top:1px solid #000;margin-top:20pt;padding-top:2pt;font-size:8.5pt;text-align:center">_____________________________________________________</div>
+</div></body></html>`;
+
+  document.getElementById('resetBtn').style.display='block';
+  const win=window.open('','_blank');
+  win.document.write(html);
+  win.document.close();
+  setTimeout(()=>win.print(),600);
 }
 
 function resetForm(){
-  document.querySelectorAll('input:not([type=radio])').forEach(el=>el.value='');
-  document.querySelectorAll('select').forEach(el=>el.value='');
+  document.querySelectorAll('input:not([type=radio])').forEach(el=>{el.value='';el.classList.remove('err','precomp');});
+  document.querySelectorAll('select').forEach(el=>{el.value='';el.classList.remove('err','precomp');});
   document.querySelectorAll('input[type=radio]').forEach(el=>el.checked=false);
   document.getElementById('ecoDiv').style.display='none';
-  document.getElementById('linkBox').style.display='none';
-  document.getElementById('resetBtn').style.display='none';
+  document.getElementById('crmBanner').style.display='none';
+  document.getElementById('studentSource').textContent='';
+  document.getElementById('cfNote').style.display='none';
   document.getElementById('durAltroDiv').style.display='none';
   document.getElementById('feeManDiv').style.display='none';
   document.getElementById('annoDiv').style.display='none';
   document.getElementById('customDateDiv').style.display='none';
   document.getElementById('fineHint').textContent='';
+  document.getElementById('resetBtn').style.display='none';
   window.scrollTo({top:0,behavior:'smooth'});
+  history.replaceState({},'',window.location.pathname);
 }
 </script>
 </body>
