@@ -8,615 +8,456 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f6f2;color:#1a1a1a;min-height:100vh}
 .wrap{max-width:580px;margin:0 auto;padding:1.5rem 1rem 5rem}
-.logo{font-size:1.3rem;font-weight:700;color:#1a1a1a;text-align:center;margin-bottom:.25rem}
+.logo{font-size:1.3rem;font-weight:700;text-align:center;margin-bottom:.25rem}
 .logo span{color:#e8a020}
-.subtitle{text-align:center;color:#888;font-size:.85rem;margin-bottom:1.5rem}
-.context-box{background:#fff;border-radius:14px;border:2px solid #fde68a;padding:1.125rem;margin-bottom:1rem}
-.context-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#b45309;margin-bottom:.75rem}
+.subtitle{text-align:center;color:#888;font-size:.85rem;margin-bottom:1.25rem}
+.ctx-box{background:#fff;border-radius:14px;border:2px solid #fde68a;padding:1.125rem;margin-bottom:1rem}
+.ctx-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#b45309;margin-bottom:.75rem}
 .ctx-row{display:flex;justify-content:space-between;padding:3px 0;font-size:.85rem}
 .ctx-row span:first-child{color:#78716c}
-.ctx-row span:last-child{font-weight:600;color:#1a1a1a}
+.ctx-row span:last-child{font-weight:600}
 .step-bar{display:flex;gap:4px;margin-bottom:1.25rem}
 .step{flex:1;height:4px;background:#e5e5e5;border-radius:4px;transition:background .3s}
-.step.done{background:#16a34a}
-.step.active{background:#e8a020}
+.step.done{background:#16a34a}.step.active{background:#e8a020}
 .card{background:#fff;border-radius:14px;border:1px solid #ebebeb;padding:1.25rem;margin-bottom:.75rem}
 .card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#aaa;margin-bottom:1rem}
-.field{margin-bottom:.875rem}
-.field:last-child{margin-bottom:0}
+.field{margin-bottom:.875rem}.field:last-child{margin-bottom:0}
 label{display:block;font-size:.825rem;color:#555;margin-bottom:5px;font-weight:500}
-input,select{width:100%;padding:11px 13px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:.95rem;color:#1a1a1a;background:#fff;outline:none;transition:border-color .15s}
+input,select{width:100%;padding:11px 13px;border:1.5px solid #e5e5e5;border-radius:9px;font-size:.95rem;color:#1a1a1a;background:#fff;outline:none;transition:border-color .15s;-webkit-appearance:none}
 input:focus,select:focus{border-color:#1a1a1a}
 .err-field input,.err-field select{border-color:#dc2626;background:#fff8f8}
 .err-msg{font-size:.75rem;color:#dc2626;margin-top:3px;display:none}
 .err-field .err-msg{display:block}
 .hint{font-size:.75rem;color:#aaa;margin-top:3px}
-.valid-badge{font-size:.75rem;color:#16a34a;margin-top:3px}
+.ok-badge{font-size:.75rem;color:#16a34a;margin-top:3px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+/* Nazionalità */
 .nat-box{display:flex;gap:10px;margin-bottom:.875rem}
-.nat-opt{flex:1;padding:12px;border:1.5px solid #e5e5e5;border-radius:9px;text-align:center;cursor:pointer;font-size:.875rem;font-weight:500;color:#666;transition:all .15s}
-.nat-opt.sel{border-color:#1a1a1a;color:#1a1a1a;background:#f7f6f2}
-.nat-opt.sel.ita{border-color:#2563eb;color:#2563eb;background:#eff6ff}
-.nat-opt.sel.str{border-color:#9333ea;color:#9333ea;background:#faf5ff}
-.info-box{background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:.75rem 1rem;font-size:.825rem;color:#15803d;margin-bottom:.875rem;line-height:1.5}
-.info-box.purple{background:#faf5ff;border-color:#d8b4fe;color:#7c3aed}
-.btn-next{width:100%;padding:15px;background:#1a1a1a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:background .15s}
+.nat-opt{flex:1;padding:14px 10px;border:1.5px solid #e5e5e5;border-radius:9px;text-align:center;cursor:pointer;font-size:.875rem;font-weight:500;color:#666;transition:all .15s;line-height:1.4}
+.nat-opt.sel-ita{border-color:#2563eb;color:#2563eb;background:#eff6ff}
+.nat-opt.sel-str{border-color:#9333ea;color:#9333ea;background:#faf5ff}
+/* Alert legale */
+.alert-legale{border-radius:12px;padding:1.125rem;margin-bottom:.75rem}
+.alert-legale.it{background:#fef2f2;border:2px solid #fca5a5}
+.alert-legale.en{background:#fff7ed;border:2px solid #fdba74}
+.alert-icon{font-size:1.5rem;margin-bottom:.5rem}
+.alert-title{font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+.alert-legale.it .alert-title{color:#991b1b}
+.alert-legale.en .alert-title{color:#9a3412}
+.alert-body{font-size:.825rem;line-height:1.6}
+.alert-legale.it .alert-body{color:#7f1d1d}
+.alert-legale.en .alert-body{color:#7c2d12}
+.alert-body strong{font-weight:700}
+/* Bottoni */
+.btn-next{width:100%;padding:15px;background:#1a1a1a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:.5rem}
 .btn-next:hover{background:#333}
 .btn-back{width:100%;padding:13px;background:#fff;color:#555;border:1.5px solid #e5e5e5;border-radius:11px;font-size:.95rem;font-weight:500;cursor:pointer;margin-top:.5rem}
+.btn-pdf{width:100%;padding:16px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:.5rem}
+.btn-pdf:hover{background:#15803d}
+/* Riepilogo */
+.rev-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:.5px solid #f0f0f0;font-size:.85rem}
+.rev-row span:first-child{color:#888;flex-shrink:0}
+.rev-row span:last-child{font-weight:500;text-align:right;max-width:62%}
+/* Errore */
+.err-page{text-align:center;padding:3rem 1rem}
 .hidden{display:none}
-
-/* FIRMA */
-.sig-box{background:#fff;border:1.5px solid #e5e5e5;border-radius:12px;overflow:hidden;margin-bottom:.75rem}
-.sig-label{padding:.75rem 1rem;font-size:.825rem;color:#555;font-weight:500;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}
-canvas#sigPad{display:block;width:100%;height:180px;cursor:crosshair;touch-action:none}
-.btn-clear{font-size:.75rem;color:#888;background:none;border:none;cursor:pointer;padding:2px 6px}
-.btn-conferma{width:100%;padding:15px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:.5rem}
-.btn-conferma:disabled{background:#d1d5db;cursor:not-allowed}
-
-/* SUCCESSO */
-.success-box{text-align:center;padding:2rem 1rem}
-.success-icon{font-size:3rem;margin-bottom:1rem}
-.success-title{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
-.success-sub{color:#666;font-size:.9rem;margin-bottom:1.5rem;line-height:1.6}
-.btn-pdf{display:inline-block;padding:14px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:11px;font-size:.95rem;font-weight:600;cursor:pointer;text-decoration:none;margin-bottom:.75rem}
-.email-note{font-size:.825rem;color:#888;line-height:1.5}
-
-/* ERRORE LINK */
-.error-page{text-align:center;padding:3rem 1rem}
-.error-page h2{font-size:1.25rem;margin-bottom:.5rem}
-.error-page p{color:#888;font-size:.875rem}
-
-/* STAMPA */
-@media print{
-  body{background:#fff;font-family:'Times New Roman',serif;font-size:10pt;color:#000}
-  .no-print{display:none!important}
-  .contratto-print{display:block!important}
-  @page{size:A4;margin:2.5cm 2cm}
-}
-.contratto-print{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="logo">Stanza <span>Semplice</span></div>
-  <div class="subtitle">Contratto di sublocazione — compilazione studente</div>
+  <div class="subtitle" id="pageSubtitle">Contratto di sublocazione — compilazione studente</div>
 
-  <!-- ERRORE LINK -->
-  <div id="errorPage" class="error-page hidden">
+  <div id="errPage" class="err-page hidden">
     <div style="font-size:2.5rem;margin-bottom:1rem">🔗</div>
-    <h2>Link non valido</h2>
-    <p>Questo link non contiene i dati del contratto.<br>Contatta Stanza Semplice per ricevere il link corretto.</p>
+    <h2 style="margin-bottom:.5rem">Link non valido</h2>
+    <p style="color:#888;font-size:.875rem">Contatta Stanza Semplice per ricevere il link corretto.</p>
   </div>
 
-  <!-- CONTENUTO PRINCIPALE -->
-  <div id="mainContent" class="hidden">
-
-    <!-- Barra step -->
-    <div class="step-bar" id="stepBar">
+  <div id="main" class="hidden">
+    <div class="step-bar">
       <div class="step active" id="sp0"></div>
       <div class="step" id="sp1"></div>
       <div class="step" id="sp2"></div>
-      <div class="step" id="sp3"></div>
     </div>
 
-    <!-- Riepilogo contratto (sempre visibile) -->
-    <div class="context-box">
-      <div class="context-title">Il tuo contratto</div>
+    <!-- Riepilogo contratto -->
+    <div class="ctx-box">
+      <div class="ctx-title" id="ctxTitle">Il tuo contratto</div>
       <div id="ctxHtml"></div>
     </div>
 
     <!-- STEP 0: NAZIONALITÀ -->
     <div id="s0">
       <div class="card">
-        <div class="card-label">Prima di iniziare</div>
+        <div class="card-label" id="lbl-natCard">Prima di iniziare</div>
         <div class="field">
-          <label>Sei italiano o straniero?</label>
+          <label id="lbl-natQ">Sei italiano o straniero / Erasmus?</label>
           <div class="nat-box">
-            <div class="nat-opt ita" id="natIta" onclick="setNat('ita')">🇮🇹 Italiano</div>
-            <div class="nat-opt str" id="natStr" onclick="setNat('str')">🌍 Straniero / Erasmus</div>
+            <div class="nat-opt" id="optIta" onclick="setNat('ita')">🇮🇹<br><span id="lbl-natIta">Italiano</span></div>
+            <div class="nat-opt" id="optStr" onclick="setNat('str')">🌍<br><span id="lbl-natStr">Straniero / Erasmus</span></div>
           </div>
         </div>
-        <div id="natNote" class="hidden"></div>
       </div>
-      <button class="btn-next" onclick="goS1()">Inizia compilazione →</button>
+      <button class="btn-next" id="btn-s0next" onclick="goS1()">Inizia →</button>
     </div>
 
-    <!-- STEP 1: DATI ANAGRAFICI -->
+    <!-- STEP 1: DATI PERSONALI -->
     <div id="s1" class="hidden">
-      <div class="card">
-        <div class="card-label">I tuoi dati personali</div>
 
-        <div class="g2">
-          <div class="field" id="f-cognome">
-            <label>Cognome *</label>
-            <input type="text" id="cognome" autocomplete="family-name">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
-          <div class="field" id="f-nome">
-            <label>Nome *</label>
-            <input type="text" id="nome" autocomplete="given-name">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
+      <!-- ALERT LEGALE -->
+      <div class="alert-legale it" id="alertLegale">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-title" id="alertTitle">ATTENZIONE — Leggi prima di compilare</div>
+        <div class="alert-body" id="alertBody">
+          I dati che stai per inserire saranno utilizzati per la <strong>registrazione legale del contratto di sublocazione</strong>.<br><br>
+          È obbligatorio che tutti i dati siano <strong>PRECISI, CORRETTI e corrispondenti esattamente</strong> al tuo documento d'identità.<br><br>
+          In caso di errori che causino problemi nella registrazione del contratto o che comportino sanzioni, penali o complicazioni legali, le relative spese e responsabilità saranno <strong>INTERAMENTE a tuo carico</strong>. Nei casi più gravi, un contratto con dati errati potrebbe essere considerato <strong>non valido</strong>.<br><br>
+          Controlla ogni campo con attenzione prima di procedere.
         </div>
+      </div>
 
-        <div class="g2">
-          <div class="field" id="f-dataNasc">
-            <label>Data di nascita *</label>
-            <input type="date" id="dataNasc">
-            <div class="err-msg">Campo obbligatorio</div>
+      <!-- SEZIONE ITALIANO -->
+      <div id="formIta">
+        <div class="card">
+          <div class="card-label">Dati personali</div>
+          <div class="g2">
+            <div class="field" id="f-cognome"><label>Cognome *</label><input type="text" id="cognome" autocomplete="family-name"><div class="err-msg">Obbligatorio</div></div>
+            <div class="field" id="f-nome"><label>Nome *</label><input type="text" id="nome" autocomplete="given-name"><div class="err-msg">Obbligatorio</div></div>
           </div>
-          <div class="field" id="f-sesso">
-            <label>Sesso *</label>
-            <select id="sesso">
-              <option value="">— seleziona —</option>
-              <option value="M">Maschio</option>
-              <option value="F">Femmina</option>
-            </select>
-            <div class="err-msg">Campo obbligatorio</div>
+          <div class="g2">
+            <div class="field" id="f-dataNasc"><label>Data di nascita *</label><input type="date" id="dataNasc"><div class="err-msg">Obbligatorio</div></div>
+            <div class="field" id="f-sesso"><label>Sesso *</label><select id="sesso"><option value="">— seleziona —</option><option value="M">Maschio</option><option value="F">Femmina</option></select><div class="err-msg">Obbligatorio</div></div>
           </div>
-        </div>
-
-        <div class="g2">
-          <div class="field" id="f-comNasc">
-            <label>Comune di nascita *</label>
-            <input type="text" id="comNasc" placeholder="es. Roma">
-            <div class="err-msg">Campo obbligatorio</div>
+          <div class="g2">
+            <div class="field" id="f-comNasc"><label>Comune di nascita *</label><input type="text" id="comNasc" placeholder="es. Roma"><div class="err-msg">Obbligatorio</div></div>
+            <div class="field" id="f-provNasc"><label>Prov. nascita *</label><input type="text" id="provNasc" maxlength="2" placeholder="RM" style="text-transform:uppercase"><div class="err-msg">2 lettere</div></div>
           </div>
-          <div class="field" id="f-provNasc">
-            <label>Provincia *</label>
-            <input type="text" id="provNasc" maxlength="2" placeholder="RM" style="text-transform:uppercase">
-            <div class="err-msg">2 lettere</div>
+          <div class="field" id="f-cf">
+            <label>Codice fiscale * <span id="cfBadge" class="ok-badge hidden">✓ valido</span></label>
+            <input type="text" id="cf" maxlength="16" placeholder="RSSMRA90A01H501Z" style="text-transform:uppercase;letter-spacing:1.5px;font-family:monospace" oninput="onCF()">
+            <div class="err-msg" id="cfErr">Codice fiscale non valido</div>
           </div>
-        </div>
-
-        <!-- CF: visibile solo per italiani -->
-        <div class="field" id="cfDiv">
-          <label>Codice fiscale * <span id="cfValid" class="valid-badge hidden">✓ valido</span></label>
-          <input type="text" id="cf" maxlength="16" placeholder="RSSMRA90A01H501Z" style="text-transform:uppercase;letter-spacing:1.5px;font-family:monospace" oninput="onCF()">
-          <div class="err-msg" id="cfErr">Codice fiscale non valido</div>
-        </div>
-
-        <!-- CF stranieri -->
-        <div class="info-box purple hidden" id="cfStrNote">
-          Il codice fiscale non è richiesto ora. Il nostro staff lo completerà con te al tuo arrivo in Italia.
-        </div>
-
-        <div style="margin-top:.25rem">
-          <label style="margin-bottom:.5rem;display:block">Indirizzo di residenza *</label>
-          <div class="field" id="f-via">
-            <input type="text" id="via" placeholder="Via/Piazza e numero civico" autocomplete="street-address">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
-          <div class="g3" style="margin-top:10px">
-            <div class="field" id="f-cap">
-              <input type="text" id="cap" maxlength="5" placeholder="CAP">
-              <div class="err-msg">5 cifre</div>
-            </div>
-            <div class="field" id="f-comRes">
-              <input type="text" id="comRes" placeholder="Comune" autocomplete="address-level2">
-              <div class="err-msg">Obbligatorio</div>
-            </div>
-            <div class="field" id="f-provRes">
-              <input type="text" id="provRes" maxlength="2" placeholder="Prov." style="text-transform:uppercase">
-              <div class="err-msg">2 lettere</div>
+          <div style="margin-top:.25rem">
+            <label style="margin-bottom:.5rem;display:block">Indirizzo di residenza *</label>
+            <div class="field" id="f-via"><input type="text" id="via" placeholder="Via/Piazza e numero civico"><div class="err-msg">Obbligatorio</div></div>
+            <div class="g3" style="margin-top:10px">
+              <div class="field" id="f-cap"><input type="text" id="cap" maxlength="5" placeholder="CAP"><div class="err-msg">5 cifre</div></div>
+              <div class="field" id="f-comRes"><input type="text" id="comRes" placeholder="Comune"><div class="err-msg">Obbligatorio</div></div>
+              <div class="field" id="f-provRes"><input type="text" id="provRes" maxlength="2" placeholder="Prov." style="text-transform:uppercase"><div class="err-msg">2 lettere</div></div>
             </div>
           </div>
-        </div>
-
-        <div class="g2" style="margin-top:.875rem">
-          <div class="field" id="f-email">
-            <label>Email *</label>
-            <input type="email" id="email" autocomplete="email">
-            <div class="err-msg">Email non valida</div>
+          <div class="g2" style="margin-top:.875rem">
+            <div class="field" id="f-email"><label>Email * <span style="font-size:.75rem;color:#888">(per comunicazioni e emergenze)</span></label><input type="email" id="email" autocomplete="email"><div class="err-msg">Email non valida</div></div>
+            <div class="field" id="f-tel"><label>Telefono * <span style="font-size:.75rem;color:#888">(per emergenze)</span></label><input type="tel" id="tel" placeholder="+39 320 0000000"><div class="err-msg">Numero non valido</div></div>
           </div>
-          <div class="field" id="f-tel">
-            <label>Telefono *</label>
-            <input type="tel" id="tel" placeholder="+39 320 0000000" autocomplete="tel">
-            <div class="err-msg">Numero non valido</div>
-          </div>
-        </div>
-
-        <div class="g2" style="margin-top:.875rem">
-          <div class="field" id="f-univ">
-            <label>Università *</label>
-            <input type="text" id="univ" placeholder="es. Università di Cagliari">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
-          <div class="field" id="f-facolta">
-            <label>Facoltà / Corso *</label>
-            <input type="text" id="facolta" placeholder="es. Ingegneria">
-            <div class="err-msg">Campo obbligatorio</div>
+          <div class="g2" style="margin-top:.875rem">
+            <div class="field" id="f-univ"><label>Università *</label><input type="text" id="univ" placeholder="es. Università di Cagliari"><div class="err-msg">Obbligatorio</div></div>
+            <div class="field" id="f-facolta"><label>Facoltà / Corso *</label><input type="text" id="facolta" placeholder="es. Ingegneria"><div class="err-msg">Obbligatorio</div></div>
           </div>
         </div>
       </div>
-      <button class="btn-next" onclick="goS2()">Continua →</button>
+
+      <!-- SEZIONE STRANIERO (English) -->
+      <div id="formStr" class="hidden">
+        <div class="card">
+          <div class="card-label">Personal details</div>
+          <div class="g2">
+            <div class="field" id="f-cognomeE"><label>Last name *</label><input type="text" id="cognomeE" autocomplete="family-name"><div class="err-msg">Required</div></div>
+            <div class="field" id="f-nomeE"><label>First name *</label><input type="text" id="nomeE" autocomplete="given-name"><div class="err-msg">Required</div></div>
+          </div>
+          <div class="g2">
+            <div class="field" id="f-dataNascE"><label>Date of birth *</label><input type="date" id="dataNascE"><div class="err-msg">Required</div></div>
+            <div class="field" id="f-sessoE"><label>Gender *</label><select id="sessoE"><option value="">— select —</option><option value="M">Male</option><option value="F">Female</option></select><div class="err-msg">Required</div></div>
+          </div>
+          <div class="field" id="f-paeseNascE"><label>Country of birth *</label><input type="text" id="paeseNascE" placeholder="e.g. Spain, France, Germany…"><div class="err-msg">Required</div></div>
+          <div class="field" id="f-cittadinanzaE"><label>Citizenship / Nationality *</label><input type="text" id="cittadinanzaE" placeholder="e.g. Spanish, French, German…"><div class="err-msg">Required</div></div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:.75rem 1rem;font-size:.825rem;color:#15803d;margin-bottom:.875rem;line-height:1.5">
+            ℹ️ Your Italian tax code (codice fiscale) is not required now. Our staff will complete it with you upon your arrival in Italy.
+          </div>
+          <div class="g2">
+            <div class="field" id="f-emailE"><label>Email address * <span style="font-size:.72rem;color:#888">(for communications & emergencies)</span></label><input type="email" id="emailE" autocomplete="email"><div class="err-msg">Invalid email</div></div>
+            <div class="field" id="f-telE"><label>Phone number * <span style="font-size:.72rem;color:#888">(for emergencies)</span></label><input type="tel" id="telE" placeholder="+34 600 000000"><div class="err-msg">Invalid number</div></div>
+          </div>
+          <div class="g2" style="margin-top:.875rem">
+            <div class="field" id="f-univE"><label>University *</label><input type="text" id="univE" placeholder="e.g. University of Cagliari"><div class="err-msg">Required</div></div>
+            <div class="field" id="f-facoltaE"><label>Faculty / Degree course *</label><input type="text" id="facoltaE" placeholder="e.g. Engineering"><div class="err-msg">Required</div></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-next" id="btn-s1next" onclick="goS2()">Continua →</button>
       <button class="btn-back" onclick="goS0()">← Indietro</button>
     </div>
 
-    <!-- STEP 2: DOCUMENTO -->
+    <!-- STEP 2: RIEPILOGO + SCARICA -->
     <div id="s2" class="hidden">
       <div class="card">
-        <div class="card-label">Documento d'identità</div>
-
-        <div class="g2">
-          <div class="field" id="f-tipoDoc">
-            <label>Tipo documento *</label>
-            <select id="tipoDoc">
-              <option value="">— seleziona —</option>
-              <option value="Carta d'Identità">Carta d'identità</option>
-              <option value="Passaporto">Passaporto</option>
-              <option value="Patente">Patente</option>
-            </select>
-            <div class="err-msg">Seleziona il tipo</div>
-          </div>
-          <div class="field" id="f-numDoc">
-            <label>Numero documento *</label>
-            <input type="text" id="numDoc" placeholder="es. CA12345AB" style="text-transform:uppercase">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
-        </div>
-
-        <div class="field" id="f-ente">
-          <label>Ente emittente *</label>
-          <input type="text" id="ente" placeholder="es. Comune di Roma — Questura di Roma">
-          <div class="err-msg">Campo obbligatorio</div>
-        </div>
-
-        <div class="g2">
-          <div class="field" id="f-rilascio">
-            <label>Data di rilascio *</label>
-            <input type="date" id="rilascio">
-            <div class="err-msg">Campo obbligatorio</div>
-          </div>
-          <div class="field" id="f-scadenza">
-            <label>Data di scadenza * <span id="scadBadge"></span></label>
-            <input type="date" id="scadenza" oninput="chkScad()">
-            <div class="err-msg" id="scadErr">Documento scaduto — usa un documento valido</div>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-next" onclick="goS3()">Controlla e firma →</button>
-      <button class="btn-back" onclick="goS1()">← Indietro</button>
-    </div>
-
-    <!-- STEP 3: FIRMA -->
-    <div id="s3" class="hidden">
-      <div class="card">
-        <div class="card-label">Riepilogo — controlla prima di firmare</div>
+        <div class="card-label" id="lbl-revCard">Riepilogo — controlla prima di scaricare</div>
         <div id="revHtml"></div>
       </div>
-
-      <div class="card">
-        <div class="card-label">Firma qui sotto</div>
-        <p style="font-size:.825rem;color:#666;margin-bottom:.75rem;line-height:1.5">
-          Firmando dichiari di aver letto e accettato tutte le condizioni del contratto di sublocazione.
-        </p>
-        <div class="sig-box">
-          <div class="sig-label">
-            <span>Firma con il dito o il mouse</span>
-            <button class="btn-clear" onclick="clearSig()">Cancella</button>
-          </div>
-          <canvas id="sigPad"></canvas>
-        </div>
-        <button class="btn-conferma" id="btnConferma" onclick="conferma()">Genera e scarica contratto firmato</button>
+      <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:1rem 1.125rem;margin-bottom:.75rem;font-size:.85rem;color:#15803d;line-height:1.5" id="downloadNote">
+        Il contratto si aprirà in una nuova finestra. Usa <strong>File → Stampa → Salva come PDF</strong> per scaricarlo, poi invialo via email a Stanza Semplice.
       </div>
-
-      <button class="btn-back" onclick="goS2()">← Indietro</button>
+      <button class="btn-pdf" id="btn-pdf" onclick="stampa()">📄 Scarica contratto PDF</button>
+      <button class="btn-back" id="btn-s2back" onclick="goS1()">← Indietro</button>
     </div>
 
-    <!-- STEP 4: SUCCESSO -->
-    <div id="s4" class="hidden success-box">
-      <div class="success-icon">✅</div>
-      <div class="success-title">Contratto pronto!</div>
-      <div class="success-sub">
-        Il tuo contratto è stato generato con la tua firma.<br>
-        Scaricalo, salvalo come PDF e invialo via email a:<br>
-        <strong>info@stanzasemplice.it</strong>
-      </div>
-      <button class="btn-pdf" onclick="stampa()">Scarica / Stampa contratto PDF</button>
-      <br>
-      <div class="email-note">
-        Usa il tasto sopra → nel menu di stampa scegli<br>
-        <strong>"Salva come PDF"</strong> → invialo per email
-      </div>
-    </div>
+  </div>
+</div>
 
-  </div><!-- /mainContent -->
-</div><!-- /wrap -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.5/signature_pad.umd.min.js"></script>
 <script>
-// ── Dati dal link ─────────────────────────────────────────────────────
-let OP = null;
-let NAZ = 'ita';
-let sigPad = null;
-let sigDataUrl = null;
-let currentStep = 0;
+// ── Dati appartamenti (premesso completo) ─────────────────────────────
+const APT = {
+  ariosto11:{label:"Via Ariosto n°11",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con i signori: Corona Anna Rita CF: CRNNRT74M59B35AN nata a Cagliari il 19/08/1974, residente in Dolianova, Via Marconi n58; Sig. Corona Gianluigi, C.F. CRNLG68T14B354X nato a Cagliari il 14/12/1968 e residente in Quartu Sant'Elena, via Armando Diaz n65; Sig. Corona Pietro C.F. CRNPTR39M08D323E nato a Cagliari il 08/08/1939 e residente a Cagliari in via Ariosto 11; avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Lodovico Ariosto n11, piano 5, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana/comune catastale A, foglio 19, sub 16, particella 2577, classe Energetica E;"},
+  dante108:{label:"Via Dante n°108",premesso:"che in data 05/10/2022 la Sublocatrice ha stipulato con la società Fabrica Immobiliare con sede legale in Roma (RM) via Nazionale n.87, C.F. e P.IVA 07753061006, R.E.A. n. RM-1054624, il contratto di locazione registrato in data 18/10/2022 al n. 021115-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Dante n. 108 piano 1, di complessivi mq. 368 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A/19 mappale 2607 sub 88 categoria A/2 classe 03, classe energetica D;"},
+  deledda22:{label:"Via Grazia Deledda n°22",premesso:"che in data 09/06/2025 il sublocatore ha stipulato con la sig.ra Chiara Maria Pulixi nata a Cagliari il 15/03/2001, residente in Cagliari Via Milano n.8, codice fiscale PLXCRM01C55B354E, il contratto di locazione registrato in data 13/06/2025 al n. 003553-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Grazia Deledda nr.18 piano 3°, censita al N.C.E.U. con i seguenti identificativi: Sezione A, Foglio 18, particella 3849, Sub 4, Categoria A/2, Classe 3, consistenza 12 vani, rendita catastale €2.231,09, classe energetica D;"},
+  doberdo37:{label:"Via Doberdò n°37",premesso:"che in data 30/06/2024 la Sublocatrice ha stipulato con la sig.ra Maria Luigia Marinelli, nata a Iglesias (CI) il 24/09/1944 e residente a Cagliari (CA) in Via Doberdò n. 37, con codice fiscale MRNMLG44P64E281V, il contratto di locazione avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Doberdò n. 37 piano 2, di complessivi mq. 100 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A10 mappale 265, sub 6 categoria A4 classe 01, R.C. €326,66, classe energetica C;"},
+  giudicati1:{label:"Via dei Giudicati n°1",premesso:"che in data 31/05/2019 il sublocatore ha stipulato con la Sig.ra Maria Giovanna Porcu nata ad Oristano il 4/04/1982, residente in Oristano via delle fosse ardeatine 25, codice fiscale PRCMGV82D44G113Y, il contratto di locazione registrato in data 07/06/2019 al n. 003344-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via dei Giudicati n1 piano 3, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 12, sub 34, particella 122, categoria A3, rendita 637,82 euro, classe Energetica C;"},
+  goldoni24:{label:"Via Goldoni n°24",premesso:"che in data 09/06/2025 il sublocatore ha stipulato con il Sig. Giorgetti Enrico nato a Cagliari il 29/01/1990, residente in Brescia via Mantova n.46, codice fiscale GRGNRC90A29B354H, il contratto di locazione registrato in data 13/01/2026 al n. 000472-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Goldoni 24 8° piano, censita al N.C.E.U. con i seguenti identificativi: Sezione A, Foglio A/13, particella 311, Sub 36, Categoria A/3, Classe 3, rendita catastale €686,89, classe energetica G;"},
+  ingurtosu9_2p:{label:"Via Ingurtosu n°9 — Piano 2",premesso:"che in data 29/01/2019 il sublocatore ha stipulato con il Sig Farigu Marco nato a Capoterra il 22/11/1958, residente in Capoterra via Michelangelo n 14, codice fiscale FRGMRC58S22B675N, il contratto di locazione registrato in data 12/02/2019 al n. 000970-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Ingurtosu n°9 piano 2, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 7, sub 8, particella 3391, categoria A3, rendita 522,90 euro, classe Energetica F;"},
+  ingurtosu9_3p:{label:"Via Ingurtosu n°9 — Piano 3",premesso:"che in data 21/11/2018 il sublocatore ha stipulato con il Sig Farigu Marco nato a Capoterra il 22/11/1958, residente in Capoterra via Michelangelo n 14, codice fiscale FRGMRC58S22B675N, il contratto di locazione registrato in data 27/11/2018 al n. 014699-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Ingurtosu n°9 piano 3, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 7, sub 11, particella 3391, categoria A3, rendita 522,90 euro, classe Energetica F;"},
+  ismirrionis87:{label:"Via Is Mirrionis n°87",premesso:"che in data 06/11/2019 il sublocatore ha stipulato con la Sig.ra Maria Virdis nata a Cagliari (CA) il 10/08/1965, residente in Cagliari (CA) via Ludovico Ariosto, codice fiscale VRDMRA30P47B354D, il contratto di locazione registrato in data 07/11/2019 al n. 008265-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Is Mirrionis 87 piano 2, di complessivi mq. 90 censita in catasto fabbricati del Comune di Cagliari, foglio 7, particella/mappale 3280, sub 9, categoria A/2, classe 1, vani 5, rendita 671,39 euro;"},
+  lombardia2:{label:"Via Lombardia n°2",premesso:"che in data 21/11/2018 il sublocatore ha stipulato con la Sig.ra Delogu Maria Serena nata a Solarussa (OR) il 10/08/1965, residente in Sestu (CA) via San Simmarco n6, codice fiscale DLGMSR65M50I791W, il contratto di locazione registrato in data 19/12/2018 al n. 015252-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Lombardia n2 piano 1, di complessivi mq. 130 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, foglio 11, particella/mappale 344, sub 125, categoria A/4, classe 2, vani 7, rendita 488,05 euro;"},
+  machiavelli91:{label:"Via Machiavelli n°91a",premesso:"che in data 27/03/2024 la Sublocatrice ha stipulato con il Sig. Francesco Marongiu, nato a Cagliari (CA) il 28/04/1972 e residente a Cagliari (CA) in Via Machiavelli n. 91a, con codice fiscale MRNFNC72D28B354V, il contratto di locazione registrato in data 05/04/2024 al n. 002225-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Machiavelli n. 91a piano 4, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio 13 mappale 2511 sub 15 categoria A3 classe 03, classe energetica D;"},
+  passeri3:{label:"Via dei Passeri n°3",premesso:"che in data 24/10/2019 il sublocatore ha stipulato con la Sig.ra Panzeri Maria nata a Cantù il 1/08/1931, residente in Cagliari via Pietro Delitala, codice fiscale PNZMRA31M41B639Z, il contratto di locazione registrato in data 06/11/2019 al n. 008246-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via dei Passeri n3 piano 3, di complessivi mq. 160 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio 21, sub 16, particella 1883, rendita 1074,23 euro, classe Energetica E;"},
+  pola5:{label:"Via Pola n°5",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la Sig.ra Poddine Rossella nata a Cagliari il 10/03/1967, residente a Cagliari in Viale Merello n71, il contratto di locazione registrato in data 17/02/2020 al n. 001155-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Pola n5 piano 2, di complessivi mq. 180 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio A/18, sub 5, particella 540, rendita 2231,09 euro, classe Energetica E;"},
+  pola26:{label:"Via Pola n°26",premesso:"che in data 29/01/2019 il sublocatore ha stipulato con il Sig Aresu Tito residente in Cagliari via San Lucifero n 72 codice fiscale RSATTI54A25G122K il contratto di locazione registrato in data 30/01/2019 al n. 620-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Pola n°26 piano 4, di complessivi mq. 150 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio 18, sub 17, particella 8248, categoria A/2, rendita catastale 1102,64 euro, classe Energetica C;"},
+  tigellio20_1p:{label:"Via Tigellio n°20 — Piano 1",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 15/01/2020 al n. 000267-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 20b piano 1, di complessivi mq. 110 censita in catasto fabbricati del Comune di Cagliari, foglio A/18, sub 43, particella 5502, rendita 1023,88 euro, classe Energetica E;"},
+  tigellio20_2p:{label:"Via Tigellio n°20 — Piano 2",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 15/01/2020 al n. 000266-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 20b piano 2, di complessivi mq. 110 censita in catasto fabbricati del Comune di Cagliari, sezione urbana A, Codice Comune B354, Categoria Catastale A2, foglio A/18, sub 7, particella 8300, rendita 1023,88 euro, classe Energetica E;"},
+  tigellio24:{label:"Via Tigellio n°24",premesso:"che in data 08/01/2020 il sublocatore ha stipulato con la CGC di Anna Congiu s.a.s. con sede in Cagliari, Piazza san Benedetto n15, p.iva. 02460300920, in persona del socio accomandatario Cerato Giuseppe Andrea, in qualità di amministratrice (in virtù della delibera delle comproprietarie in data 30/12/2015) del patrimonio immobiliare comune alle seguenti signore: Giulia Fiorelli FRLGLI56B48B354M, Adriana Fiorelli FRLDRN57R55B354W, Maria Rosaria Randaccio RNDMRS45L41B354G; il contratto di locazione registrato in data 04/12/2020 al n. 008480-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA) via Tigellio 24 piano 5, di complessivi mq. 140 censita in catasto fabbricati del Comune di Cagliari, foglio A/18, sub 31, particella 8300, rendita 1260,15 euro, classe Energetica G;"},
+  tiziano62:{label:"Via Tiziano n°62",premesso:"che in data 09/12/2021 la Sublocatrice ha stipulato con il Sig. Gianluca Fontana nato a Cagliari (CA) il 21/07/1975, residente a Sanluri (VS) in via Zurru n.7, C.F. FNTGLC75L21B354Y, il contratto di locazione registrato in data 13/12/2021 al n. 009499-Serie 3T avente ad oggetto il godimento dell'immobile sito a Cagliari (CA) in via Tiziano n. 62 piano 4, di complessivi mq. 145 censita in catasto fabbricati del Comune di Cagliari c.c. Cagliari foglio A/19 p.m. 3119 sub 8 categoria A/2 classe 02, classe energetica G;"}
+};
 
-(function init() {
-  const params = new URLSearchParams(window.location.search);
-  const raw = params.get('d');
-  if (!raw) { show('errorPage'); return; }
-  try {
-    OP = JSON.parse(decodeURIComponent(raw));
-  } catch(e) { show('errorPage'); return; }
-  if (!OP.stanza || !OP.dataInizio) { show('errorPage'); return; }
+// ── Stato globale ──────────────────────────────────────────────────────
+let OP=null, NAZ='', LANG='it';
 
-  // Mostra riepilogo contratto
-  document.getElementById('ctxHtml').innerHTML =
-    cr('Stanza', 'n° ' + OP.stanza) +
-    cr('Periodo', OP.dataInizio + ' → ' + OP.dataFine + ' (' + OP.durataMesi + ' mesi)') +
-    cr('Canone mensile', '€ ' + OP.canoneMensile) +
-    cr('Prima rata (1° mese + fee)', '€ ' + OP.primaRata);
-
-  show('mainContent');
-  setNat('ita'); // default
-  initSig();
+(function init(){
+  const p=new URLSearchParams(window.location.search);
+  const raw=p.get('d');
+  if(!raw){show('errPage');return;}
+  try{OP=JSON.parse(decodeURIComponent(raw));}catch(e){show('errPage');return;}
+  if(!OP.stanza||!OP.dataInizio){show('errPage');return;}
+  const apt=APT[OP.appartamento];
+  document.getElementById('ctxHtml').innerHTML=
+    cr('Appartamento',apt?apt.label:'—')+
+    cr('Stanza','n° '+OP.stanza)+
+    cr('Periodo',OP.dataInizio+' → '+OP.dataFine+' ('+OP.durataMesi+' mesi)')+
+    cr('Canone mensile','€ '+OP.canoneMensile)+
+    cr('Prima rata (1° mese + fee)','€ '+OP.primaRata);
+  show('main');
 })();
 
-function cr(l, v) { return `<div class="ctx-row"><span>${l}</span><span>${v}</span></div>`; }
-function show(id) { document.getElementById(id).classList.remove('hidden'); }
-function hide(id) { document.getElementById(id).classList.add('hidden'); }
+function cr(l,v){return`<div class="ctx-row"><span>${l}</span><span>${v}</span></div>`;}
+function show(id){document.getElementById(id).classList.remove('hidden');}
+function hide(id){document.getElementById(id).classList.add('hidden');}
 
-// ── Navigazione step ──────────────────────────────────────────────────
-function setStep(n) {
-  ['s0','s1','s2','s3','s4'].forEach((id, i) => {
-    document.getElementById(id).classList.toggle('hidden', i !== n);
+// ── Step navigation ────────────────────────────────────────────────────
+function setStep(n){
+  ['s0','s1','s2'].forEach((id,i)=>document.getElementById(id).classList.toggle('hidden',i!==n));
+  ['sp0','sp1','sp2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.className='step'+(i<n?' done':i===n?' active':'');
   });
-  ['sp0','sp1','sp2','sp3'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
-  });
-  currentStep = n;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function goS0() { setStep(0); }
-function goS1() {
-  if (!NAZ) { alert('Seleziona la nazionalità per continuare.'); return; }
+function goS0(){setStep(0);}
+function goS1(){
+  if(!NAZ){alert(LANG==='en'?'Please select your nationality first.':'Seleziona la nazionalità per continuare.');return;}
   setStep(1);
 }
-function goS2() {
-  if (!validaS1()) return;
-  setStep(2);
-}
-function goS3() {
-  if (!validaS2()) return;
-  buildReview();
-  setStep(3);
+function goS2(){
+  if(!validaS1())return;
+  buildReview();setStep(2);
 }
 
-// ── Nazionalità ───────────────────────────────────────────────────────
-function setNat(n) {
-  NAZ = n;
-  document.getElementById('natIta').className = 'nat-opt ita' + (n === 'ita' ? ' sel' : '');
-  document.getElementById('natStr').className = 'nat-opt str' + (n === 'str' ? ' sel' : '');
-
-  if (n === 'ita') {
-    show('cfDiv'); hide('cfStrNote');
-    document.getElementById('natNote').className = 'info-box';
-    document.getElementById('natNote').textContent = 'Compila tutti i campi. Il codice fiscale verrà validato automaticamente.';
-    show('natNote');
+// ── Nazionalità ────────────────────────────────────────────────────────
+function setNat(n){
+  NAZ=n;LANG=n==='str'?'en':'it';
+  document.getElementById('optIta').className='nat-opt'+(n==='ita'?' sel-ita':'');
+  document.getElementById('optStr').className='nat-opt'+(n==='str'?' sel-str':'');
+  if(n==='ita'){
+    show('formIta');hide('formStr');
+    document.getElementById('alertLegale').className='alert-legale it';
+    document.getElementById('alertTitle').textContent='ATTENZIONE — Leggi prima di compilare';
+    document.getElementById('alertBody').innerHTML='I dati che stai per inserire saranno utilizzati per la <strong>registrazione legale del contratto di sublocazione</strong>.<br><br>È obbligatorio che tutti i dati siano <strong>PRECISI, CORRETTI e corrispondenti esattamente</strong> al tuo documento d\'identità.<br><br>In caso di errori che causino problemi nella registrazione del contratto o che comportino sanzioni, penali o complicazioni legali, le relative spese e responsabilità saranno <strong>INTERAMENTE a tuo carico</strong>. Nei casi più gravi, un contratto con dati errati potrebbe essere considerato <strong>non valido</strong>.<br><br>Controlla ogni campo con attenzione prima di procedere.';
+    document.getElementById('btn-s0next').textContent='Inizia →';
+    document.getElementById('btn-s1next').textContent='Continua →';
+    document.getElementById('lbl-revCard').textContent='Riepilogo — controlla prima di scaricare';
+    document.getElementById('downloadNote').innerHTML='Il contratto si aprirà in una nuova finestra. Usa <strong>File → Stampa → Salva come PDF</strong> per scaricarlo, poi invialo via email a Stanza Semplice.';
+    document.getElementById('btn-pdf').textContent='📄 Scarica contratto PDF';
+    document.getElementById('btn-s2back').textContent='← Indietro';
+    document.getElementById('ctxTitle').textContent='Il tuo contratto';
+    document.getElementById('pageSubtitle').textContent='Contratto di sublocazione — compilazione studente';
   } else {
-    hide('cfDiv'); show('cfStrNote');
-    document.getElementById('natNote').className = 'info-box purple';
-    document.getElementById('natNote').innerHTML = '🌍 Benvenuto! Compila i campi con i dati del tuo documento. Il codice fiscale verrà completato dal nostro staff al tuo arrivo.';
-    show('natNote');
+    hide('formIta');show('formStr');
+    document.getElementById('alertLegale').className='alert-legale en';
+    document.getElementById('alertTitle').textContent='IMPORTANT — Read carefully before filling in';
+    document.getElementById('alertBody').innerHTML='The information you are about to provide will be used for the <strong>legal registration of your sublease contract</strong>.<br><br>All data must be <strong>ACCURATE, CORRECT and exactly matching</strong> your identity document.<br><br>If errors in your personal data cause problems with contract registration or result in fines, penalties or legal complications, all related costs and responsibilities will be <strong>ENTIRELY your own</strong>. In the most serious cases, a contract with incorrect data may be considered <strong>invalid</strong>.<br><br>Please check every field carefully before proceeding.';
+    document.getElementById('btn-s0next').textContent='Start →';
+    document.getElementById('btn-s1next').textContent='Continue →';
+    document.getElementById('lbl-revCard').textContent='Summary — check before downloading';
+    document.getElementById('downloadNote').innerHTML='The contract will open in a new window. Use <strong>File → Print → Save as PDF</strong> to download it, then send it by email to Stanza Semplice.';
+    document.getElementById('btn-pdf').textContent='📄 Download contract PDF';
+    document.getElementById('btn-s2back').textContent='← Back';
+    document.getElementById('ctxTitle').textContent='Your contract';
+    document.getElementById('pageSubtitle').textContent='Sublease contract — student form';
   }
 }
 
 // ── Validazione CF ────────────────────────────────────────────────────
-function onCF() {
-  const cf = document.getElementById('cf').value.toUpperCase();
-  const el = document.getElementById('f-cf') || document.getElementById('cfDiv').closest('.field');
-  const badge = document.getElementById('cfValid');
-  if (cf.length === 0) { badge.classList.add('hidden'); return; }
-  const valid = chkCF(cf);
-  badge.classList.toggle('hidden', !valid);
-  if (!valid && cf.length === 16) {
-    document.getElementById('cfErr').textContent = 'CF non valido (16 caratteri richiesti)';
+function onCF(){
+  const cf=document.getElementById('cf').value.toUpperCase();
+  const badge=document.getElementById('cfBadge');
+  if(cf.length===0){badge.classList.add('hidden');return;}
+  const v=chkCF(cf);
+  badge.classList.toggle('hidden',!v);
+  if(!v&&cf.length===16)document.getElementById('cfErr').textContent='Carattere di controllo errato';
+  else if(cf.length!==16)document.getElementById('cfErr').textContent='Il CF deve essere di 16 caratteri (inseriti: '+cf.length+')';
+}
+function chkCF(cf){
+  cf=cf.toUpperCase().trim();if(cf.length!==16)return false;
+  const odd={0:1,1:0,2:5,3:7,4:9,5:13,6:15,7:17,8:19,9:21,A:1,B:0,C:5,D:7,E:9,F:13,G:15,H:17,I:19,J:21,K:2,L:4,M:18,N:20,O:11,P:3,Q:6,R:8,S:12,T:14,U:16,V:10,W:22,X:25,Y:24,Z:23};
+  const evn={0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,A:0,B:1,C:2,D:3,E:4,F:5,G:6,H:7,I:8,J:9,K:10,L:11,M:12,N:13,O:14,P:15,Q:16,R:17,S:18,T:19,U:20,V:21,W:22,X:23,Y:24,Z:25};
+  let s=0;for(let i=0;i<15;i++){const c=cf[i];s+=(i%2===0)?(odd[c]||0):(evn[c]||0);}
+  return cf[15]===String.fromCharCode(65+(s%26));
+}
+
+// ── Validazioni ────────────────────────────────────────────────────────
+function req(id,fn){
+  const el=document.getElementById(id),fe=document.getElementById('f-'+id);
+  if(!el)return true;
+  const v=el.value.trim(),ok=fn?fn(v):v.length>0;
+  if(fe)fe.classList.toggle('err-field',!ok);
+  return ok;
+}
+function validaS1(){
+  let ok=true;
+  if(NAZ==='ita'){
+    ok=req('cognome')&&ok; ok=req('nome')&&ok;
+    ok=req('dataNasc',v=>v.length>0)&&ok;
+    ok=req('sesso',v=>v.length>0)&&ok;
+    ok=req('comNasc')&&ok; ok=req('provNasc',v=>v.length===2)&&ok;
+    const cf=document.getElementById('cf').value.toUpperCase();
+    if(!chkCF(cf)){document.getElementById('f-cf').classList.add('err-field');ok=false;}
+    else document.getElementById('f-cf').classList.remove('err-field');
+    ok=req('via')&&ok; ok=req('cap',v=>/^\d{5}$/.test(v))&&ok;
+    ok=req('comRes')&&ok; ok=req('provRes',v=>v.length===2)&&ok;
+    ok=req('email',v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))&&ok;
+    ok=req('tel',v=>v.replace(/\D/g,'').length>=8)&&ok;
+    ok=req('univ')&&ok; ok=req('facolta')&&ok;
+  } else {
+    ok=req('cognomeE')&&ok; ok=req('nomeE')&&ok;
+    ok=req('dataNascE',v=>v.length>0)&&ok;
+    ok=req('sessoE',v=>v.length>0)&&ok;
+    ok=req('paeseNascE')&&ok; ok=req('cittadinanzaE')&&ok;
+    ok=req('emailE',v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))&&ok;
+    ok=req('telE',v=>v.replace(/\D/g,'').length>=8)&&ok;
+    ok=req('univE')&&ok; ok=req('facoltaE')&&ok;
   }
-}
-
-function chkCF(cf) {
-  cf = cf.toUpperCase().trim();
-  if (cf.length !== 16) return false;
-  const odd = {0:1,1:0,2:5,3:7,4:9,5:13,6:15,7:17,8:19,9:21,A:1,B:0,C:5,D:7,E:9,F:13,G:15,H:17,I:19,J:21,K:2,L:4,M:18,N:20,O:11,P:3,Q:6,R:8,S:12,T:14,U:16,V:10,W:22,X:25,Y:24,Z:23};
-  const evn = {0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,A:0,B:1,C:2,D:3,E:4,F:5,G:6,H:7,I:8,J:9,K:10,L:11,M:12,N:13,O:14,P:15,Q:16,R:17,S:18,T:19,U:20,V:21,W:22,X:23,Y:24,Z:25};
-  let s = 0;
-  for (let i = 0; i < 15; i++) { const c = cf[i]; s += (i % 2 === 0) ? (odd[c] || 0) : (evn[c] || 0); }
-  return cf[15] === String.fromCharCode(65 + (s % 26));
-}
-
-function chkScad() {
-  const v = document.getElementById('scadenza').value;
-  const badge = document.getElementById('scadBadge');
-  const el = document.getElementById('f-scadenza');
-  if (!v) { badge.textContent = ''; el.classList.remove('err-field'); return true; }
-  const ok = new Date(v) >= new Date();
-  badge.textContent = ok ? '✓ valido' : '⚠ scaduto';
-  badge.style.color = ok ? '#16a34a' : '#dc2626';
-  badge.style.fontSize = '.72rem';
-  el.classList.toggle('err-field', !ok);
-  if (!ok) document.getElementById('scadErr').textContent = 'Documento scaduto il ' + fmtD(v) + ' — usa un documento valido';
+  if(!ok)window.scrollTo({top:0,behavior:'smooth'});
   return ok;
 }
 
-// ── Validazioni step ──────────────────────────────────────────────────
-function req(id, fn) {
-  const el = document.getElementById(id);
-  const wrapper = document.getElementById('f-' + id);
-  if (!el) return true;
-  const v = el.value.trim();
-  const ok = fn ? fn(v) : v.length > 0;
-  if (wrapper) wrapper.classList.toggle('err-field', !ok);
-  return ok;
-}
-
-function validaS1() {
-  let ok = true;
-  ok = req('cognome') && ok;
-  ok = req('nome') && ok;
-  ok = req('dataNasc', v => v.length > 0) && ok;
-  ok = req('sesso', v => v.length > 0) && ok;
-  ok = req('comNasc') && ok;
-  ok = req('provNasc', v => v.length === 2) && ok;
-  if (NAZ === 'ita') {
-    const cf = document.getElementById('cf').value.toUpperCase();
-    const cfOk = chkCF(cf);
-    document.getElementById('cfDiv').classList.toggle('err-field', !cfOk);
-    if (!cfOk) { document.getElementById('cfErr').textContent = cf.length !== 16 ? 'Il CF deve essere di 16 caratteri' : 'Codice fiscale non valido'; ok = false; }
+// ── Riepilogo step 2 ───────────────────────────────────────────────────
+function buildReview(){
+  let html='';
+  const rr=(l,v)=>`<div class="rev-row"><span>${l}</span><span>${v}</span></div>`;
+  const fmtD=iso=>{if(!iso)return'';const[y,m,d]=iso.split('-');return d+'/'+m+'/'+y;};
+  if(NAZ==='ita'){
+    html=rr('Cognome e nome',document.getElementById('cognome').value+' '+document.getElementById('nome').value)+
+      rr('Data di nascita',fmtD(document.getElementById('dataNasc').value))+
+      rr('Luogo di nascita',document.getElementById('comNasc').value+' ('+document.getElementById('provNasc').value.toUpperCase()+')')+
+      rr('Codice fiscale',document.getElementById('cf').value.toUpperCase())+
+      rr('Residenza',document.getElementById('via').value+', '+document.getElementById('cap').value+' '+document.getElementById('comRes').value+' ('+document.getElementById('provRes').value.toUpperCase()+')')+
+      rr('Email',document.getElementById('email').value)+
+      rr('Telefono',document.getElementById('tel').value)+
+      rr('Università',document.getElementById('univ').value)+
+      rr('Facoltà',document.getElementById('facolta').value);
+  } else {
+    html=rr('Last name / First name',document.getElementById('cognomeE').value+' '+document.getElementById('nomeE').value)+
+      rr('Date of birth',fmtD(document.getElementById('dataNascE').value))+
+      rr('Country of birth',document.getElementById('paeseNascE').value)+
+      rr('Citizenship',document.getElementById('cittadinanzaE').value)+
+      rr('Tax code','To be completed upon arrival')+
+      rr('Email',document.getElementById('emailE').value)+
+      rr('Phone',document.getElementById('telE').value)+
+      rr('University',document.getElementById('univE').value)+
+      rr('Degree course',document.getElementById('facoltaE').value);
   }
-  ok = req('via') && ok;
-  ok = req('cap', v => /^\d{5}$/.test(v)) && ok;
-  ok = req('comRes') && ok;
-  ok = req('provRes', v => v.length === 2) && ok;
-  ok = req('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && ok;
-  ok = req('tel', v => v.replace(/\D/g,'').length >= 8) && ok;
-  ok = req('univ') && ok;
-  ok = req('facolta') && ok;
-  return ok;
+  document.getElementById('revHtml').innerHTML=html;
 }
 
-function validaS2() {
-  let ok = true;
-  ok = req('tipoDoc', v => v.length > 0) && ok;
-  ok = req('numDoc') && ok;
-  ok = req('ente') && ok;
-  ok = req('rilascio', v => v.length > 0) && ok;
-  ok = req('scadenza', v => v.length > 0) && ok;
-  if (!chkScad()) ok = false;
-  return ok;
-}
+// ── Generazione contratto per stampa ───────────────────────────────────
+function fmtD(iso){if(!iso)return'';const[y,m,d]=iso.split('-');return d+'/'+m+'/'+y;}
+function todayIta(){const d=new Date();return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}
 
-// ── Riepilogo step 3 ──────────────────────────────────────────────────
-function buildReview() {
-  const cf = NAZ === 'ita' ? document.getElementById('cf').value.toUpperCase() : 'Da completare all\'arrivo';
-  const res = document.getElementById('via').value + ', ' + document.getElementById('cap').value + ' ' + document.getElementById('comRes').value + ' (' + document.getElementById('provRes').value.toUpperCase() + ')';
-  document.getElementById('revHtml').innerHTML =
-    rr('Nome e cognome', document.getElementById('nome').value + ' ' + document.getElementById('cognome').value) +
-    rr('Data di nascita', fmtD(document.getElementById('dataNasc').value)) +
-    rr('Luogo di nascita', document.getElementById('comNasc').value + ' (' + document.getElementById('provNasc').value.toUpperCase() + ')') +
-    rr('Codice fiscale', cf) +
-    rr('Residenza', res) +
-    rr('Email', document.getElementById('email').value) +
-    rr('Telefono', document.getElementById('tel').value) +
-    rr('Università', document.getElementById('univ').value) +
-    rr('Documento', document.getElementById('tipoDoc').value + ' n° ' + document.getElementById('numDoc').value.toUpperCase()) +
-    rr('Scadenza doc.', fmtD(document.getElementById('scadenza').value));
-}
-function rr(l, v) { return `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:.5px solid #f0f0f0;font-size:.85rem"><span style="color:#888">${l}</span><span style="font-weight:500;text-align:right;max-width:60%">${v}</span></div>`; }
-
-// ── Signature Pad ──────────────────────────────────────────────────────
-function initSig() {
-  const canvas = document.getElementById('sigPad');
-  sigPad = new SignaturePad(canvas, { penColor: '#1a1a1a', minWidth: 1.5, maxWidth: 3 });
-  function resize() {
-    const ratio = Math.max(window.devicePixelRatio || 1, 1);
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * ratio;
-    canvas.height = 180 * ratio;
-    canvas.getContext('2d').scale(ratio, ratio);
-    sigPad.clear();
+function stampa(){
+  const apt=APT[OP.appartamento]||{label:'—',premesso:'—'};
+  let cognome,nome,dataNasc,luogoNasc,residenza,cf,email,tel,univ,facolta,titolo,sessoStr;
+  if(NAZ==='ita'){
+    cognome=document.getElementById('cognome').value;
+    nome=document.getElementById('nome').value;
+    dataNasc=fmtD(document.getElementById('dataNasc').value);
+    const s=document.getElementById('sesso').value;
+    titolo=s==='F'?'Sig.ra':'Sig.';
+    sessoStr=s==='F'?'nata':'nato';
+    luogoNasc=document.getElementById('comNasc').value+' ('+document.getElementById('provNasc').value.toUpperCase()+')';
+    residenza=document.getElementById('via').value+', '+document.getElementById('cap').value+' '+document.getElementById('comRes').value+' ('+document.getElementById('provRes').value.toUpperCase()+')';
+    cf=document.getElementById('cf').value.toUpperCase();
+    email=document.getElementById('email').value;
+    tel=document.getElementById('tel').value;
+    univ=document.getElementById('univ').value;
+    facolta=document.getElementById('facolta').value;
+  } else {
+    cognome=document.getElementById('cognomeE').value;
+    nome=document.getElementById('nomeE').value;
+    dataNasc=fmtD(document.getElementById('dataNascE').value);
+    const s=document.getElementById('sessoE').value;
+    titolo=s==='F'?'Sig.ra':'Sig.';
+    sessoStr=s==='F'?'nata':'nato';
+    luogoNasc=document.getElementById('paeseNascE').value;
+    residenza=document.getElementById('cittadinanzaE').value+' (cittadinanza)';
+    cf='____________________';
+    email=document.getElementById('emailE').value;
+    tel=document.getElementById('telE').value;
+    univ=document.getElementById('univE').value;
+    facolta=document.getElementById('facoltaE').value;
   }
-  window.addEventListener('resize', resize);
-  setTimeout(resize, 100);
-}
+  const nomeCompleto=cognome+' '+nome;
 
-function clearSig() { sigPad.clear(); }
-
-function conferma() {
-  if (sigPad.isEmpty()) { alert('Firma il contratto per continuare.'); return; }
-  sigDataUrl = sigPad.toDataURL('image/png');
-  setStep(4);
-  document.getElementById('stepBar').querySelectorAll('.step').forEach(el => el.className = 'step done');
-}
-
-// ── Utilità date/numeri ───────────────────────────────────────────────
-function fmtD(iso) {
-  if (!iso) return '';
-  const [y, m, d] = iso.split('-');
-  return d + '/' + m + '/' + y;
-}
-
-function todayIta() {
-  const d = new Date();
-  const dd = String(d.getDate()).padStart(2,'0');
-  const mm = String(d.getMonth()+1).padStart(2,'0');
-  return dd + '/' + mm + '/' + d.getFullYear();
-}
-
-function todayComponents() {
-  const d = new Date();
-  const mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-  return { g: d.getDate(), m: mesi[d.getMonth()], a: d.getFullYear() };
-}
-
-// ── Genera contratto per stampa ───────────────────────────────────────
-function stampa() {
-  const st = {
-    cognome: document.getElementById('cognome').value,
-    nome: document.getElementById('nome').value,
-    dataNasc: fmtD(document.getElementById('dataNasc').value),
-    sesso: document.getElementById('sesso').value,
-    comNasc: document.getElementById('comNasc').value,
-    provNasc: document.getElementById('provNasc').value.toUpperCase(),
-    cf: NAZ === 'ita' ? document.getElementById('cf').value.toUpperCase() : '____________________',
-    via: document.getElementById('via').value,
-    cap: document.getElementById('cap').value,
-    comRes: document.getElementById('comRes').value,
-    provRes: document.getElementById('provRes').value.toUpperCase(),
-    email: document.getElementById('email').value,
-    tel: document.getElementById('tel').value,
-    univ: document.getElementById('univ').value,
-    facolta: document.getElementById('facolta').value,
-    tipoDoc: document.getElementById('tipoDoc').value,
-    numDoc: document.getElementById('numDoc').value.toUpperCase(),
-    ente: document.getElementById('ente').value,
-    rilascio: fmtD(document.getElementById('rilascio').value),
-    scadenza: fmtD(document.getElementById('scadenza').value)
-  };
-  const dt = todayComponents();
-  const nomeCompleto = st.cognome + ' ' + st.nome;
-  const residenza = st.via + ', ' + st.cap + ' ' + st.comRes + ' (' + st.provRes + ')';
-  const titolo = st.sesso === 'F' ? 'Sig.ra' : 'Sig.';
-
-  const html = `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
-<title>Contratto di Sublocazione — ${nomeCompleto}</title>
+  const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
+<title>Contratto — ${nomeCompleto}</title>
 <style>
-body{font-family:'Times New Roman',Times,serif;font-size:10.5pt;line-height:1.6;color:#000;margin:0;padding:0}
-.page{max-width:170mm;margin:0 auto;padding:20mm 0}
-h1{font-size:13pt;font-weight:bold;text-align:center;margin-bottom:6pt;text-transform:uppercase;letter-spacing:1px}
-h2{font-size:10.5pt;font-weight:bold;margin:14pt 0 4pt;text-decoration:underline}
-p{margin:0 0 7pt;text-align:justify}
-.parti{margin:14pt 0}
-.firma-box{margin-top:40pt;display:flex;justify-content:space-between;gap:40px}
-.firma-col{flex:1;border-top:1px solid #000;padding-top:8pt;font-size:9.5pt;text-align:center}
-.sig-img{max-width:180px;max-height:70px;display:block;margin:0 auto 6pt}
-.approvazione{margin-top:20pt;font-size:9pt;border:1pt solid #ccc;padding:8pt;background:#f9f9f9}
+body{font-family:'Times New Roman',Times,serif;font-size:10.5pt;line-height:1.65;color:#000;margin:0}
+.page{max-width:170mm;margin:0 auto;padding:18mm 0}
+h1{font-size:12pt;font-weight:bold;text-align:center;margin-bottom:8pt;text-transform:uppercase;letter-spacing:.5px}
+h2{font-size:10.5pt;font-weight:bold;margin:13pt 0 3pt;text-decoration:underline}
+p{margin:0 0 6pt;text-align:justify}
+.firme{margin-top:40pt;display:flex;justify-content:space-between;gap:40px}
+.firma-col{flex:1;text-align:center;font-size:9.5pt}
+.firma-line{border-top:1px solid #000;margin-top:30pt;padding-top:6pt}
+.footer-note{margin-top:16pt;font-size:9pt;border:1pt solid #ccc;padding:8pt;background:#f9f9f9}
 @media print{body{margin:0}@page{size:A4;margin:2.2cm 2cm}}
 </style></head><body><div class="page">
 
 <h1>Contratto di sublocazione abitativa</h1>
 
-<p>L'anno <strong>${dt.a}</strong> il giorno <strong>${dt.g}</strong> del mese di <strong>${dt.m}</strong> in <strong>Cagliari</strong>, tra:</p>
+<p>L'anno <strong>${OP.sigAnno}</strong> il giorno <strong>${OP.sigGiorno}</strong> del mese di <strong>${OP.sigMese}</strong> in <strong>Cagliari</strong>, tra:</p>
 
-<div class="parti">
 <p><strong>"Top SRL."</strong> in persona del legale rappresentante pro tempore <strong>Matteo Carta</strong>, (P.IVA 03838480923) avente sede legale in Cagliari (CA) via Sigmund Freud, n.4, d'ora in poi denominato anche <em>«SUBLOCATRICE»</em></p>
-<p style="text-align:center;font-weight:bold">e</p>
-<p><strong>${titolo} ${nomeCompleto}</strong> nato/a a ${st.comNasc} (${st.provNasc}) il ${st.dataNasc}, residente in ${residenza}, C.F. <strong>${st.cf}</strong>, d'ora in poi denominato/a anche <em>«Subconduttore»</em> (indirizzo email: ${st.email} — telefono: ${st.tel})</p>
-</div>
+<p style="text-align:center">e</p>
+<p><strong>${titolo} ${nomeCompleto}</strong> ${sessoStr} a ${luogoNasc} il ${dataNasc}, residente in ${residenza}, C.F. <strong>${cf}</strong>, d'ora in poi denominato/a anche <em>«Subconduttore»</em></p>
+<p style="font-size:9.5pt"><em>Email: ${email} — Telefono: ${tel}</em></p>
 
 <h2>PREMESSO</h2>
-<p>1) che in data 29/01/2019 il sublocatore ha stipulato con il Sig. Aresu Tito residente in Cagliari via San Lucifero n. 72, codice fiscale RSATTI54A25G122K, il contratto di locazione registrato in data 30/01/2019 al n. 620-serie 3T avente ad oggetto il godimento dell'immobile sito in Cagliari (CA);</p>
+<p>1) ${apt.premesso}</p>
 <p>2) che il predetto contratto di locazione prevede espressamente, alla clausola n. 4, la facoltà per il conduttore di concedere in sublocazione il citato immobile o porzione di esso;</p>
 
 <p>Tutto ciò premesso e considerato, <strong>SI CONVIENE E SI STIPULA QUANTO SEGUE</strong></p>
-
-<p>Top SRL concede in sublocazione al/alla ${titolo} <strong>${nomeCompleto}</strong> che accetta, l'unità immobiliare (ovvero porzione dell'unità immobiliare – stanza n° <strong>${OP.stanza}</strong> oltre i vani in comune) sita in Cagliari. L'unità immobiliare viene concessa in sublocazione ammobiliata e pulita, come da separato verbale sottoscritto dalle parti.</p>
+<p>Top SRL concede in sublocazione al/alla ${titolo} <strong>${nomeCompleto}</strong> che accetta, l'unità immobiliare (ovvero porzione dell'unità immobiliare – stanza n° <strong>${OP.stanza}</strong> oltre i vani in comune) sita in Cagliari presso l'immobile sopra indicato. L'unità immobiliare viene concessa ammobiliata e pulita, come da separato verbale sottoscritto dalle parti.</p>
 <p>L'immobile è destinato esclusivamente ad uso di civile abitazione del Subconduttore.</p>
 
 <h2>AI SEGUENTI PATTI E CONDIZIONI</h2>
@@ -625,89 +466,84 @@ p{margin:0 0 7pt;text-align:justify}
 <p>Le premesse formano parte integrante, sostanziale ed inscindibile del presente contratto.</p>
 
 <h2>Articolo 2 — Durata della sublocazione</h2>
-<p>Il presente contratto è stipulato con decorrenza dal <strong>${OP.dataInizio}</strong> al <strong>${OP.dataFine}</strong>. Al termine pattuito il contratto sarà definitivamente scaduto senza possibilità di rinnovo tacito. Il Subconduttore entrerà nel possesso dell'unità immobiliare oggetto di locazione, ovvero della parte di essa così come descritta in premessa, libera da persone e cose.</p>
-<p>Le parti convengono altresì che il contratto potrà cessare automaticamente e consensualmente la sua efficacia anticipatamente rispetto alla sua naturale scadenza nell'ipotesi in cui l'immobile sublocato necessiti di opere di manutenzione e/o ristrutturazione tali da impedirne la concomitante occupazione da parte del Subconduttore. In questo caso la Sublocatrice darà comunicazione al Subconduttore con preavviso di almeno 30 giorni e si farà carico di trovare una sistemazione alternativa equivalente.</p>
+<p>Il presente contratto è stipulato con decorrenza dal <strong>${OP.dataInizio}</strong> al <strong>${OP.dataFine}</strong>. Al termine pattuito il contratto sarà definitivamente scaduto senza possibilità di rinnovo tacito. Il Subconduttore entrerà nel possesso dell'unità immobiliare libera da persone e cose.</p>
+<p>Le parti convengono che il contratto potrà cessare anticipatamente qualora l'immobile necessiti di opere di manutenzione tali da impedirne la concomitante occupazione, con preavviso di almeno 30 giorni da parte della Sublocatrice.</p>
 
 <h2>Articolo 3 — Canone</h2>
 <p>Il canone totale di sublocazione è pattuito in Euro <strong>${OP.canoneTotale.replace('.',',')} (${OP.canoneTotaleLettere})</strong> e dovrà essere corrisposto come di seguito indicato:</p>
 <p>quanto ad Euro <strong>${OP.primaRata.replace('.',',')} (${OP.primaRataLettere})</strong> all'atto della sottoscrizione del presente contratto, da imputare come prima mensilità e iscrizione club, mediante Bonifico Bancario;</p>
-<p>quanto ad Euro <strong>${OP.rateResidueTotale.replace('.',',')} (${OP.rateResidueLettere})</strong> in n.<strong>${OP.nRateResidue}</strong> rate mensili, ciascuna pari ad Euro <strong>${OP.canoneMensile.replace('.',',')} (${OP.canoneMensileLettere})</strong>, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP SRL — IBAN: IT 70 M 03069 09606 100000015827.</p>
-<p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra. Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso o ritardato.</p>
+<p>quanto ad Euro <strong>${OP.rateResidueTotale.replace('.',',')} (${OP.rateResidueLettere})</strong> in n.<strong>${OP.nRateResidue}</strong> rate mensili, ciascuna pari ad Euro <strong>${OP.canoneMensile.replace('.',',')} (${OP.canoneMensileLettere})</strong>, a mezzo RID o bonifico, entro il 05 di ciascun mese su C/C bancario intestato a TOP SRL — IBAN: IT 70 M 03069 09606 100000015827.</p>
+<p>Le spese condominiali sono incluse nel canone. Il pagamento non potrà essere sospeso o ritardato per nessun motivo.</p>
 
-<h2>Articolo 4 — Spese ed oneri a carico della Sublocatrice e del Subconduttore</h2>
-<p>Sono a carico della Sublocatrice: il versamento delle imposte di bollo e di registrazione del presente contratto; l'assicurazione fabbricato e arredi; le spese per l'allacciamento e/o voltura delle utenze energetiche; le spese di gestione e consumo delle utenze nel limite dei consumi pattuiti; le spese di manutenzione ordinaria degli arredi e degli impianti; le tasse per lo smaltimento dei rifiuti solidi urbani nonché i canoni per utenze comunali.</p>
-<p>Il mancato puntuale pagamento, per qualunque causa, anche di una sola rata del canone, costituisce in mora il Subconduttore, fatto salvo quanto previsto dagli artt. 5 e 55 della Legge n. 392/78.</p>
+<h2>Articolo 4 — Spese ed oneri</h2>
+<p>Sono a carico della Sublocatrice: imposte di bollo e registrazione del contratto; assicurazione fabbricato e arredi; allacciamento e voltura utenze; consumo delle utenze nel limite dei consumi pattuiti; manutenzione ordinaria degli arredi e impianti; tasse rifiuti e utenze comunali. Il mancato puntuale pagamento del canone costituisce in mora il Subconduttore.</p>
 
-<h2>Articolo 5 — Uso, manutenzione, oneri accessori e obblighi del Subconduttore</h2>
-<p>Il Subconduttore si assume la responsabilità della custodia dell'unità immobiliare sublocata, comprese le relative chiavi di accesso, e si impegna a utilizzarla con la diligenza del buon padre di famiglia. Eventuali interventi resi necessari da un uso negligente dell'immobile, da danni dovuti a imperizia o da carenze nella pulizia saranno a carico esclusivo del Subconduttore.</p>
-<p>Il Subconduttore dispone di 48 ore dalla presa in consegna dell'unità per segnalare eventuali difformità, tramite comunicazione scritta da inviare via PEC all'indirizzo toplocazioni@legalmail.it. Il Subconduttore è tenuto a mantenere il decoro degli ambienti e il rispetto della civile convivenza, provvedendo alla pulizia degli spazi comuni.</p>
+<h2>Articolo 5 — Uso, manutenzione e obblighi del Subconduttore</h2>
+<p>Il Subconduttore si assume la responsabilità della custodia dell'unità immobiliare, si impegna a utilizzarla con la diligenza del buon padre di famiglia e a mantenere il decoro degli ambienti comuni. Eventuali danni da uso negligente saranno a suo esclusivo carico. Il Subconduttore dispone di 48 ore dalla consegna per segnalare difformità via PEC a toplocazioni@legalmail.it.</p>
 
 <h2>Articolo 6 — Divieti</h2>
-<p>È fatto divieto al Subconduttore occupare con materiali od oggetti gli spazi comuni, nonché porre fissi, infissi, targhe, insegne, tende di qualsiasi genere e condizionatori all'esterno dell'unità immobiliare, salvo preventiva autorizzazione scritta della Sublocatrice. È fatto espresso divieto al Subconduttore di fumare in ogni locale dell'unità abitativa. Salvo diverso accordo con gli altri eventuali Subconduttori, è vietato detenere animali nell'immobile.</p>
+<p>È vietato al Subconduttore: occupare spazi comuni con materiali; porre fissi, infissi o insegne; fumare in ogni locale dell'abitazione; detenere animali salvo diverso accordo con gli altri conduttori.</p>
 
-<h2>Articolo 7 — Miglioramenti, addizioni e innovazioni</h2>
-<p>È vietato al Subconduttore eseguire innovazioni, migliorie, addizioni di qualsiasi genere e natura senza preventivo assenso scritto della Sublocatrice. In caso di innovazioni eseguite senza autorizzazione, la Sublocatrice avrà diritto, a sua scelta, di ripristinare lo stato originario a spese del Subconduttore.</p>
+<h2>Articolo 7 — Miglioramenti e innovazioni</h2>
+<p>È vietato eseguire innovazioni o modifiche di qualsiasi natura senza il preventivo assenso scritto della Sublocatrice. In caso contrario, la Sublocatrice potrà pretendere il ripristino a spese del Subconduttore.</p>
 
 <h2>Articolo 8 — Accesso nell'immobile</h2>
-<p>Il Subconduttore si impegna a consentire l'accesso al bene da parte della Sublocatrice o da persone da questa autorizzate, previo idoneo preavviso. Ove sia stata preventivamente comunicata disdetta o in caso di necessità urgente, l'accesso potrà avvenire senza preavviso.</p>
+<p>Il Subconduttore consente l'accesso alla Sublocatrice e a persone da essa autorizzate, previo preavviso. In caso di urgenza o disdetta, l'accesso potrà avvenire senza preavviso.</p>
 
-<h2>Articolo 9 — Cessione, sublocazione, comodato, successione</h2>
-<p>È fatto espresso divieto al Subconduttore di sublocare, in tutto o in parte, la cosa locata; di cedere in qualsiasi forma ad altri il suo contratto; di consentire, a qualsiasi titolo, l'utilizzo di quanto oggetto del presente contratto a terzi. Non è consentito dare alloggio, sia pure a titolo gratuito, ad alcuna persona senza il preventivo consenso scritto della Sublocatrice.</p>
+<h2>Articolo 9 — Cessione e sublocazione</h2>
+<p>È fatto espresso divieto al Subconduttore di sublocare o cedere in qualsiasi forma il proprio contratto, o di consentire l'utilizzo dell'immobile a terzi senza il preventivo consenso scritto della Sublocatrice.</p>
 
 <h2>Articolo 10 — Clausola risolutiva espressa</h2>
-<p>Il presente contratto si intenderà immediatamente risolto, ai sensi dell'art. 1456 del Codice civile, qualora il Subconduttore: non adempia al pagamento anche di una sola mensilità; non mantenga l'immobile in condizioni di pulizia; ceda il godimento del bene a terzi senza consenso; impedisca l'accesso alla Sublocatrice; modifichi la destinazione d'uso; non rispetti il Regolamento Stanza Semplice; non trasmetta copia del contratto firmato entro 2 giorni dalla ricezione; non fornisca il codice fiscale entro 30 giorni dalla decorrenza; detenga armi o materiali illeciti; o trasferisca la propria residenza anagrafica presso l'immobile.</p>
+<p>Il contratto si intenderà risolto ai sensi dell'art. 1456 c.c. qualora il Subconduttore: non paghi anche una sola mensilità; non mantenga l'immobile pulito; ceda il godimento a terzi; impedisca l'accesso alla Sublocatrice; modifichi la destinazione d'uso; non rispetti il Regolamento Stanza Semplice; non trasmetta il contratto firmato entro 2 giorni; non fornisca il CF entro 30 giorni; detenga armi o materiali illeciti; o trasferisca la residenza anagrafica nell'immobile.</p>
 
 <h2>Articolo 11 — Dispositivo di rilevamento decibel</h2>
-<p>Il Subconduttore dichiara di essere informato e di accettare espressamente la presenza di un dispositivo elettronico per il rilevamento dei livelli sonori (decibel) installato nella zona comune dell'appartamento. Tale dispositivo ha la sola funzione di monitorare i livelli acustici e non registra né trasmette audio o video.</p>
+<p>Il Subconduttore dichiara di essere informato e di accettare la presenza di un dispositivo elettronico per il rilevamento dei livelli sonori (decibel) nelle zone comuni. Tale dispositivo monitora esclusivamente i livelli acustici, senza registrare né trasmettere audio o video.</p>
 
-<h2>Articolo 12 — Riscaldamento e Condizionamento</h2>
-<p>Il Subconduttore dichiara di accettare che, nell'ambito dei servizi "all inclusive" previsti dal presente contratto, non sono inclusi il servizio di riscaldamento né quello di aria condizionata. Qualora l'appartamento fosse dotato di impianti di riscaldamento, gli stessi potranno essere attivati esclusivamente in determinati periodi dell'anno, per specifiche fasce orarie, secondo le disposizioni del Sublocatore. L'appartamento non è dotato di impianto di aria condizionata.</p>
+<h2>Articolo 12 — Riscaldamento e condizionamento</h2>
+<p>Il Subconduttore accetta che i servizi di riscaldamento e aria condizionata non siano inclusi nell'importo "all inclusive". Eventuali impianti presenti potranno essere attivati solo nei periodi e nelle fasce orarie stabilite dalla Sublocatrice.</p>
 
 <h2>Articolo 13 — Riconsegna</h2>
-<p>Alla data di cessazione del contratto il Subconduttore è tenuto alla consegna delle chiavi dei locali previo sopralluogo da parte della Sublocatrice. Il Subconduttore si impegna a liberare la stanza entro le ore 12:00 dell'ultimo giorno del mese di scadenza del contratto, in perfetto stato di manutenzione e pulizia.</p>
+<p>Alla cessazione del contratto il Subconduttore consegnerà le chiavi previo sopralluogo, liberando la stanza entro le ore 12:00 dell'ultimo giorno del mese di scadenza, in perfetto stato di pulizia e manutenzione.</p>
 
 <h2>Articolo 14 — Esonero di responsabilità</h2>
-<p>Il Subconduttore è costituito custode della cosa locata ed esonera espressamente la Sublocatrice da qualsiasi responsabilità per danni diretti ed indiretti derivanti da fatti dolosi o colposi di altri conduttori o di terzi in genere.</p>
+<p>Il Subconduttore è custode della cosa locata ed esonera la Sublocatrice da responsabilità per danni derivanti da fatti di altri conduttori o terzi, ferma restando la responsabilità della Sublocatrice per fatti propri.</p>
 
 <h2>Articolo 15 — Foro Competente</h2>
-<p>Per ogni controversia inerente alla validità, interpretazione e/o esecuzione del presente contratto, le parti si obbligano, in via preliminare, ad esperire il tentativo di mediazione secondo la normativa vigente (D.Lgs. n. 28/2010). Per quanto non risolto in sede di mediazione, è competente il Foro di Cagliari.</p>
+<p>Per ogni controversia le parti esperiscono preliminarmente la mediazione (D.Lgs. n. 28/2010). Per quanto non risolto, è competente il Foro di Cagliari.</p>
 
 <h2>Articolo 16 — Trattamento dei dati personali</h2>
-<p>Le parti si impegnano a trattare i dati personali nel rispetto della normativa sulla Privacy (D.Lgs. 196/2003 e Regolamento Europeo 679/2016 — GDPR). I dati potranno essere utilizzati esclusivamente per fini connessi al presente contratto.</p>
-<p style="font-size:9.5pt"><em>Indirizzo email Subconduttore: ${st.email} — Telefono: ${st.tel}</em></p>
+<p>Le parti trattano i dati personali nel rispetto del D.Lgs. 196/2003 e del Regolamento UE 679/2016 (GDPR), esclusivamente per fini connessi al presente contratto.</p>
+<p style="font-size:9.5pt"><em>Contatti Subconduttore per emergenze: ${email} — ${tel}</em></p>
 
 <h2>Articolo 17 — Richiamo a disposizioni di legge</h2>
-<p>Per quanto non previsto nel presente contratto valgono, in quanto applicabili, le norme del Codice Civile, le Leggi n. 392/78 e n. 431/98 e la normativa vigente in materia di locazioni abitative.</p>
+<p>Per quanto non previsto valgono le norme del Codice Civile, le Leggi n. 392/78 e n. 431/98 e la normativa vigente in materia di locazioni abitative.</p>
 
-<p style="margin-top:16pt"><strong>Letto, approvato e sottoscritto a Cagliari il ${todayIta()}</strong></p>
+<p style="margin-top:14pt"><strong>Letto, approvato e sottoscritto a Cagliari il ${OP.sigGiorno} ${OP.sigMese} ${OP.sigAnno}</strong></p>
+<p style="font-size:9pt;margin-top:6pt">A norma degli artt. 1341 e 1342 c.c., le parti approvano espressamente le clausole degli Articoli 3, 4, 6, 7, 9, 10, 12 e 13.</p>
 
-<p style="font-size:9pt;margin-top:8pt">A norma degli artt. 1341 e 1342 del Codice Civile, le parti dichiarano espressamente di approvare le clausole degli Articoli 3, 4, 6, 7, 9, 10, 12 e 13 del presente contratto.</p>
-
-<div class="firma-box">
+<div class="firme">
   <div class="firma-col">
-    <p style="margin-bottom:20pt;font-size:9pt">Per TOP SRL — Sublocatrice<br><em>Matteo Carta</em></p>
-    <p style="font-size:9pt">_______________________</p>
-    <p style="font-size:9pt;margin-top:4pt">Firma</p>
+    <p style="font-size:9pt">Per TOP SRL — Sublocatrice<br><em>Matteo Carta</em></p>
+    <div class="firma-line">Firma</div>
   </div>
   <div class="firma-col">
-    <p style="margin-bottom:6pt;font-size:9pt">${titolo} ${nomeCompleto} — Subconduttore/a</p>
-    ${sigDataUrl ? `<img class="sig-img" src="${sigDataUrl}" alt="firma">` : ''}
-    <p style="font-size:9pt">_______________________</p>
-    <p style="font-size:9pt;margin-top:4pt">Firma</p>
+    <p style="font-size:9pt">${titolo} ${nomeCompleto}<br><em>Subconduttore/a</em></p>
+    <div class="firma-line">Firma</div>
   </div>
 </div>
 
-<div class="approvazione" style="margin-top:24pt">
-  <p style="font-size:9pt;margin:0"><strong>Dati documento d'identità Subconduttore:</strong> ${st.tipoDoc} n° ${st.numDoc} — rilasciato da ${st.ente} il ${st.rilascio} — scade il ${st.scadenza}</p>
-  <p style="font-size:9pt;margin:4pt 0 0"><strong>Università:</strong> ${st.univ} — <strong>Corso:</strong> ${st.facolta}</p>
+<div class="footer-note">
+  <strong>Dati Subconduttore:</strong> ${nomeCompleto} — nato/a a ${luogoNasc} il ${dataNasc} — C.F.: ${cf}<br>
+  Università: ${univ} — Corso: ${facolta}<br>
+  Appartamento: ${apt.label} — Stanza n° ${OP.stanza}
 </div>
 
 </div></body></html>`;
 
-  const win = window.open('', '_blank');
+  const win=window.open('','_blank');
   win.document.write(html);
   win.document.close();
-  setTimeout(() => win.print(), 500);
+  setTimeout(()=>win.print(),600);
 }
 </script>
 </body>
