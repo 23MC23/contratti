@@ -179,6 +179,7 @@ input.precomp{background:#f0fdf4;border-color:#86efac;color:#15803d}
   </div>
 
   <button class="btn-pdf" onclick="genera()">📄 Genera contratto PDF</button>
+  <button class="btn-pdf" style="background:#2563eb" onclick="generaWord()">📝 Scarica contratto Word</button>
   <span class="reset-link" onclick="resetForm()" id="resetBtn" style="display:none">↩ Nuovo contratto</span>
 </div>
 
@@ -377,10 +378,10 @@ function genera(){
   const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
 <title></title>
 <style>
-body{font-family:'Times New Roman',Times,serif;font-size:7.5pt;line-height:1.08;color:#000;margin:0}
+body{font-family:'Times New Roman',Times,serif;font-size:7.7pt;line-height:1.10;color:#000;margin:0}
 .page{max-width:180mm;margin:0 auto;padding:0}
 h1{font-size:9pt;font-weight:bold;text-align:center;margin-bottom:2pt;text-transform:uppercase;letter-spacing:.3px}
-h2{font-size:7.5pt;font-weight:bold;margin:1pt 0 0}
+h2{font-size:7.7pt;font-weight:bold;margin:1pt 0 0}
 p{margin:0;text-align:justify}
 p.center{text-align:center}
 ul.arr{list-style:none;margin:0.2pt 0 0.4pt;padding:0}
@@ -515,6 +516,49 @@ ul.bul li{margin-bottom:0;text-align:justify}
   win.document.write(html);
   win.document.close();
   setTimeout(()=>win.print(),600);
+}
+
+function generaWord(){
+  // Build the same contract HTML as genera()
+  const origGenera = genera;
+  
+  // We need to reconstruct the HTML. Let's extract it by calling genera logic
+  // but instead of printing, download as Word
+  
+  // Temporarily override window.open to capture the HTML
+  const realOpen = window.open;
+  let contractHtml = '';
+  window.open = function() {
+    return {
+      document: {
+        write: function(h) { contractHtml = h; },
+        close: function() {}
+      },
+      print: function() {}
+    };
+  };
+  genera();
+  window.open = realOpen;
+  
+  if (!contractHtml) { alert('Errore nella generazione'); return; }
+  
+  // Wrap in Word-compatible HTML
+  const wordHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
+</head><body>` + contractHtml.replace(/<!DOCTYPE[^>]*>/i,'').replace(/<html[^>]*>/i,'').replace(/<\/html>/i,'').replace(/<head>.*?<\/head>/is,'').replace(/<body[^>]*>/i,'').replace(/<\/body>/i,'') + '</body></html>';
+  
+  const blob = new Blob([wordHtml], {type: 'application/msword'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  
+  // Get student name for filename
+  const cognome = document.getElementById('s-cognome')?.value || 'contratto';
+  const nome = document.getElementById('s-nome')?.value || '';
+  a.download = 'Contratto_' + cognome + '_' + nome + '.doc';
+  a.href = url;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function resetForm(){
