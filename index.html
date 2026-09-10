@@ -131,7 +131,7 @@ input.precomp{background:#f0fdf4;border-color:#86efac;color:#15803d}
       <select id="feeTipo" onchange="onFee()"><option value="">— seleziona —</option><option value="380">€ 380,00 (standard)</option><option value="manuale">Importo personalizzato</option></select>
     </div>
     <div class="field" id="feeManDiv" style="display:none"><label>Importo fee * (€)</label><input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()"></div>
-    <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="depositoCheck" checked onchange="onDeposito()" style="width:auto;margin:0"> Deposito cauzionale</label></div>
+    <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="depositoCheck" checked onchange="onDeposito()" style="width:18px;height:18px;margin:0;accent-color:#2563eb;cursor:pointer"> Deposito cauzionale</label></div>
     <div class="field" id="depositoDiv"><label>Importo deposito (€)</label><input type="number" id="depositoImp" min="0" step="0.01" value="100" placeholder="es. 100.00" oninput="calcEco()"></div>
   </div>
 
@@ -403,7 +403,7 @@ function genera(){
 body{font-family:'Times New Roman',Times,serif;font-size:7.7pt;line-height:1.08;color:#000;margin:0}
 .page{max-width:180mm;margin:0 auto;padding:0}
 h1{font-size:9pt;font-weight:bold;text-align:center;margin-bottom:2pt;text-transform:uppercase;letter-spacing:.3px}
-h2{font-size:7.7pt;font-weight:bold;margin:1pt 0 0}
+h2{font-size:7.7pt;font-weight:bold;margin:1pt 0 0;text-align:center}
 p{margin:0;text-align:justify}
 p.center{text-align:center}
 ul.arr{list-style:none;margin:0.2pt 0 0.4pt;padding:0}
@@ -422,7 +422,7 @@ ul.bul li{margin-bottom:0;text-align:justify}
 <p>L'anno <strong>${ds.a}</strong> il giorno <strong>${ds.g}</strong> del mese di <strong>${ds.m}</strong> in Cagliari, tra:</p>
 <p>"Top SRL." in persona del legale rappresentante pro tempore Matteo Carta, (P.IVA 03838480923 ) avente sede legale in Cagliari (CA) via Sigmund Freud, n.4, d'ora in poi denominato anche «SUBLOCATRICE»</p>
 <p>e</p>
-<p>${nomeCompleto} ${sessoStr} a ${luogoNasc} residente a ${residenza} C.F. ${cf} d'ora in poi denominato anche «Subconduttore» (indirizzo email:${email} telefono ${tel}</p>
+<p>${nomeCompleto} ${sessoStr} a ${luogoNasc} il ${dataNasc} residente a ${residenza} C.F. ${cf} d'ora in poi denominato anche «Subconduttore» (indirizzo email:${email} telefono ${tel}</p>
 <p class="center"><strong>PREMESSO</strong></p>
 <p>1) ${apt.premesso}</p>
 <p>2) che il predetto contratto di locazione prevede espressamente, alla clausola n. 4 la facoltà per il conduttore di concedere in sublocazione il citato immobile o porzione di esso;</p>
