@@ -133,6 +133,9 @@ input.precomp{background:#f0fdf4;border-color:#86efac;color:#15803d}
     <div class="field" id="feeManDiv" style="display:none"><label>Importo fee * (€)</label><input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()"></div>
     <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="depositoCheck" checked onchange="onDeposito()" style="width:18px;height:18px;margin:0;accent-color:#2563eb;cursor:pointer"> Deposito cauzionale</label></div>
     <div class="field" id="depositoDiv"><label>Importo deposito (€)</label><input type="number" id="depositoImp" min="0" step="0.01" value="100" placeholder="es. 100.00" oninput="calcEco()"></div>
+    <div class="field" id="depModeDiv"><label>Modalità pagamento deposito</label>
+      <select id="depMode" onchange="calcEco()"><option value="anticipo">Ultima mensilità anticipata alla firma</option><option value="spalmata">Ultima mensilità spalmata nelle rate</option></select>
+    </div>
   </div>
 
   <!-- DATI STUDENTE -->
@@ -303,7 +306,7 @@ function getDataStipula(){
 // ── Durata e fee ───────────────────────────────────────────────────────
 function onDur(){document.getElementById('durAltroDiv').style.display=document.getElementById('durata').value==='altro'?'block':'none';calcFine();}
 function onFee(){document.getElementById('feeManDiv').style.display=document.getElementById('feeTipo').value==='manuale'?'block':'none';calcEco();}
-function onDeposito(){document.getElementById('depositoDiv').style.display=document.getElementById('depositoCheck').checked?'block':'none';calcEco();}
+function onDeposito(){const on=document.getElementById('depositoCheck').checked;document.getElementById('depositoDiv').style.display=on?'block':'none';document.getElementById('depModeDiv').style.display=on?'block':'none';calcEco();}
 function getDeposito(){return document.getElementById('depositoCheck').checked?(parseFloat(document.getElementById('depositoImp').value)||0):0;}
 function calcFine(){
   const ini=document.getElementById('inizio').value,d=getDur();
@@ -316,11 +319,19 @@ function calcEco(){
   if(!c||!f||!d){document.getElementById('ecoDiv').style.display='none';return;}
   document.getElementById('ecoDiv').style.display='block';
   let h;
-  if(hasDep){
+  const depMode=document.getElementById('depMode').value;
+  if(hasDep&&depMode==='anticipo'){
     const pag1=c+f,pag2=c+dep,nr=d-2,rr=c*nr,tot=c*d+f+dep;
     h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
       er('Alla firma (ultima mens. + fee)',fmtE(pag1))+
       er('Entro 5gg (prima mens. + deposito)',fmtE(pag2))+
+      er(nr+' rate mensili residue',fmtE(rr))+
+      `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
+  }else if(hasDep&&depMode==='spalmata'){
+    const pag1=c+f,pag2=dep,nr=d-1,rr=c*nr,tot=c*d+f+dep;
+    h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
+      er('Alla firma (prima mens. + fee)',fmtE(pag1))+
+      er('Entro 5gg (deposito)',fmtE(pag2))+
       er(nr+' rate mensili residue',fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }else{
@@ -378,9 +389,11 @@ function genera(){
   if(!ds){alert('Seleziona la data di stipula.');return;}
   const c=getCanone(),f=getFee(),d=getDur(),dep=getDeposito();
   const hasDep=document.getElementById('depositoCheck').checked;
+  const depMode=document.getElementById('depMode').value;
   const ao=hasDep?1:0;
   let pag1,pag2,nr,rr,tot;
-  if(hasDep){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
+  if(hasDep&&depMode==='anticipo'){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
+  else if(hasDep&&depMode==='spalmata'){pag1=c+f;pag2=dep;nr=d-1;rr=c*nr;tot=c*d+f+dep;}
   else{pag1=c+f;pag2=0;nr=d-1;rr=c*nr;tot=pag1+rr;}
   const apt=APT[document.getElementById('appartamento').value]||{label:'—',premesso:'—'};
   const sesso=v('s-sesso'),titolo=sesso==='F'?'Sig.ra':'Sig.',sessoStr=sesso==='F'?'nata':'nato';
@@ -440,8 +453,9 @@ ul.bul li{margin-bottom:0;text-align:justify}
 <h2>Articolo 3 - (Canone)</h2>
 <p>Il canone totale di sublocazione è pattuito in Euro <strong>${canoneTotale} ( ${n2w(tot)}/00)</strong> e dovrà essere corrisposto come di seguito indicato:</p>
 <ul class="arr">
-<li>quanto ad Euro <strong>${fPag1} ( ${n2w(pag1)}/00)</strong> all'atto della sottoscrizione del presente contratto, da imputare come ${hasDep?'ultima mensilità':'prima mensilità'}, iscrizione club mediante Bonifico Bancario</li>
-${hasDep?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come prima mensilità e deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
+<li>quanto ad Euro <strong>${fPag1} ( ${n2w(pag1)}/00)</strong> all'atto della sottoscrizione del presente contratto, da imputare come ${hasDep&&depMode==='anticipo'?'ultima mensilità':'prima mensilità'}, iscrizione club mediante Bonifico Bancario</li>
+${hasDep&&depMode==='anticipo'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come prima mensilità e deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
+${hasDep&&depMode==='spalmata'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
 <li>quanto ad Euro <strong>${fRateRes} ( ${n2w(rr)}/00)</strong> in n.${nr} rate mensili, ciascuna pari ad Euro <strong>${canoneMensile} ( ${n2w(c)}/00)</strong>, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: <strong>IT02W0200804810000105593166</strong></li>
 </ul>
 <p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra.</p>
