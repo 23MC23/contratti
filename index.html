@@ -328,8 +328,8 @@ function calcEco(){
       er(nr+' rate mensili residue',fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }else if(hasDep&&depMode==='spalmata'){
-    const maggiorazione=Math.round(c/d*100)/100,rataS=Math.round((c+maggiorazione)*100)/100;
-    const pag1=c+f,pag2=dep,nr=d-1,rr=Math.round(rataS*nr*100)/100,tot=pag1+pag2+rr;
+    const nr=d-2,rataS=Math.round((d-1)*c/nr*100)/100,maggiorazione=Math.round((rataS-c)*100)/100;
+    const pag1=c+f,pag2=dep,rr=Math.round(rataS*nr*100)/100,tot=pag1+pag2+rr;
     h=er('Canone mensile base',fmtE(c))+er('Maggiorazione mensile (ult. mens. spalmata)',fmtE(maggiorazione))+
       er('Rata mensile effettiva',fmtE(rataS))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
       er('Alla firma (prima mens. + fee)',fmtE(pag1))+
@@ -396,7 +396,7 @@ function genera(){
   let pag1,pag2,nr,rr,tot;
   let rataS=c,maggiorazione=0;
   if(hasDep&&depMode==='anticipo'){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
-  else if(hasDep&&depMode==='spalmata'){maggiorazione=Math.round(c/d*100)/100;rataS=Math.round((c+maggiorazione)*100)/100;pag1=c+f;pag2=dep;nr=d-1;rr=Math.round(rataS*nr*100)/100;tot=pag1+pag2+rr;}
+  else if(hasDep&&depMode==='spalmata'){nr=d-2;rataS=Math.round((d-1)*c/nr*100)/100;maggiorazione=Math.round((rataS-c)*100)/100;pag1=c+f;pag2=dep;rr=Math.round(rataS*nr*100)/100;tot=pag1+pag2+rr;}
   else{pag1=c+f;pag2=0;nr=d-1;rr=c*nr;tot=pag1+rr;}
   const apt=APT[document.getElementById('appartamento').value]||{label:'—',premesso:'—'};
   const sesso=v('s-sesso'),titolo=sesso==='F'?'Sig.ra':'Sig.',sessoStr=sesso==='F'?'nata':'nato';
