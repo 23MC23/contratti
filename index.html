@@ -328,11 +328,13 @@ function calcEco(){
       er(nr+' rate mensili residue',fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }else if(hasDep&&depMode==='spalmata'){
-    const pag1=c+f,pag2=dep,nr=d-1,rr=c*nr,tot=c*d+f+dep;
-    h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
+    const maggiorazione=Math.round(c/d*100)/100,rataS=Math.round((c+maggiorazione)*100)/100;
+    const pag1=c+f,pag2=dep,nr=d-1,rr=Math.round(rataS*nr*100)/100,tot=pag1+pag2+rr;
+    h=er('Canone mensile base',fmtE(c))+er('Maggiorazione mensile (ult. mens. spalmata)',fmtE(maggiorazione))+
+      er('Rata mensile effettiva',fmtE(rataS))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
       er('Alla firma (prima mens. + fee)',fmtE(pag1))+
       er('Entro 5gg (deposito)',fmtE(pag2))+
-      er(nr+' rate mensili residue',fmtE(rr))+
+      er(nr+' rate mensili a '+fmtE(rataS),fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }else{
     const pr=c+f,nr=d-1,rr=c*nr,tot=pr+rr;
@@ -392,8 +394,9 @@ function genera(){
   const depMode=document.getElementById('depMode').value;
   const ao=hasDep?1:0;
   let pag1,pag2,nr,rr,tot;
+  let rataS=c,maggiorazione=0;
   if(hasDep&&depMode==='anticipo'){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
-  else if(hasDep&&depMode==='spalmata'){pag1=c+f;pag2=dep;nr=d-1;rr=c*nr;tot=c*d+f+dep;}
+  else if(hasDep&&depMode==='spalmata'){maggiorazione=Math.round(c/d*100)/100;rataS=Math.round((c+maggiorazione)*100)/100;pag1=c+f;pag2=dep;nr=d-1;rr=Math.round(rataS*nr*100)/100;tot=pag1+pag2+rr;}
   else{pag1=c+f;pag2=0;nr=d-1;rr=c*nr;tot=pag1+rr;}
   const apt=APT[document.getElementById('appartamento').value]||{label:'—',premesso:'—'};
   const sesso=v('s-sesso'),titolo=sesso==='F'?'Sig.ra':'Sig.',sessoStr=sesso==='F'?'nata':'nato';
@@ -409,6 +412,7 @@ function genera(){
   const fPag2=hasDep?(pag2.toFixed(2).replace('.',',')):'';
   const fDep=dep.toFixed(2).replace('.',',');
   const fRateRes=rr.toFixed(2).replace('.',',');
+  const fRataS=rataS.toFixed(2).replace('.',',');
 
   const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
 <title></title>
@@ -456,7 +460,7 @@ ul.bul li{margin-bottom:0;text-align:justify}
 <li>quanto ad Euro <strong>${fPag1} ( ${n2w(pag1)}/00)</strong> all'atto della sottoscrizione del presente contratto, da imputare come ${hasDep&&depMode==='anticipo'?'ultima mensilità':'prima mensilità'}, iscrizione club mediante Bonifico Bancario</li>
 ${hasDep&&depMode==='anticipo'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come prima mensilità e deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
 ${hasDep&&depMode==='spalmata'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
-<li>quanto ad Euro <strong>${fRateRes} ( ${n2w(rr)}/00)</strong> in n.${nr} rate mensili, ciascuna pari ad Euro <strong>${canoneMensile} ( ${n2w(c)}/00)</strong>, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: <strong>IT02W0200804810000105593166</strong></li>
+<li>quanto ad Euro <strong>${fRateRes} ( ${n2w(rr)}/00)</strong> in n.${nr} rate mensili, ciascuna pari ad Euro <strong>${hasDep&&depMode==='spalmata'?fRataS:canoneMensile} ( ${n2w(hasDep&&depMode==='spalmata'?rataS:c)}/00)</strong>${hasDep&&depMode==='spalmata'?' (di cui € '+canoneMensile+' a titolo di canone ed € '+(maggiorazione.toFixed(2).replace('.',','))+' quale quota parte dell\\'ultima mensilità)':''}, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: <strong>IT02W0200804810000105593166</strong></li>
 </ul>
 <p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra.</p>
 <p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso o ritardato.</p>
