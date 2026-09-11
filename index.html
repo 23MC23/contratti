@@ -133,7 +133,7 @@ input.precomp{background:#f0fdf4;border-color:#86efac;color:#15803d}
     <div class="field" id="feeManDiv" style="display:none"><label>Importo fee * (€)</label><input type="number" id="feeImp" min="0" step="0.01" placeholder="es. 350.00" oninput="calcEco()"></div>
     <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="depositoCheck" checked onchange="onDeposito()" style="width:18px;height:18px;margin:0;accent-color:#2563eb;cursor:pointer"> Deposito cauzionale</label></div>
     <div class="field" id="depositoDiv"><label>Importo deposito (€)</label><input type="number" id="depositoImp" min="0" step="0.01" value="100" placeholder="es. 100.00" oninput="calcEco()"></div>
-    <div class="field" id="depModeDiv"><label>Modalità pagamento deposito</label>
+    <div class="field"><label>Modalità pagamento ultima mensilità</label>
       <select id="depMode" onchange="calcEco()"><option value="anticipo">Ultima mensilità anticipata alla firma</option><option value="spalmata">Ultima mensilità spalmata nelle rate</option></select>
     </div>
   </div>
@@ -306,7 +306,7 @@ function getDataStipula(){
 // ── Durata e fee ───────────────────────────────────────────────────────
 function onDur(){document.getElementById('durAltroDiv').style.display=document.getElementById('durata').value==='altro'?'block':'none';calcFine();}
 function onFee(){document.getElementById('feeManDiv').style.display=document.getElementById('feeTipo').value==='manuale'?'block':'none';calcEco();}
-function onDeposito(){const on=document.getElementById('depositoCheck').checked;document.getElementById('depositoDiv').style.display=on?'block':'none';document.getElementById('depModeDiv').style.display=on?'block':'none';calcEco();}
+function onDeposito(){document.getElementById('depositoDiv').style.display=document.getElementById('depositoCheck').checked?'block':'none';calcEco();}
 function getDeposito(){return document.getElementById('depositoCheck').checked?(parseFloat(document.getElementById('depositoImp').value)||0):0;}
 function calcFine(){
   const ini=document.getElementById('inizio').value,d=getDur();
@@ -320,14 +320,21 @@ function calcEco(){
   document.getElementById('ecoDiv').style.display='block';
   let h;
   const depMode=document.getElementById('depMode').value;
-  if(hasDep&&depMode==='anticipo'){
+  const isSpalmata=depMode==='spalmata';
+  if(!isSpalmata&&hasDep){
     const pag1=c+f,pag2=c+dep,nr=d-2,rr=c*nr,tot=c*d+f+dep;
     h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+er('Deposito cauzionale',fmtE(dep))+
       er('Alla firma (ultima mens. + fee)',fmtE(pag1))+
       er('Entro 5gg (prima mens. + deposito)',fmtE(pag2))+
       er(nr+' rate mensili residue',fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
-  }else if(hasDep&&depMode==='spalmata'){
+  }else if(!isSpalmata&&!hasDep){
+    const pag1=c+f,nr=d-1,rr=c*nr,tot=pag1+rr;
+    h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+
+      er('Alla firma (ultima mens. + fee)',fmtE(pag1))+
+      er(nr+' rate mensili residue',fmtE(rr))+
+      `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
+  }else if(isSpalmata&&hasDep){
     const nr=d-2,rataS=Math.round((d-1)*c/nr*100)/100,maggiorazione=Math.round((rataS-c)*100)/100;
     const pag1=c+f,pag2=dep,rr=Math.round(rataS*nr*100)/100,tot=pag1+pag2+rr;
     h=er('Canone mensile base',fmtE(c))+er('Maggiorazione mensile (ult. mens. spalmata)',fmtE(maggiorazione))+
@@ -337,11 +344,13 @@ function calcEco(){
       er(nr+' rate mensili a '+fmtE(rataS),fmtE(rr))+
       `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }else{
-    const pr=c+f,nr=d-1,rr=c*nr,tot=pr+rr;
-    h=er('Canone mensile',fmtE(c))+er('Fee Club',fmtE(f))+
-      er('Prima rata (1° mese + fee)',fmtE(pr))+
-      er(nr+' rate mensili residue',fmtE(rr))+
-      `<div class="er sep"><span>Canone totale complessivo</span><span>${fmtE(tot)}</span></div>`;
+    const nr=d-2,rataS=Math.round((d-1)*c/nr*100)/100,maggiorazione=Math.round((rataS-c)*100)/100;
+    const pag1=c+f,rr=Math.round(rataS*nr*100)/100,tot=pag1+rr;
+    h=er('Canone mensile base',fmtE(c))+er('Maggiorazione mensile (ult. mens. spalmata)',fmtE(maggiorazione))+
+      er('Rata mensile effettiva',fmtE(rataS))+er('Fee Club',fmtE(f))+
+      er('Alla firma (prima mens. + fee)',fmtE(pag1))+
+      er(nr+' rate mensili a '+fmtE(rataS),fmtE(rr))+
+      `<div class="er sep"><span>Totale complessivo</span><span>${fmtE(tot)}</span></div>`;
   }
   document.getElementById('ecoHtml').innerHTML=h;
 }
@@ -393,11 +402,13 @@ function genera(){
   const hasDep=document.getElementById('depositoCheck').checked;
   const depMode=document.getElementById('depMode').value;
   const ao=hasDep?1:0;
+  const isSpalmata=depMode==='spalmata';
   let pag1,pag2,nr,rr,tot;
   let rataS=c,maggiorazione=0;
-  if(hasDep&&depMode==='anticipo'){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
-  else if(hasDep&&depMode==='spalmata'){nr=d-2;rataS=Math.round((d-1)*c/nr*100)/100;maggiorazione=Math.round((rataS-c)*100)/100;pag1=c+f;pag2=dep;rr=Math.round(rataS*nr*100)/100;tot=pag1+pag2+rr;}
-  else{pag1=c+f;pag2=0;nr=d-1;rr=c*nr;tot=pag1+rr;}
+  if(!isSpalmata&&hasDep){pag1=c+f;pag2=c+dep;nr=d-2;rr=c*nr;tot=c*d+f+dep;}
+  else if(!isSpalmata&&!hasDep){pag1=c+f;pag2=0;nr=d-1;rr=c*nr;tot=pag1+rr;}
+  else if(isSpalmata&&hasDep){nr=d-2;rataS=Math.round((d-1)*c/nr*100)/100;maggiorazione=Math.round((rataS-c)*100)/100;pag1=c+f;pag2=dep;rr=Math.round(rataS*nr*100)/100;tot=pag1+pag2+rr;}
+  else{nr=d-2;rataS=Math.round((d-1)*c/nr*100)/100;maggiorazione=Math.round((rataS-c)*100)/100;pag1=c+f;pag2=0;rr=Math.round(rataS*nr*100)/100;tot=pag1+rr;}
   const apt=APT[document.getElementById('appartamento').value]||{label:'—',premesso:'—'};
   const sesso=v('s-sesso'),titolo=sesso==='F'?'Sig.ra':'Sig.',sessoStr=sesso==='F'?'nata':'nato';
   const nomeCompleto=v('s-cognome')+' '+v('s-nome');
@@ -417,10 +428,10 @@ function genera(){
   const html=`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
 <title></title>
 <style>
-body{font-family:'Times New Roman',Times,serif;font-size:8.2pt;line-height:1.08;color:#000;margin:0}
+body{font-family:'Times New Roman',Times,serif;font-size:8.7pt;line-height:1.08;color:#000;margin:0}
 .page{max-width:180mm;margin:0 auto;padding:0}
 h1{font-size:9pt;font-weight:bold;text-align:center;margin-bottom:2pt;text-transform:uppercase;letter-spacing:.3px}
-h2{font-size:8.2pt;font-weight:bold;margin:1pt 0 0;text-align:center}
+h2{font-size:8.7pt;font-weight:bold;margin:1pt 0 0;text-align:center}
 p{margin:0;text-align:justify}
 p.center{text-align:center}
 ul.arr{list-style:none;margin:0.2pt 0 0.4pt;padding:0}
@@ -433,7 +444,7 @@ ul.bul li{margin-bottom:0;text-align:justify}
 .fc{flex:1;font-size:7.5pt}
 .firma-slot{min-height:0;margin-top:0;padding:0}
 .firma-fixed{display:none}
-@media print{body{margin:0;padding:0}@page{size:A4;margin:8mm 16mm 10mm 16mm}.page{padding:0}}
+@media print{body{margin:0;padding:0}@page{size:A4;margin:8mm 16mm 13mm 16mm}.page{padding:0}}
 </style></head><body><div class="page">
 <h1>Contratto di Sublocazione Abitativa</h1>
 <p>L'anno <strong>${ds.a}</strong> il giorno <strong>${ds.g}</strong> del mese di <strong>${ds.m}</strong> in Cagliari, tra:</p>
@@ -457,10 +468,10 @@ ul.bul li{margin-bottom:0;text-align:justify}
 <h2>Articolo 3 - (Canone)</h2>
 <p>Il canone totale di sublocazione è pattuito in Euro <strong>${canoneTotale} ( ${n2w(tot)}/00)</strong> e dovrà essere corrisposto come di seguito indicato:</p>
 <ul class="arr">
-<li>quanto ad Euro <strong>${fPag1} ( ${n2w(pag1)}/00)</strong> all'atto della sottoscrizione del presente contratto, da imputare come ${hasDep&&depMode==='anticipo'?'ultima mensilità':'prima mensilità'}, iscrizione club mediante Bonifico Bancario</li>
-${hasDep&&depMode==='anticipo'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come prima mensilità e deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
-${hasDep&&depMode==='spalmata'?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
-<li>quanto ad Euro <strong>${fRateRes} ( ${n2w(rr)}/00)</strong> in n.${nr} rate mensili, ciascuna pari ad Euro <strong>${hasDep&&depMode==='spalmata'?fRataS:canoneMensile} ( ${n2w(hasDep&&depMode==='spalmata'?rataS:c)}/00)</strong>${hasDep&&depMode==='spalmata'?' (di cui € '+canoneMensile+' a titolo di canone ed € '+(maggiorazione.toFixed(2).replace('.',','))+' quale quota parte dell\'ultima mensilità)':''}, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: <strong>IT02W0200804810000105593166</strong></li>
+<li>quanto ad Euro <strong>${fPag1} ( ${n2w(pag1)}/00)</strong> all'atto della sottoscrizione del presente contratto, da imputare come ${!isSpalmata&&hasDep?'ultima mensilità':'prima mensilità'}, iscrizione club mediante Bonifico Bancario</li>
+${!isSpalmata&&hasDep?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come prima mensilità e deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
+${isSpalmata&&hasDep?`<li>quanto ad Euro <strong>${fPag2} ( ${n2w(pag2)}/00)</strong> entro e non oltre 5 giorni dall'inizio di decorrenza del presente contratto, da imputare come deposito cauzionale, mediante Bonifico Bancario.</li>`:''}
+<li>quanto ad Euro <strong>${fRateRes} ( ${n2w(rr)}/00)</strong> in n.${nr} rate mensili, ciascuna pari ad Euro <strong>${isSpalmata?fRataS:canoneMensile} ( ${n2w(isSpalmata?rataS:c)}/00)</strong>${isSpalmata?' (di cui '+canoneMensile+' a titolo di canone ed '+(maggiorazione.toFixed(2).replace('.',','))+' quale quota parte dell\'ultima mensilità)':''}, a mezzo disposizione bancaria permanente RID o bonifico, con valuta entro e non oltre il 05 di ciascun mese su C/C bancario intestato a TOP srl– IBAN: <strong>IT02W0200804810000105593166</strong></li>
 </ul>
 <p>Rimane espressamente inteso tra le parti come le spese condominiali siano incluse nel canone di sublocazione di cui sopra.</p>
 <p>Il pagamento del canone o di quant'altro dovuto anche per oneri accessori non potrà essere sospeso o ritardato.</p>
